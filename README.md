@@ -1,2 +1,2 @@
 # Random
-I'm using this hub to store anything non work-related.
+I'm using this repo to store anything non work-related.
