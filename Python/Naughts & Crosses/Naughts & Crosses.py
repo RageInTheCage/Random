@@ -12,7 +12,7 @@ def main():
 
 def playGame():
     resetBoard()
-    players = getAiVsHumanOpponents()
+    players = getAiVsAiOpponents()
     
     playerNumber = 1
     for moveNumber in range(1, 10):
