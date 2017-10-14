@@ -10,9 +10,25 @@ def main():
         if playersAreBored():
             break
 
+def getPlayers():
+    print("Which game mode do you wish to use?")
+    choices = [('A', 'Computer vs Computer'),
+               ('B', 'Player vs Player'),
+               ('C', 'Computer vs Player')]
+    for choice in choices:
+        print('{0} {1}'.format(choice[0], choice[1]))
+    gameMode = None
+    while gameMode not in ('A', 'B', 'C'):
+        gameMode = input(':  ').upper()
+    if gameMode == 'A':
+        return getAiVsAiOpponents()
+    elif gameMode == 'B':
+        return getHumanVsHumanOpponents()
+    return getAiVsHumanOpponents()
+
 def playGame():
     resetBoard()
-    players = getAiVsAiOpponents()
+    players = getPlayers()
     
     playerNumber = 1
     for moveNumber in range(1, 10):
