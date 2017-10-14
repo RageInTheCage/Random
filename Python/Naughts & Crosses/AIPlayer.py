@@ -16,8 +16,9 @@ class AIPlayer(object):
         if self.moveNumber == 1:
             self.chooseAFreeCorner()
         elif self.moveNumber == 2:
-            if not self.chooseOppositeCornerIfPossible():
-                self.chooseAFreeCorner()
+            if not self.fillGapIfPossible(self.playerNumber):
+                if not self.chooseOppositeCornerIfPossible():
+                    self.chooseAFreeCorner()
         elif self.moveNumber == 3:
             if not self.fillGapIfPossible(self.playerNumber):
                 self.chooseAFreeCorner()
