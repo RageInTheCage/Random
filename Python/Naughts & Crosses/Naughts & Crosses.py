@@ -1,5 +1,6 @@
 from AIPlayer import AIPlayer
 from HumanPlayer import HumanPlayer
+from GameBoard import GameBoard
 
 def main():
     clearScreen()
@@ -11,18 +12,19 @@ def main():
             break
 
 def playGame():
-    resetBoard()
+    global gameBoard
+    gameBoard = GameBoard(3, 3)
     players = getPlayers()
     
     playerNumber = 1
-    for moveNumber in range(1, 10):
-        print ('Player {0}''s turn.'.format(getPlayerLetter(playerNumber)))
+    for moveNumber in range(1, gameBoard.width * gameBoard.height):
+        print ('Player {0}''s turn.'.format(gameBoard.getPlayerLetter(playerNumber)))
         
-        drawBoard()
+        gameBoard.drawBoard()
 
         players[playerNumber - 1].makeMove()
 
-        if playerHasWon(playerNumber):
+        if gameBoard.playerHasWon(playerNumber):
             finishGame(playerNumber)
             return
 
@@ -63,60 +65,11 @@ def getAiVsAiOpponents():
 
 def finishGame(winningPlayer):
     clearScreen()
-    print("Well done player {0}, you won!".format(getPlayerLetter(winningPlayer)))
-    drawBoard()
+    print("Well done player {0}, you won!".format(gameBoard.getPlayerLetter(winningPlayer)))
+    gameBoard.drawBoard()
 
 def clearScreen():
     print ('\n' * 3)
-
-def resetBoard():
-    global width, height, gameBoard
-    width, height = 3, 3;
-    gameBoard = [[0 for x in range(width)] for y in range(height)]
-
-def drawBoard():
-    for y in reversed(range(0, height)):
-        for x in range(0, width):
-            playerNumber = gameBoard[x][y]
-            print (getPlayerLetter(playerNumber), end=' ')
-        print('\n')
-
-def getPlayerLetter(playerNumber):
-    if playerNumber == 1:
-        return 'X'
-    if playerNumber == 2:
-        return 'O'
-    return '.'
-
-def playerHasWon(playerNumber):
-    if checkForStraightWin(playerNumber):
-        return True
-    return checkForWinDiagonally(playerNumber)
-
-def checkForStraightWin(playerNumber):
-    for x in range(0, width):
-        countColumn, countRow = 0, 0
-        for y in range(0, height):
-            if gameBoard[x][y] == playerNumber:
-                countColumn += 1
-            if gameBoard[y][x] == playerNumber:
-                countRow += 1
-        if countColumn == height:
-            return True
-        if countRow == width:
-            return True
-    
-    return False
-
-def checkForWinDiagonally(playerNumber):
-    count1, count2 = 0, 0
-    for index in range(0, width):
-        if gameBoard[index][index] == playerNumber:
-            count1 += 1
-        y = width - index - 1
-        if gameBoard[index][y] == playerNumber:
-            count2 += 1
-    return count1 == width or count2 == width
 
 def playersAreBored():
     while True:

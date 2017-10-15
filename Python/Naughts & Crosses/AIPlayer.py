@@ -4,9 +4,7 @@ class AIPlayer(object):
     def __init__(self, playerNumber, gameBoard):
         self.playerNumber = playerNumber
         self.opponentNumber = 3 - playerNumber
-        self.gameBoard = gameBoard
-        self.height = len(gameBoard)
-        self.width = len(gameBoard[0])
+        self.board = gameBoard
         self.moveNumber = 1
 
     def makeMove(self):
@@ -20,12 +18,13 @@ class AIPlayer(object):
                 if not self.chooseOppositeCornerIfPossible():
                     self.chooseAFreeCorner()
         elif self.moveNumber == 3:
-            if not self.fillGapIfPossible(self.playerNumber):
-                self.chooseAFreeCorner()
+            if not self.fillGapIfPossible(self.opponentNumber):
+                if not self.fillGapIfPossible(self.playerNumber):
+                    self.chooseAFreeCorner()
         elif self.moveNumber == 4:
             if not self.fillGapIfPossible(self.playerNumber):
                 if not self.fillGapIfPossible(self.opponentNumber):
-                    self.chooseFreeCorner()
+                    self.chooseAFreeCorner()
         else:
             self.chooseFreeSpace()
                 
@@ -33,7 +32,10 @@ class AIPlayer(object):
 
     def chooseAFreeCorner(self):
         print ('chooseAFreeCorner')
-        allCorners = [(0,0), (2,0), (0, 2), (2, 2)]
+        allCorners = [(0,0),
+                      (self.board.width - 1,0),
+                      (0, self.board.height - 1),
+                      (self.board.width - 1, self.board.height -1)]
         random.shuffle(allCorners)
         for corner in allCorners:
             if self.tryToMakeMove(corner[0], corner[1]):
@@ -48,12 +50,6 @@ class AIPlayer(object):
         y = self.cornerFromFirstMove[1]
         return self.tryToMakeMove(2 - x, 2 - y)
 
-    def tryToMakeMove(self, x, y):
-        if self.gameBoard[x][y] == 0:
-            self.gameBoard[x][y] = self.playerNumber
-            return True
-        return False
-
     def fillGapIfPossible(self, findPlayerNumber):
         if self.tryToFillStraightGap(findPlayerNumber):
             return True
@@ -64,16 +60,16 @@ class AIPlayer(object):
         
         columnGapX, columnGapY, rowGapX, rowGapY = None, None, None, None
         
-        for x in range(0, self.width):
+        for x in range(0, self.board.width):
             countColumn, countRow = 0, 0
-            for y in range(0, self.height):
-                xyPosition = self.gameBoard[x][y]
+            for y in range(0, self.board.height):
+                xyPosition = self.board.getPlayerAtPosition(x, y)
                 if xyPosition == 0:
                     columnGapX, columnGapY = x, y
                 elif xyPosition == findPlayerNumber:
                     countColumn += 1
 
-                yxposition = self.gameBoard[y][x]
+                yxposition = self.board.getPlayerAtPosition(y, x)
                 if yxposition == findPlayerNumber:
                     countRow += 1
                 elif yxposition == 0:
@@ -92,15 +88,15 @@ class AIPlayer(object):
         count1, count2 = 0, 0
         gap1X, gap1Y, gap2X, gap2Y = None, None, None, None
         
-        for index in range(0, self.width):
-            position1 = self.gameBoard[index][index]
+        for index in range(0, self.board.width):
+            position1 = self.board.getPlayerAtPosition(index, index)
             if position1 == 0:
                 gap1X, gap1Y = index, index
             elif position1 == findPlayerNumber:
                 count1 += 1
             
-            y = self.width - index - 1
-            position2 = self.gameBoard[index][y]
+            y = self.board.width - index - 1
+            position2 = self.board.getPlayerAtPosition(index, y)
             if position2 == 0:
                 gap2X, gap2Y = index, y
             elif position2 == findPlayerNumber:
@@ -119,8 +115,11 @@ class AIPlayer(object):
     def chooseFreeSpace(self):
         print ('chooseFreeSpace')
 
-        for x in range(0, self.width):
-            for y in range(0, self.height):
+        for x in range(0, self.board.width):
+            for y in range(0, self.board.height):
                 if self.tryToMakeMove(x, y):
                     return True
         return False
+
+    def tryToMakeMove(self, x, y):
+        return self.board.tryToMakeMove(x, y, self.playerNumber)

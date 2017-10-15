@@ -2,9 +2,7 @@ class HumanPlayer(object):
     def __init__(self, playerNumber, gameBoard):
         self.playerNumber = playerNumber
         self.opponentNumber = 3 - playerNumber
-        self.gameBoard = gameBoard
-        self.height = len(gameBoard)
-        self.width = len(gameBoard[0])
+        self.board = gameBoard
 
     def makeMove(self):
         print ('Player {0}''s turn.'.format(self.getPlayerLetter()))
@@ -18,21 +16,14 @@ class HumanPlayer(object):
     def askPlayerForMove(self):
         print ('Enter co-ordinates:')
         
-        waitingForValidInput = True
-        while waitingForValidInput:
-            x = self.askPlayerForCoordinate('x = ', self.width)
-            y = self.askPlayerForCoordinate('y = ', self.height)
+        while True:
+            x = self.askPlayerForCoordinate('x = ', self.board.width) - 1
+            y = self.askPlayerForCoordinate('y = ', self.board.height) - 1 
 
-            if self.coordinateIsEmpty(x, y):
-                waitingForValidInput = False
-            else:
-                print ('That space is taken dummy')
-                
-        self.gameBoard[x - 1][y - 1] = self.playerNumber
-
-    def coordinateIsEmpty(self, x, y):
-        return self.gameBoard[x - 1][y - 1] == 0
-
+            if self.board.tryToMakeMove(x, y, self.playerNumber):
+                break
+            print ('That space is taken dummy')
+        
     def askPlayerForCoordinate(self, prompt, maximumValue):
         waitingForValidInput = True
         while waitingForValidInput:
