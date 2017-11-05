@@ -1,0 +1,27 @@
+-build a list of 5 or more words
+-shuffle list
+-show player underscores
+-input letter
+-if player get wrong letter, draw more of hang man
+-stop player repeating themselves
+-repeat show player underscores with filled in letters
+-until either hangman is complete or player has guessed entire word
+     _________
+    |         |
+    |         0
+    |        /|\
+    |        / \
+    |
+    |
+
+
+
+if guessedLetter.isalpha():
+            print("This is not a letter")
+        elif guessedLetter == "":
+            print("You cannot have nothing as a letter")
+        elif len(guessedLetterStr) != 1:
+            print("Your letter has to be only one character")
+        elif lettersGuessed.count(guessedLetter) == 0:
+            return guessedLetter
+        else:
