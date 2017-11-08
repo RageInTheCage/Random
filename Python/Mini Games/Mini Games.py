@@ -1,6 +1,76 @@
 import shelve
 import random
 
+#apps needs work (a lot!)
+
+def apps(score):
+    while True:
+        count = 0
+        Applications = ["Number guessing game"]
+        Applications.sort()
+        print("Applications\n")
+        appNumber = 1
+        for A in (Applications):
+            print("-" + A + "(" + str(appNumber) + ")")
+            appNumber += 1
+        chooseApp = input(":  ")
+        try:
+            chooseAppNumber = int(chooseApp)
+        except ValueError:
+            print(chooseApp.capitalize() + " is not a number.")
+
+        appNumber -= 1
+
+        if chooseAppNumber > appNumber or chooseAppNumber < appNumber:
+            print(str(chooseApp) + " is not on the list")
+        else:
+            chooseAppNumber -= 1
+            chosenApp = Applications[chooseAppNumber]
+            if chosenApp == "Number guessing game":
+
+                while True:
+                    score = 0
+                    gameScore = numberGuessingGame()
+
+                    if gameScore == -1:
+                        print("-1 point!")
+                        score -= 1
+                    elif gameScore == 1:
+                        print("+1 point")
+                        score += 1
+                    else:
+                        print("+" + str(gameScore) + " points")
+                        score += gameScore
+
+                    choice = input("Again?\n(Y or N)\n:  ").upper()
+
+                    if choice == "Y":
+                        input("Great!")
+                    elif choice == "N":
+                        print("good bye!")
+                        return score
+                    else:
+                        print(choice + " is not an option.")
+            elif chosenApp == "Blackjack":
+                print("not yet")
+
+
+
+def shop():
+    print("Sorry but the shop is not currently open.")
+    shopStock = open("shopStock.txt", "r")
+    print(shopStock.read())
+    byItem = input(":  ").upper()
+    something = "(" + byItem + ")"
+    #do stuff here
+    with open("shopStock.txt") as f:
+        stock = f.readlines()
+    if something in open("shopStock.txt").read():
+        print()
+    else:
+        print("damn")
+
+
 def numberGuessingGame():
     randomNumber = random.randint(1000,9999)
 
@@ -48,7 +118,7 @@ def numberGuessingGame():
             
             if guessesLeft == 0:
                 print("Oh no! You lost! better luck next time!")
-                return None
+                return -1
             
             if value > randomNumber:
                 print("This number is too high.")
@@ -62,35 +132,16 @@ def main(score):
 
     while True:
         userFriendlyScore = str(score)
-        print("Menu:\n\n-Number guessing game(A)\n-(B)\n-(C)\n-Reset all save data(D)\n-Save and quit(Quit)\n\nYou have " + userFriendlyScore + " points.")
+
+        print("Menu:\n\n-Apps(A)\n-Shop(B)\n-Reset all save data(C)\n-Save and quit(Quit)\n\nYou have " + userFriendlyScore + " points.")
         menu = input("\n:  ").upper()
 
         if menu == "A":
-
-            while True:
-                gameScore = numberGuessingGame()
-
-                if gameScore == None:
-                    print("-1 point!")
-                elif gameScore == 1:
-                    print ("+1 point")
-                else:
-                    print("+" + str(gameScore) + " points")
-                    score += gameScore
-                    
-                choice = input("Again?\n(Y or N)\n:  ").upper()
-
-                if choice == "Y":
-                    input("Great!")
-                elif choice == "    N":
-                    print("good bye!")
-                    break
+            score += apps(score)
                 
         elif menu == "B":
-            print("Sorry not yet")
+            shop()
         elif menu == "C":
-            print("Sorry not yet")
-        elif menu == "D":
 
             while True:
                 reset = input("Are you sure you want to reset?\n(Y or N)\n:  ").upper()
@@ -122,7 +173,7 @@ def main(score):
         
     
 print("Opening save files...")
-d = `klshelve.open('score.txt'),
+d = shelve.open('score.txt')
 score = d['score']
 print("Save files opend.")
 
