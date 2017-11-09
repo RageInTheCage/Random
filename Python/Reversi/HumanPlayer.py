@@ -5,4 +5,6 @@ class HumanPlayer(object):
         self.board = gameBoard
 
     def makeMove(self):
-        self.board.tryToMakeMove(3, 5, self.playerNumber)
+        x = 4
+        y = 6
+        self.board.tryToMakeMove(self.playerNumber, x - 1, y - 1)

@@ -11,8 +11,8 @@ class GameBoard(object):
         return " "
 
     def drawBoard(self):
-        for y in reversed(range(0, 8)):
-            print(y + 1, end = ' ')
+        for y in (range(0, 8)):
+            print(8 - y, end = ' ')
             for x in range(0, 8):
                 playerNumber = self.board[x][y]
                 print(self.getPlayerCharacter(playerNumber), end=self.getRowTerminator(x))
@@ -33,7 +33,7 @@ class GameBoard(object):
     def getPlayerAtPosition(self, x, y):
         return self.board[x][y]
 
-    def tryToMakeMove(self, x, y, playerNumber):
+    def tryToMakeMove(self, playerNumber, x, y):
         if not self.positionIsEmpty(x, y):
             return False
 
@@ -52,34 +52,28 @@ class GameBoard(object):
         stopX = self.getStopCoordinate(stepX, startFromX)
         stopY = self.getStopCoordinate(stepY, startFromY)
         opponent = 3 - playerNumber
+        x = startFromX
+        y = startFromY
+        flipCount = 0
+        while x != stopX and y != stopY:
+            x += stepX
+            y += stepY
 
-        totalFlipCount = 0
-        for x in range(startFromX + stepX, stopX, stepX):
-            flipCount = 0
-            for y in range(startFromY + stepY, stopY, stepY):
-                piece = self.board[x][y]
-                if piece == opponent:
-                    flipCount += 1
-                elif piece == 0:
-                    break
-            if flipCount == 0:
+            piece = self.board[x][y]
+            if piece == opponent:
+                flipCount += 1
+            elif piece == 0:
                 break
 
-            for y in range(startFromY + stepY, stopY, stepY):
+        if flipCount > 0:
+            x = startFromX
+            y = startFromY
+            while x != stopX and y != stopY:
                 piece = self.board[x][y]
                 if piece == opponent:
                     self.board[x][y] = playerNumber
                 else:
                     break
-
-            totalFlipCount += flipCount
-
-        return totalFlipCount
-
-
-
-
-        if flipCount > 0:
             self.board[x][y] = playerNumber
 
         return flipCount
