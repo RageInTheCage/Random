@@ -1,7 +1,6 @@
 from GameBoard import GameBoard
 from HumanPlayer import HumanPlayer
 
-
 def main():
     clearScreen()
     print('Welcome to Reversi')
@@ -10,7 +9,6 @@ def main():
         playGame()
         if playersAreBored():
             break
-
 
 def playersAreBored():
     while True:
@@ -23,7 +21,6 @@ def playersAreBored():
             print('Excellent!  Another game...')
             return False
         print('Huh? ')
-
 
 def getPlayers():
     return getHumanVsHumanOpponents()
@@ -40,13 +37,11 @@ def getPlayers():
             if choice[0] == gameMode:
                 return choice[2]
 
-
 def getHumanVsHumanOpponents():
     return (
         HumanPlayer(1, gameBoard),
         HumanPlayer(2, gameBoard)
     )
-
 
 # def getAiVsHumanOpponents():
 #     return (
@@ -59,10 +54,8 @@ def getHumanVsHumanOpponents():
 #     p2 = AIPlayer(2, gameBoard)
 #     return (p1, p2)
 
-
 def clearScreen():
     print('\n' * 3)
-
 
 def playGame():
     global gameBoard
@@ -71,19 +64,17 @@ def playGame():
 
     playerNumber = 1
     while True:
-        print("Score: {0} = {1}, {2} = {3}".format(gameBoard.getPlayerCharacter(1), gameBoard.score[0],
-                                                   gameBoard.getPlayerCharacter(2), gameBoard.score[1]))
-        thisPlayerCharacter = gameBoard.getPlayerCharacter(playerNumber)
-        print("Player {0}'s turn.".format(thisPlayerCharacter))
-        gameBoard.drawBoard()
+        gameBoard.showScore()
+        playerCharacter = gameBoard.getPlayerCharacter(playerNumber)
+        print("Player {0}'s turn.".format(playerCharacter))
+        gameBoard.drawBoard(playerNumber)
 
         players[playerNumber - 1].makeMove()
 
         if gameBoard.playerHasWon(playerNumber):
-            print("Player {0} has won!".format(thisPlayerCharacter))
+            print("Player {0} has won!".format(playerCharacter))
             break
 
         playerNumber = gameBoard.opponentNumber(playerNumber)
-
 
 main()
