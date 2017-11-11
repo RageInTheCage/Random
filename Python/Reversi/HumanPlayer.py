@@ -14,7 +14,7 @@ class HumanPlayer(object):
 
             if flipCount > 0:
                 break
-            print("That space doesn't overturn any {0} pieces.".format(self.board.getPlayerCharacter(self.board.opponent(self.playerNumber))))
+            print("That space doesn't overturn any {0} pieces.".format(self.board.getPlayerCharacter(self.board.opponentNumber(self.playerNumber))))
 
     def askPlayerForCoordinate(self, prompt):
         waitingForValidInput = True
