@@ -1,5 +1,4 @@
-from colorama import Fore, Back, Style
-
+from colorama import Fore
 
 class GameBoard(object):
     def __init__(self):
@@ -119,13 +118,16 @@ class GameBoard(object):
     def isPassedEdge(self, coordinate):
         return coordinate < 0 or coordinate > 7
 
+    def gameIsDrawn(self):
+        return self.score[0] == 32 and self.score[1] == 32
+
     def playerHasWon(self, playerNumber):
         opponent = self.opponentNumber(playerNumber)
         if self.score[opponent - 1] == 0: #Opponent wiped out
             return True
 
-        totalScore = sum(self.score)
-        if totalScore == 64 and self.score[opponent - 1] < self.score[playerNumber - 1]: #Board filled
+        if sum(self.score) == 64\
+                and self.score[opponent - 1] < self.score[playerNumber - 1]: #Board filled
             return True
 
         return False

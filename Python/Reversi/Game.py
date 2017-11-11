@@ -57,6 +57,21 @@ def getHumanVsHumanOpponents():
 def clearScreen():
     print('\n' * 3)
 
+def playerHasWon():
+    for playerNumber in range(1, 3):
+        if gameBoard.playerHasWon(playerNumber):
+            print("Player {0} has won!".format(gameBoard.getPlayerCharacter(playerNumber)))
+            return True
+    return False
+
+
+def gameIsDrawn():
+    if gameBoard.gameIsDrawn():
+        print("It's a draw.  How dull.")
+        return True
+    return False
+
+
 def playGame():
     global gameBoard
     gameBoard = GameBoard()
@@ -65,14 +80,15 @@ def playGame():
     playerNumber = 1
     while True:
         gameBoard.showScore()
-        playerCharacter = gameBoard.getPlayerCharacter(playerNumber)
-        print("Player {0}'s turn.".format(playerCharacter))
+        print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
         gameBoard.drawBoard(playerNumber)
 
         players[playerNumber - 1].makeMove()
 
-        if gameBoard.playerHasWon(playerNumber):
-            print("Player {0} has won!".format(playerCharacter))
+        if playerHasWon():
+            break
+
+        if gameIsDrawn():
             break
 
         playerNumber = gameBoard.opponentNumber(playerNumber)
