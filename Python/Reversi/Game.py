@@ -25,23 +25,6 @@ def playersAreBored():
         print('Huh? ')
 
 
-def playGame():
-    global gameBoard
-    gameBoard = GameBoard()
-    players = getPlayers()
-
-    playerNumber = 1
-    while True:
-        print('Player {0}''s turn.'.format(gameBoard.getPlayerCharacter(playerNumber)))
-        gameBoard.drawBoard()
-
-        players[playerNumber - 1].makeMove()
-
-        playerNumber = 3 - playerNumber
-        if playerNumber == 1:
-            break
-
-
 def getPlayers():
     return getHumanVsHumanOpponents()
 
@@ -76,8 +59,28 @@ def getHumanVsHumanOpponents():
 #     p2 = AIPlayer(2, gameBoard)
 #     return (p1, p2)
 
+
 def clearScreen():
     print('\n' * 3)
+
+
+def playGame():
+    global gameBoard
+    gameBoard = GameBoard()
+    players = getPlayers()
+
+    playerNumber = 1
+    while True:
+        print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
+        gameBoard.drawBoard()
+
+        players[playerNumber - 1].makeMove()
+
+        if gameBoard.playerHasWon(playerNumber):
+            print("Player {0} has won!".format(gameBoard.getPlayerCharacter(playerNumber)))
+            break
+
+        playerNumber = gameBoard.opponent(playerNumber)
 
 
 main()
