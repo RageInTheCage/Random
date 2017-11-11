@@ -5,7 +5,9 @@ class GameBoard(object):
     def __init__(self):
         self.board = [[0 for x in range(8)] for y in range(8)]
         self.score = [2, 2]
-
+        self.playerColours = [Fore.BLUE, Fore.RED]
+        self.playerCharacters = [".", self.playerColours[0] + "©" + Fore.RESET,
+                                 self.playerColours[1] + "ø" + Fore.RESET]
         for x in range(3, 5):
             self.board[x][x] = 1
             self.board[7 - x][x] = 2
@@ -28,24 +30,21 @@ class GameBoard(object):
 
     def getBoardCharacter(self, x, y, showFlipCountForPlayerNumber):
         piece = self.board[x][y]
-        if piece > 0:
-            return self.getPlayerCharacter(piece)
 
-        if showFlipCountForPlayerNumber == 0:
-            return "."
+        if piece > 0 or showFlipCountForPlayerNumber == 0:
+            return self.playerCharacters[piece]
 
         flipCount = self.assessMove(showFlipCountForPlayerNumber, x, y, overturnPieces=False)
         if flipCount == 0:
-            return Style.DIM + Fore.WHITE + "." + Style.RESET_ALL
+            return "."
 
-        return Style.BRIGHT + Back.YELLOW + "." + Style.RESET_ALL
+        return self.getPlayerColour(showFlipCountForPlayerNumber) + "." + Fore.RESET
 
     def getPlayerCharacter(self, playerNumber):
-        if playerNumber == 1:
-            return Fore.BLUE + "©" + Fore.RESET
-        elif playerNumber == 2:
-            return Fore.RED + "ø" + Fore.RESET
-        return "."
+        return self.playerCharacters[playerNumber]
+
+    def getPlayerColour(self, playerNumber):
+        return self.playerColours[playerNumber - 1]
 
     def positionIsEmpty(self, x, y):
         return self.board[x][y] == 0
