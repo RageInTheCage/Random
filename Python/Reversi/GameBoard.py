@@ -1,4 +1,5 @@
 from colorama import Fore
+from GameMove import GameMove
 
 class GameBoard(object):
     def __init__(self):
@@ -8,6 +9,7 @@ class GameBoard(object):
         self.playerCharacters = [".", self.playerColours[0] + "©" + Fore.RESET,
                                  self.playerColours[1] + "ø" + Fore.RESET]
         self.gameExtents = []
+        self.moves = []
         for x in range(3, 5):
             self.fillLocation(1, x, x)
             self.fillLocation(2, 7 - x, x)
@@ -37,8 +39,7 @@ class GameBoard(object):
             self.gameExtents.remove(location)
 
         for direction in self.getDirections(x, y):
-            scanX = x + direction[0]
-            scanY = y + direction[1]
+            scanX, scanY = x + direction[0], y + direction[1]
             if self.board[scanX][scanY] > 0:
                 continue
             location = (scanX, scanY)
@@ -51,30 +52,37 @@ class GameBoard(object):
             return "\n"
         return " "
 
-    def drawBoard(self, showFlipCountForPlayerNumber):
+    def drawBoard(self, assessForPlayer):
+        if assessForPlayer == 0:
+            self.moves = []
+        else:
+            self.moves = self.assessBoard(assessForPlayer)
+
         for y in reversed(range(0, 8)):
             print(y, end=' ')
             for x in range(0, 8):
-                piece = self.board[x][y]
-
-                print(self.getBoardCharacter(x, y, showFlipCountForPlayerNumber),
+                print(self.getBoardCharacter(x, y),
                       end=self.getRowTerminator(x))
         print('  ', end='')
+
         for x in range(0, 8):
             print(x, end=self.getRowTerminator(x))
-        print("Locations avaiable count = {0}".format(len(self.gameExtents)))
 
-    def getBoardCharacter(self, x, y, showFlipCountForPlayerNumber):
+    def getBoardCharacter(self, x, y):
         piece = self.board[x][y]
 
-        if piece > 0 or showFlipCountForPlayerNumber == 0:
+        if piece > 0 or len(self.moves) == 0:
             return self.playerCharacters[piece]
 
-        flipCount = self.assessMove(showFlipCountForPlayerNumber, x, y, overturnPieces=False)
-        if flipCount == 0:
+        location = (x, y)
+        if location not in self.moves:
             return '.'
 
-        return self.getPlayerColour(showFlipCountForPlayerNumber) + '.' + Fore.RESET
+        move = self.moves[location]
+        if move.flipCount == 0:
+            return '.'
+
+        return self.getPlayerColour(move.playerNumber) + '.' + Fore.RESET
 
     def getPlayerCharacter(self, playerNumber):
         return self.playerCharacters[playerNumber]
@@ -101,12 +109,24 @@ class GameBoard(object):
 
         return totalFlipCount
 
+    def assessBoard(self, playerNumber):
+        moves = {}
+        for location in self.gameExtents:
+            moveX, moveY = location[0], location[1]
+
+            totalFlipCount = self.assessMove(playerNumber, moveX, moveY, overturnPieces=False)
+            if totalFlipCount == 0:
+                continue
+            move = GameMove(playerNumber, moveX, moveY, totalFlipCount)
+            moves[(moveX, moveY)] = move
+
+        return moves
+
     def assessMove(self, playerNumber, x, y, overturnPieces):
         totalFlipCount = 0
 
         for direction in self.getDirections(x, y):
-            stepX = direction[0]
-            stepY = direction[1]
+            stepX, stepY = direction[0], direction[1]
             flipCount = self.getFlipCount(playerNumber, x, y, stepX, stepY)
             totalFlipCount += flipCount
             if overturnPieces and flipCount > 0:
