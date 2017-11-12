@@ -5,3 +5,4 @@ class GameMove(object):
         self.y = y
         self.overturned = overturned
         self.flipCount = len(overturned)
+        self.score = 0

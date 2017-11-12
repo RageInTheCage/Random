@@ -70,7 +70,6 @@ def gameIsOver():
 
     return False
 
-
 def playGame():
     global gameBoard
     gameBoard = GameBoard()
@@ -79,14 +78,13 @@ def playGame():
     playerNumber = 1
     while True:
         gameBoard.showScore()
-        print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
         gameBoard.drawBoard(assessForPlayer=playerNumber)
 
-        players[playerNumber - 1].makeMove()
-
         if gameIsOver():
-            gameBoard.drawBoard(assessForPlayer=0)
             break
+
+        print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
+        players[playerNumber - 1].makeMove()
 
         playerNumber = gameBoard.opponentNumber(playerNumber)
 

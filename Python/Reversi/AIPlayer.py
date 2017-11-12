@@ -9,6 +9,44 @@ class AIPlayer(object):
         print('Player {0} is thinking...'.format(playerCharacter))
 
         self.board.assessBoard(self.playerNumber)
-        move = next(iter(self.board.moves.values()))
 
-        self.board.tryToMakeMove(self.playerNumber, move.x, move.y)
+        bestMove = None
+        for key, move in self.board.moves.items():
+            move.score = self.getMoveScore(move)
+            if bestMove is None or move.score > bestMove.score:
+                bestMove = move
+
+        print('bestMove.score = {0}, bestMove.flipCount = {1}'.format(bestMove.score, bestMove.flipCount))
+
+        self.board.tryToMakeMove(self.playerNumber, bestMove.x, bestMove.y)
+
+    def getMoveScore(self, move):
+        moveScore = self.getLocationScore(move.x, move.y)
+        for location in move.overturned:
+            locationX = location[0]
+            locationY = location[1]
+            moveScore += self.getLocationScore(locationX, locationY)
+        return moveScore
+
+    def getLocationScore(self, x, y):
+        if self.isCorner(x, y):
+            return 20
+        if self.isEdge(x, y):
+            return 10
+        if self.isInnerCorner(x, y):
+            return -10
+        return 1
+
+    def isCorner(self, x, y):
+        return self.isCoordinateAnEdge(x) and self.isCoordinateAnEdge(y)
+
+    def isEdge(self, x, y):
+        if self.isCorner(x, y):
+            return False
+        return self.isCoordinateAnEdge(x) or self.isCoordinateAnEdge(y)
+
+    def isCoordinateAnEdge(self, coordinate):
+        return coordinate == 0 or coordinate == 7
+
+    def isInnerCorner(self, x, y):
+        return (x == 1 or x == 6) and (y == 1 or y == 6)
