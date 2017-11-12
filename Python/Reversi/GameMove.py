@@ -1,10 +1,7 @@
 class GameMove(object):
-    def __init__(self, playerNumber, x, y, flipCount):
+    def __init__(self, playerNumber, x, y, overturned):
         self.playerNumber = playerNumber
         self.x = x
         self.y = y
-        self.flipCount = flipCount
-        self.overturned = []
-
-    def addOverturned(self, overturned):
-        self.overturned.extend(overturned)
+        self.overturned = overturned
+        self.flipCount = len(overturned)

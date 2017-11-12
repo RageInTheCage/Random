@@ -102,7 +102,10 @@ class GameBoard(object):
         if move.flipCount == 0:
             return False
 
-        self.assessMove(playerNumber, x, y, overturnPieces=True)
+        for piece in move.overturned:
+            pieceX, pieceY = piece[0], piece[1]
+            self.board[pieceX][pieceY] = playerNumber
+
         self.fillLocation(playerNumber, x, y)
         self.score[playerNumber - 1] += move.flipCount + 1
         self.score[self.opponentNumber(playerNumber) - 1] -= move.flipCount
@@ -114,26 +117,24 @@ class GameBoard(object):
         for location in self.gameExtents:
             moveX, moveY = location[0], location[1]
 
-            totalFlipCount = self.assessMove(playerNumber, moveX, moveY, overturnPieces=False)
-            if totalFlipCount == 0:
+            move = self.assessMove(playerNumber, moveX, moveY)
+            if len(move.overturned) == 0:
                 continue
-            move = GameMove(playerNumber, moveX, moveY, totalFlipCount)
             moves[(moveX, moveY)] = move
 
         return moves
 
-    def assessMove(self, playerNumber, x, y, overturnPieces):
-        totalFlipCount = 0
+    def assessMove(self, playerNumber, x, y):
+        allOverturned = []
 
         for direction in self.getDirections(x, y):
             stepX, stepY = direction[0], direction[1]
             overturned = self.assessRow(playerNumber, x, y, stepX, stepY)
-            flipCount = len(overturned)
-            totalFlipCount += flipCount
-            if overturnPieces and flipCount > 0:
-                self.overturnRow(playerNumber, x, y, stepX, stepY)
 
-        return totalFlipCount
+            if len(overturned) > 0:
+                allOverturned.extend(overturned)
+
+        return GameMove(playerNumber, x, y, allOverturned)
 
     def opponentNumber(self, playerNumber):
         return 3 - playerNumber
@@ -157,19 +158,6 @@ class GameBoard(object):
                 break
 
         return overturned
-
-    def overturnRow(self, playerNumber, x, y, stepX, stepY):
-        opponent = self.opponentNumber(playerNumber)
-        while True:
-            x += stepX
-            y += stepY
-            if self.isPassedEdge(x) or self.isPassedEdge(y):
-                break
-
-            if self.board[x][y] == opponent:
-                self.board[x][y] = playerNumber
-            else:
-                break
 
     def isPassedEdge(self, coordinate):
         return coordinate < 0 or coordinate > 7
