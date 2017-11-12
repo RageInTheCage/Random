@@ -7,9 +7,44 @@ class GameBoard(object):
         self.playerColours = [Fore.BLUE, Fore.RED]
         self.playerCharacters = [".", self.playerColours[0] + "©" + Fore.RESET,
                                  self.playerColours[1] + "ø" + Fore.RESET]
+        self.gameExtents = []
         for x in range(3, 5):
-            self.board[x][x] = 1
-            self.board[7 - x][x] = 2
+            self.fillLocation(1, x, x)
+            self.fillLocation(2, 7 - x, x)
+
+    def getDirections(self, x, y):
+        directions = []
+        for stepX in range(-1, 2):
+            scanX = x + stepX
+            if self.isPassedEdge(scanX):
+                continue
+            for stepY in range(-1, 2):
+                if stepY == 0 and stepX == 0:
+                    continue
+                scanY = y + stepY
+                if self.isPassedEdge(scanY):
+                    continue
+                direction = (stepX, stepY)
+                directions.append(direction)
+
+        return directions
+
+    def fillLocation(self, playerNumber, x, y):
+        self.board[x][y] = playerNumber
+
+        location = (x, y)
+        if location in self.gameExtents:
+            self.gameExtents.remove(location)
+
+        for direction in self.getDirections(x, y):
+            scanX = x + direction[0]
+            scanY = y + direction[1]
+            if self.board[scanX][scanY] > 0:
+                continue
+            location = (scanX, scanY)
+            if location in self.gameExtents:
+                continue
+            self.gameExtents.append(location)
 
     def getRowTerminator(self, x):
         if x == 7:
@@ -22,10 +57,12 @@ class GameBoard(object):
             for x in range(0, 8):
                 piece = self.board[x][y]
 
-                print(self.getBoardCharacter(x, y, showFlipCountForPlayerNumber), end=self.getRowTerminator(x))
+                print(self.getBoardCharacter(x, y, showFlipCountForPlayerNumber),
+                      end=self.getRowTerminator(x))
         print('  ', end='')
         for x in range(0, 8):
             print(x, end=self.getRowTerminator(x))
+        print("Locations avaiable count = {0}".format(len(self.gameExtents)))
 
     def getBoardCharacter(self, x, y, showFlipCountForPlayerNumber):
         piece = self.board[x][y]
@@ -35,9 +72,9 @@ class GameBoard(object):
 
         flipCount = self.assessMove(showFlipCountForPlayerNumber, x, y, overturnPieces=False)
         if flipCount == 0:
-            return "."
+            return '.'
 
-        return self.getPlayerColour(showFlipCountForPlayerNumber) + "." + Fore.RESET
+        return self.getPlayerColour(showFlipCountForPlayerNumber) + '.' + Fore.RESET
 
     def getPlayerCharacter(self, playerNumber):
         return self.playerCharacters[playerNumber]
@@ -57,6 +94,7 @@ class GameBoard(object):
 
         totalFlipCount = self.assessMove(playerNumber, x, y, overturnPieces=True)
         if totalFlipCount > 0:
+            self.fillLocation(playerNumber, x, y)
             self.board[x][y] = playerNumber
             self.score[playerNumber - 1] += totalFlipCount + 1
             self.score[self.opponentNumber(playerNumber) - 1] -= totalFlipCount
@@ -66,13 +104,13 @@ class GameBoard(object):
     def assessMove(self, playerNumber, x, y, overturnPieces):
         totalFlipCount = 0
 
-        for stepX in range(-1, 2):
-            for stepY in range(-1, 2):
-                if not (stepY == 0 and stepX == 0):
-                    flipCount = self.getFlipCount(playerNumber, x, y, stepX, stepY)
-                    totalFlipCount += flipCount
-                    if overturnPieces and flipCount > 0:
-                        self.overturnRow(playerNumber, x, y, stepX, stepY)
+        for direction in self.getDirections(x, y):
+            stepX = direction[0]
+            stepY = direction[1]
+            flipCount = self.getFlipCount(playerNumber, x, y, stepX, stepY)
+            totalFlipCount += flipCount
+            if overturnPieces and flipCount > 0:
+                self.overturnRow(playerNumber, x, y, stepX, stepY)
 
         return totalFlipCount
 
@@ -109,8 +147,7 @@ class GameBoard(object):
             if self.isPassedEdge(x) or self.isPassedEdge(y):
                 break
 
-            piece = self.board[x][y]
-            if piece == opponent:
+            if self.board[x][y] == opponent:
                 self.board[x][y] = playerNumber
             else:
                 break
@@ -135,4 +172,3 @@ class GameBoard(object):
     def showScore(self):
         print("Score: {0} = {1}, {2} = {3}".format(self.getPlayerCharacter(1), self.score[0],
                                                    self.getPlayerCharacter(2), self.score[1]))
-
