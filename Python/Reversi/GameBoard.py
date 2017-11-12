@@ -127,7 +127,8 @@ class GameBoard(object):
 
         for direction in self.getDirections(x, y):
             stepX, stepY = direction[0], direction[1]
-            flipCount = self.getFlipCount(playerNumber, x, y, stepX, stepY)
+            overturned = self.assessRow(playerNumber, x, y, stepX, stepY)
+            flipCount = len(overturned)
             totalFlipCount += flipCount
             if overturnPieces and flipCount > 0:
                 self.overturnRow(playerNumber, x, y, stepX, stepY)
@@ -137,27 +138,25 @@ class GameBoard(object):
     def opponentNumber(self, playerNumber):
         return 3 - playerNumber
 
-    def getFlipCount(self, playerNumber, startFromX, startFromY, stepX, stepY):
-        opponent = self.opponentNumber(playerNumber)
-        x = startFromX
-        y = startFromY
-        flipCount = 0
+    def assessRow(self, playerNumber, x, y, stepX, stepY):
+        overturned = []
         while True:
             x += stepX
+            if self.isPassedEdge(x):
+                return []
             y += stepY
-            if self.isPassedEdge(x) or self.isPassedEdge(y):
-                flipCount = 0
-                break
+            if self.isPassedEdge(y):
+                return []
 
             piece = self.board[x][y]
-            if piece == opponent:
-                flipCount += 1
-                continue
-            elif piece == 0:
-                flipCount = 0
-            break
+            if piece == 0:
+                return []
+            elif piece != playerNumber:
+                overturned.append((x, y))
+            else:
+                break
 
-        return flipCount
+        return overturned
 
     def overturnRow(self, playerNumber, x, y, stepX, stepY):
         opponent = self.opponentNumber(playerNumber)

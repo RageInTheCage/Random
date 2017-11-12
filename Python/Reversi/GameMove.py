@@ -4,3 +4,7 @@ class GameMove(object):
         self.x = x
         self.y = y
         self.flipCount = flipCount
+        self.overturned = []
+
+    def addOverturned(self, overturned):
+        self.overturned.extend(overturned)
