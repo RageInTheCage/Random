@@ -1,5 +1,6 @@
 from GameBoard import GameBoard
 from HumanPlayer import HumanPlayer
+from AIPlayer import AIPlayer
 
 def main():
     clearScreen()
@@ -23,12 +24,12 @@ def playersAreBored():
         print('Huh? ')
 
 def getPlayers():
-    return getHumanVsHumanOpponents()
-
     print("Which game mode do you wish to use?")
-    choices = [('A', 'Computer vs Computer', getAiVsAiOpponents()),
-               ('B', 'Human vs Human', getHumanVsHumanOpponents()),
-               ('C', 'Computer vs Human', getAiVsHumanOpponents())]
+    choices = [
+        ('A', 'Computer vs Computer', getAiVsAiOpponents()),
+        ('B', 'Human vs Human', getHumanVsHumanOpponents()),
+        ('C', 'Computer vs Human', getAiVsHumanOpponents())
+        ]
     for choice in choices:
         print('{0} {1}'.format(choice[0], choice[1]))
     while True:
@@ -43,32 +44,30 @@ def getHumanVsHumanOpponents():
         HumanPlayer(2, gameBoard)
     )
 
-# def getAiVsHumanOpponents():
-#     return (
-#         AIPlayer(1, gameBoard),
-#         HumanPlayer(2, gameBoard)
-#         )
-#
-# def getAiVsAiOpponents():
-#     p1 = AIPlayer(1, gameBoard)
-#     p2 = AIPlayer(2, gameBoard)
-#     return (p1, p2)
+def getAiVsHumanOpponents():
+    return (
+        AIPlayer(1, gameBoard),
+        HumanPlayer(2, gameBoard)
+        )
+
+def getAiVsAiOpponents():
+    p1 = AIPlayer(1, gameBoard)
+    p2 = AIPlayer(2, gameBoard)
+    return (p1, p2)
 
 def clearScreen():
     print('\n' * 3)
 
-def playerHasWon():
+def gameIsOver():
     for playerNumber in range(1, 3):
         if gameBoard.playerHasWon(playerNumber):
             print("Player {0} has won!".format(gameBoard.getPlayerCharacter(playerNumber)))
             return True
-    return False
 
-
-def gameIsDrawn():
     if gameBoard.gameIsDrawn():
         print("It's a draw.  How dull.")
         return True
+
     return False
 
 
@@ -81,14 +80,12 @@ def playGame():
     while True:
         gameBoard.showScore()
         print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
-        gameBoard.drawBoard(playerNumber)
+        gameBoard.drawBoard(assessForPlayer=playerNumber)
 
         players[playerNumber - 1].makeMove()
 
-        if playerHasWon():
-            break
-
-        if gameIsDrawn():
+        if gameIsOver():
+            gameBoard.drawBoard(assessForPlayer=0)
             break
 
         playerNumber = gameBoard.opponentNumber(playerNumber)

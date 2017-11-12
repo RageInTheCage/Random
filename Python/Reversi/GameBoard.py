@@ -90,24 +90,24 @@ class GameBoard(object):
     def getPlayerColour(self, playerNumber):
         return self.playerColours[playerNumber - 1]
 
-    def positionIsEmpty(self, x, y):
-        return self.board[x][y] == 0
-
     def getPlayerAtPosition(self, x, y):
         return self.board[x][y]
 
     def tryToMakeMove(self, playerNumber, x, y):
-        if not self.positionIsEmpty(x, y):
+        location = (x, y)
+        if location not in self.moves:
             return False
 
-        totalFlipCount = self.assessMove(playerNumber, x, y, overturnPieces=True)
-        if totalFlipCount > 0:
-            self.fillLocation(playerNumber, x, y)
-            self.board[x][y] = playerNumber
-            self.score[playerNumber - 1] += totalFlipCount + 1
-            self.score[self.opponentNumber(playerNumber) - 1] -= totalFlipCount
+        move = self.moves[location]
+        if move.flipCount == 0:
+            return False
 
-        return totalFlipCount
+        self.assessMove(playerNumber, x, y, overturnPieces=True)
+        self.fillLocation(playerNumber, x, y)
+        self.score[playerNumber - 1] += move.flipCount + 1
+        self.score[self.opponentNumber(playerNumber) - 1] -= move.flipCount
+
+        return move.flipCount
 
     def assessBoard(self, playerNumber):
         moves = {}
