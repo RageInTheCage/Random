@@ -1,3 +1,6 @@
+import random
+
+
 class AIPlayer(object):
     def __init__(self, playerNumber, gameBoard):
         self.playerNumber = playerNumber
@@ -10,13 +13,7 @@ class AIPlayer(object):
 
         self.board.assessBoard(self.playerNumber)
 
-        bestMove = None
-        for key, move in self.board.moves.items():
-            move.score = self.getMoveScore(move)
-            if bestMove is None or move.score > bestMove.score:
-                bestMove = move
-
-        print("bestMove.score = {0}, bestMove.flipCount = {1}".format(bestMove.score, bestMove.flipCount))
+        bestMove = random.choice(self.getBestMoves())
 
         self.board.tryToMakeMove(self.playerNumber, bestMove.x, bestMove.y)
 
@@ -60,5 +57,19 @@ class AIPlayer(object):
         if coordinate < 4:
             return 0
         return 7
+
+    def getBestMoves(self):
+        bestMoveScore = None
+        bestMoves = []
+
+        for key, move in self.board.moves.items():
+            moveScore = self.getMoveScore(move)
+            if bestMoveScore is None or moveScore > bestMoveScore:
+                bestMoveScore = moveScore
+                bestMoves = [move]
+            elif moveScore == bestMoveScore:
+                bestMoves.append(move)
+
+        return bestMoves
 
 
