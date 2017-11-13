@@ -33,7 +33,7 @@ class AIPlayer(object):
             return 20
         if self.isEdge(x, y):
             return 10
-        if self.isInnerCorner(x, y):
+        if self.isInnerCorner(x, y) and self.isCornerUnprotected(x, y):
             return -10
         return 1
 
@@ -50,3 +50,15 @@ class AIPlayer(object):
 
     def isInnerCorner(self, x, y):
         return (x == 1 or x == 6) and (y == 1 or y == 6)
+
+    def isCornerUnprotected(self, innerCornerX, innerCornerY):
+        cornerX = self.getEdgeNearest(innerCornerX)
+        cornerY = self.getEdgeNearest(innerCornerY)
+        return self.board.getPlayerAtPosition(cornerX, cornerY) != self.playerNumber
+
+    def getEdgeNearest(self, coordinate):
+        if coordinate < 4:
+            return 0
+        return 7
+
+
