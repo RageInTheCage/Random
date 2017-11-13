@@ -6,7 +6,7 @@ class AIPlayer(object):
 
     def makeMove(self):
         playerCharacter = self.board.getPlayerCharacter(self.playerNumber)
-        print('Player {0} is thinking...'.format(playerCharacter))
+        print("Player {0} is thinking...".format(playerCharacter))
 
         self.board.assessBoard(self.playerNumber)
 
@@ -16,7 +16,7 @@ class AIPlayer(object):
             if bestMove is None or move.score > bestMove.score:
                 bestMove = move
 
-        print('bestMove.score = {0}, bestMove.flipCount = {1}'.format(bestMove.score, bestMove.flipCount))
+        print("bestMove.score = {0}, bestMove.flipCount = {1}".format(bestMove.score, bestMove.flipCount))
 
         self.board.tryToMakeMove(self.playerNumber, bestMove.x, bestMove.y)
 

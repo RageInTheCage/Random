@@ -1,6 +1,7 @@
 from colorama import Fore
 from GameMove import GameMove
 
+
 class GameBoard(object):
     def __init__(self):
         self.board = [[0 for x in range(8)] for y in range(8)]
@@ -59,11 +60,11 @@ class GameBoard(object):
             self.moves = self.assessBoard(assessForPlayer)
 
         for y in reversed(range(0, 8)):
-            print(y, end=' ')
+            print(y, end=" ")
             for x in range(0, 8):
                 print(self.getBoardCharacter(x, y),
                       end=self.getRowTerminator(x))
-        print('  ', end='')
+        print("  ", end="")
 
         for x in range(0, 8):
             print(x, end=self.getRowTerminator(x))
@@ -76,11 +77,11 @@ class GameBoard(object):
 
         location = (x, y)
         if location not in self.moves:
-            return '.'
+            return "."
 
         move = self.moves[location]
         if move.flipCount == 0:
-            return '.'
+            return "."
 
         return self.getPlayerColour(move.playerNumber) + '.' + Fore.RESET
 
@@ -103,8 +104,8 @@ class GameBoard(object):
             return False
 
         for piece in move.overturned:
-            pieceX, pieceY = piece[0], piece[1]
-            self.board[pieceX][pieceY] = playerNumber
+            pX, pY = piece[0], piece[1]
+            self.board[pX][pY] = playerNumber
 
         self.fillLocation(playerNumber, x, y)
         self.score[playerNumber - 1] += move.flipCount + 1
@@ -161,20 +162,6 @@ class GameBoard(object):
 
     def isPassedEdge(self, coordinate):
         return coordinate < 0 or coordinate > 7
-
-    def gameIsDrawn(self):
-        return self.score[0] == 32 and self.score[1] == 32
-
-    def playerHasWon(self, playerNumber):
-        opponent = self.opponentNumber(playerNumber)
-        if self.score[opponent - 1] == 0: #Opponent wiped out
-            return True
-
-        if sum(self.score) == 64\
-                and self.score[opponent - 1] < self.score[playerNumber - 1]: #Board filled
-            return True
-
-        return False
 
     def showScore(self):
         print("Score: {0} = {1}, {2} = {3}".format(self.getPlayerCharacter(1), self.score[0],
