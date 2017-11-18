@@ -1,6 +1,7 @@
 from GameBoard import GameBoard
 from HumanPlayer import HumanPlayer
 from AIPlayer import AIPlayer
+from Graphics import Graphics
 
 
 def main():
@@ -26,7 +27,7 @@ def playersAreBored():
         print("Huh? ")
 
 
-def getPlayers():
+def get_players():
     print("Which game mode do you wish to use?")
     choices = [
         ("A", "Computer vs Computer", getAiVsAiOpponents()),
@@ -44,21 +45,21 @@ def getPlayers():
 
 def getHumanVsHumanOpponents():
     return (
-        HumanPlayer(1, gameBoard),
-        HumanPlayer(2, gameBoard)
+        HumanPlayer(1, game_board),
+        HumanPlayer(2, game_board)
     )
 
 
 def getAiVsHumanOpponents():
     return (
-        AIPlayer(1, gameBoard),
-        HumanPlayer(2, gameBoard)
+        AIPlayer(1, game_board),
+        HumanPlayer(2, game_board)
     )
 
 
 def getAiVsAiOpponents():
-    p1 = AIPlayer(1, gameBoard)
-    p2 = AIPlayer(2, gameBoard)
+    p1 = AIPlayer(1, game_board)
+    p2 = AIPlayer(2, game_board)
     return (p1, p2)
 
 
@@ -66,40 +67,45 @@ def clearScreen():
     print("\n" * 3)
 
 
-def gameIsOver():
-    if len(gameBoard.moves) > 0:
+def game_is_over():
+    if len(game_board.moves) > 0:
         return False
 
-    if gameBoard.score[0] == gameBoard.score[1]:
+    if game_board.score[0] == game_board.score[1]:
         print("It's a draw.  How dull.")
         return True
 
-    if gameBoard.score[0] > gameBoard.score[1]:
+    if game_board.score[0] > game_board.score[1]:
         winner = 1
     else:
         winner = 2
 
-    print("Player {0} has won!".format(gameBoard.getPlayerCharacter(winner)))
+    print("Player {0} has won!".format(game_board.get_player_character(winner)))
     return True
 
 
 def playGame():
-    global gameBoard
-    gameBoard = GameBoard()
-    players = getPlayers()
+    global game_board
+    game_board = GameBoard()
+    players = get_players()
+    graphics = Graphics((500, 500), game_board)
 
-    playerNumber = 1
+    player_number = 1
     while True:
-        gameBoard.showScore()
-        gameBoard.drawBoard(assessForPlayer=playerNumber)
+        game_board.show_score()
+        game_board.draw_ascii_board(assess_for_player=player_number)
 
-        if gameIsOver():
+        if game_is_over():
             break
 
-        print("Player {0}'s turn.".format(gameBoard.getPlayerCharacter(playerNumber)))
-        players[playerNumber - 1].makeMove()
+        print("Player {0}'s turn.".format(game_board.get_player_character(player_number)))
 
-        playerNumber = gameBoard.opponentNumber(playerNumber)
+        players[player_number - 1].make_move(graphics)
+
+        player_number = game_board.opponent_number(player_number)
+
+    graphics.draw_board()
+    graphics.update()
 
 
 main()

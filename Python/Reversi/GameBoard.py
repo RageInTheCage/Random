@@ -6,74 +6,74 @@ class GameBoard(object):
     def __init__(self):
         self.board = [[0 for x in range(8)] for y in range(8)]
         self.score = [2, 2]
-        self.playerColours = [Fore.BLUE, Fore.RED]
-        self.playerCharacters = [".", self.playerColours[0] + "©" + Fore.RESET,
-                                 self.playerColours[1] + "ø" + Fore.RESET]
-        self.gameExtents = []
+        self.playerColours = [Fore.RED, Fore.BLUE]
+        self.player_characters = [".", self.playerColours[0] + "©" + Fore.RESET,
+                                  self.playerColours[1] + "ø" + Fore.RESET]
+        self.game_extents = []
         self.moves = []
         for x in range(3, 5):
-            self.fillLocation(1, x, x)
-            self.fillLocation(2, 7 - x, x)
+            self.fill_location(1, x, x)
+            self.fill_location(2, 7 - x, x)
 
-    def getDirections(self, x, y):
+    def get_directions(self, x, y):
         directions = []
-        for stepX in range(-1, 2):
-            scanX = x + stepX
-            if self.isPassedEdge(scanX):
+        for step_x in range(-1, 2):
+            scan_x = x + step_x
+            if self.is_passed_edge(scan_x):
                 continue
-            for stepY in range(-1, 2):
-                if stepY == 0 and stepX == 0:
+            for step_y in range(-1, 2):
+                if step_y == 0 and step_x == 0:
                     continue
-                scanY = y + stepY
-                if self.isPassedEdge(scanY):
+                scan_y = y + step_y
+                if self.is_passed_edge(scan_y):
                     continue
-                direction = (stepX, stepY)
+                direction = (step_x, step_y)
                 directions.append(direction)
 
         return directions
 
-    def fillLocation(self, playerNumber, x, y):
-        self.board[x][y] = playerNumber
+    def fill_location(self, player_number, x, y):
+        self.board[x][y] = player_number
 
         location = (x, y)
-        if location in self.gameExtents:
-            self.gameExtents.remove(location)
+        if location in self.game_extents:
+            self.game_extents.remove(location)
 
-        for direction in self.getDirections(x, y):
-            scanX, scanY = x + direction[0], y + direction[1]
-            if self.board[scanX][scanY] > 0:
+        for direction in self.get_directions(x, y):
+            scan_x, scan_y = x + direction[0], y + direction[1]
+            if self.board[scan_x][scan_y] > 0:
                 continue
-            location = (scanX, scanY)
-            if location in self.gameExtents:
+            location = (scan_x, scan_y)
+            if location in self.game_extents:
                 continue
-            self.gameExtents.append(location)
+            self.game_extents.append(location)
 
-    def getRowTerminator(self, x):
+    def get_row_terminator(self, x):
         if x == 7:
             return "\n"
         return " "
 
-    def drawBoard(self, assessForPlayer):
-        if assessForPlayer == 0:
+    def draw_ascii_board(self, assess_for_player):
+        if assess_for_player == 0:
             self.moves = []
         else:
-            self.moves = self.assessBoard(assessForPlayer)
+            self.moves = self.assess_board(assess_for_player)
 
-        for y in reversed(range(0, 8)):
+        for y in range(0, 8):
             print(y, end=" ")
             for x in range(0, 8):
-                print(self.getBoardCharacter(x, y),
-                      end=self.getRowTerminator(x))
+                print(self.get_board_character(x, y),
+                      end=self.get_row_terminator(x))
         print("  ", end="")
 
         for x in range(0, 8):
-            print(x, end=self.getRowTerminator(x))
+            print(x, end=self.get_row_terminator(x))
 
-    def getBoardCharacter(self, x, y):
+    def get_board_character(self, x, y):
         piece = self.board[x][y]
 
         if piece > 0 or len(self.moves) == 0:
-            return self.playerCharacters[piece]
+            return self.player_characters[piece]
 
         location = (x, y)
         if location not in self.moves:
@@ -83,18 +83,18 @@ class GameBoard(object):
         if move.flipCount == 0:
             return "."
 
-        return self.getPlayerColour(move.playerNumber) + '.' + Fore.RESET
+        return self.get_player_colour(move.player_number) + '.' + Fore.RESET
 
-    def getPlayerCharacter(self, playerNumber):
-        return self.playerCharacters[playerNumber]
+    def get_player_character(self, player_number):
+        return self.player_characters[player_number]
 
-    def getPlayerColour(self, playerNumber):
-        return self.playerColours[playerNumber - 1]
+    def get_player_colour(self, player_number):
+        return self.playerColours[player_number - 1]
 
-    def getPlayerAtPosition(self, x, y):
+    def get_player_at(self, x, y):
         return self.board[x][y]
 
-    def tryToMakeMove(self, playerNumber, x, y):
+    def try_to_make_move(self, player_number, x, y):
         location = (x, y)
         if location not in self.moves:
             return False
@@ -105,64 +105,64 @@ class GameBoard(object):
 
         for piece in move.overturned:
             pX, pY = piece[0], piece[1]
-            self.board[pX][pY] = playerNumber
+            self.board[pX][pY] = player_number
 
-        self.fillLocation(playerNumber, x, y)
-        self.score[playerNumber - 1] += move.flipCount + 1
-        self.score[self.opponentNumber(playerNumber) - 1] -= move.flipCount
+        self.fill_location(player_number, x, y)
+        self.score[player_number - 1] += move.flipCount + 1
+        self.score[self.opponent_number(player_number) - 1] -= move.flipCount
 
         return move.flipCount
 
-    def assessBoard(self, playerNumber):
+    def assess_board(self, player_number):
         moves = {}
-        for location in self.gameExtents:
-            moveX, moveY = location[0], location[1]
+        for location in self.game_extents:
+            move_x, move_y = location[0], location[1]
 
-            move = self.assessMove(playerNumber, moveX, moveY)
+            move = self.assess_move(player_number, move_x, move_y)
             if len(move.overturned) == 0:
                 continue
-            moves[(moveX, moveY)] = move
+            moves[(move_x, move_y)] = move
 
         return moves
 
-    def assessMove(self, playerNumber, x, y):
-        allOverturned = []
+    def assess_move(self, player_number, x, y):
+        all_overturned = []
 
-        for direction in self.getDirections(x, y):
-            stepX, stepY = direction[0], direction[1]
-            overturned = self.assessRow(playerNumber, x, y, stepX, stepY)
+        for direction in self.get_directions(x, y):
+            step_x, step_y = direction[0], direction[1]
+            overturned = self.assess_row(player_number, x, y, step_x, step_y)
 
             if len(overturned) > 0:
-                allOverturned.extend(overturned)
+                all_overturned.extend(overturned)
 
-        return GameMove(playerNumber, x, y, allOverturned)
+        return GameMove(player_number, x, y, all_overturned)
 
-    def opponentNumber(self, playerNumber):
-        return 3 - playerNumber
+    def opponent_number(self, player_number):
+        return 3 - player_number
 
-    def assessRow(self, playerNumber, x, y, stepX, stepY):
+    def assess_row(self, player_number, x, y, step_x, step_y):
         overturned = []
         while True:
-            x += stepX
-            if self.isPassedEdge(x):
+            x += step_x
+            if self.is_passed_edge(x):
                 return []
-            y += stepY
-            if self.isPassedEdge(y):
+            y += step_y
+            if self.is_passed_edge(y):
                 return []
 
             piece = self.board[x][y]
             if piece == 0:
                 return []
-            elif piece != playerNumber:
+            elif piece != player_number:
                 overturned.append((x, y))
             else:
                 break
 
         return overturned
 
-    def isPassedEdge(self, coordinate):
+    def is_passed_edge(self, coordinate):
         return coordinate < 0 or coordinate > 7
 
-    def showScore(self):
-        print("Score: {0} = {1}, {2} = {3}".format(self.getPlayerCharacter(1), self.score[0],
-                                                   self.getPlayerCharacter(2), self.score[1]))
+    def show_score(self):
+        print("Score: {0} = {1}, {2} = {3}".format(self.get_player_character(1), self.score[0],
+                                                   self.get_player_character(2), self.score[1]))

@@ -1,33 +1,17 @@
 class HumanPlayer(object):
-    def __init__(self, playerNumber, gameBoard):
-        self.playerNumber = playerNumber
+    def __init__(self, player_number, gameBoard):
+        self.player_number = player_number
         self.board = gameBoard
 
-    def makeMove(self):
+    def make_move(self, graphics):
         print('Enter co-ordinates:')
 
         while True:
-            x = self.askPlayerForCoordinate('x = ')
-            y = self.askPlayerForCoordinate('y = ')
+            cursor = graphics.ask_player_for_move(self.player_number)
 
-            flipCount = self.board.tryToMakeMove(self.playerNumber, x, y)
+            flip_count = self.board.try_to_make_move(self.player_number, cursor[0], cursor[1])
 
-            if flipCount > 0:
+            if flip_count > 0:
                 break
-            print("That space doesn't overturn any {0} pieces.".format(self.board.getPlayerCharacter(self.board.opponentNumber(self.playerNumber))))
-
-    def askPlayerForCoordinate(self, prompt):
-        waitingForValidInput = True
-        while waitingForValidInput:
-            coordinate = input(prompt)
-            if self.isCoordinateValid(coordinate):
-                return int(coordinate)
-            print('You twerp, that was invalid')
-
-    def isCoordinateValid(self, value):
-        try:
-            integerValue = int(value)
-        except:
-            return False
-
-        return integerValue in range(0, 8)
+            print("That space doesn't overturn any {0} pieces.".format(
+                self.board.get_player_character(self.board.opponent_number(self.player_number))))
