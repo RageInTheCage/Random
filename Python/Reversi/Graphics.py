@@ -131,6 +131,9 @@ class Graphics(object):
         pygame.display.update()
         pygame.time.delay(1000)
 
+    def close(self):
+        pygame.quit()
+
     @staticmethod
     def cursor_events():
         return {

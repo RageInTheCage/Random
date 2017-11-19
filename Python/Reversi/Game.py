@@ -71,8 +71,12 @@ def game_is_over():
     if len(game_board.moves) > 0:
         return False
 
+    graphics.draw_board()
+    graphics.update()
+
     if game_board.score[0] == game_board.score[1]:
         print("It's a draw.  How dull.")
+        graphics.display_message("It's a draw.  How dull.")
         return True
 
     if game_board.score[0] > game_board.score[1]:
@@ -81,14 +85,16 @@ def game_is_over():
         winner = 2
 
     print("Player {0} has won!".format(game_board.get_player_character(winner)))
+    graphics.display_message("Player {0} has won!".format(winner))
     return True
 
 
 def playGame():
     global game_board
+    global graphics
     game_board = GameBoard()
     players = get_players()
-    graphics = Graphics((500, 500), game_board)
+    graphics = Graphics((300, 300), game_board)
 
     player_number = 1
     while True:
@@ -104,8 +110,6 @@ def playGame():
 
         player_number = game_board.opponent_number(player_number)
 
-    graphics.draw_board()
-    graphics.update()
-
+    graphics.close()
 
 main()
