@@ -16,6 +16,7 @@ class AIPlayer(object):
         best_move = random.choice(self.get_best_moves())
 
         self.board.try_to_make_move(self.player_number, best_move.x, best_move.y)
+        graphics.fill()
         graphics.draw_board()
         graphics.update()
 

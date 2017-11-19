@@ -33,11 +33,36 @@ class Graphics(object):
         self.pieces = (
             sprites.get_tile(0, 0, self.piece_size, self.piece_size),
             sprites.get_tile(1, 0, self.piece_size, self.piece_size)
-            )
+        )
 
-        self.background_colour = (30, 30, 30)
+        self.background_colour = (0, 0, 0)
+        self.cursor_colour = (250, 230, 230)
+        self.move_colour = (40, 40, 40)
         self.cursor = [3, 3]
         self.clock = pygame.time.Clock()
+        self.moves = []
+
+    def fill(self):
+        self.game_display.fill(self.background_colour)
+
+    def show_moves(self):
+        key = (self.cursor[0], self.cursor[1])
+        if key in self.moves:
+            move = self.moves[key]
+
+            for piece in move.overturned:
+                self.draw_rectangle(piece, self.cursor_colour)
+            return
+
+        for key, move in self.moves.items():
+            self.draw_rectangle((move.x, move.y), self.move_colour)
+
+    def draw_rectangle(self, location, colour):
+        self.game_display.fill(colour, (location[0] * self.piece_size, location[1] * self.piece_size,
+                                        self.piece_size, self.piece_size))
+
+    def draw_cursor(self):
+        self.draw_rectangle(self.cursor, self.cursor_colour)
 
     def draw_piece(self, player_number, x, y):
         if player_number == 0:
@@ -45,7 +70,6 @@ class Graphics(object):
         self.game_display.blit(self.pieces[player_number - 1], (x * self.piece_size, y * self.piece_size))
 
     def draw_board(self):
-        self.game_display.fill(self.background_colour)
         for x in range(0, 8):
             for y in range(0, 8):
                 self.draw_piece(self.game_board.get_player_at(x, y), x, y)
@@ -55,21 +79,28 @@ class Graphics(object):
         # Frames per second
         self.clock.tick(10)
 
-    def ask_player_for_move(self, player_number):
-        self.display_message("Move please...")
+    def ask_player_for_move(self, assess_for_player):
+        if assess_for_player == 0:
+            self.moves = []
+        else:
+            self.moves = self.game_board.assess_board(assess_for_player)
+
+        self.display_message("Your move...")
         cursor_events = self.cursor_events()
 
         chosen = False
         while not chosen:
             for event in pygame.event.get():
-                chosen = self.process_cursor_keys(cursor_events, event)\
+                chosen = self.process_cursor_keys(cursor_events, event) \
                          or self.process_mouse_clicks(event)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
 
+            self.fill()
+            self.show_moves()
+            self.draw_cursor()
             self.draw_board()
-            self.draw_piece(player_number, self.cursor[0], self.cursor[1])
             self.update()
 
         return self.cursor
@@ -98,7 +129,7 @@ class Graphics(object):
         rectangle.center = (self.width / 2, self.height / 2)
         self.game_display.blit(surface, rectangle)
         pygame.display.update()
-        pygame.time.delay(3000)
+        pygame.time.delay(1000)
 
     @staticmethod
     def cursor_events():
@@ -108,4 +139,3 @@ class Graphics(object):
             pygame.K_UP: (0, -1),
             pygame.K_DOWN: (0, 1)
         }
-
