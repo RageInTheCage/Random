@@ -92,6 +92,7 @@ def game_is_over():
 def playGame():
     global game_board
     global graphics
+
     game_board = GameBoard()
     players = get_players()
     graphics = Graphics((300, 300), game_board)

@@ -48,11 +48,13 @@ class Graphics(object):
     def show_moves(self):
         key = (self.cursor[0], self.cursor[1])
         if key in self.moves:
+            self.cursor_colour = pygame.color.Color("green")
             move = self.moves[key]
 
             for piece in move.overturned:
                 self.draw_rectangle(piece, self.cursor_colour)
             return
+        self.cursor_colour = pygame.color.Color("red")
 
         for key, move in self.moves.items():
             self.draw_rectangle((move.x, move.y), self.move_colour)
