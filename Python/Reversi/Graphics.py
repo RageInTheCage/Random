@@ -1,5 +1,6 @@
 import pygame
 from Sprites import Sprites
+from TextOverlay import TextOverlay
 
 
 def check_bounds(coordinate):
@@ -41,6 +42,7 @@ class Graphics(object):
         self.cursor = [3, 3]
         self.clock = pygame.time.Clock()
         self.moves = []
+        self.text_overlays = []
 
     def fill(self):
         self.game_display.fill(self.background_colour)
@@ -79,7 +81,7 @@ class Graphics(object):
     def update(self):
         pygame.display.update()
         # Frames per second
-        self.clock.tick(10)
+        self.clock.tick(20)
 
     def ask_player_for_move(self, assess_for_player):
         if assess_for_player == 0:
@@ -87,7 +89,7 @@ class Graphics(object):
         else:
             self.moves = self.game_board.assess_board(assess_for_player)
 
-        self.display_message("Your move...")
+        self.add_text_overlay("Your move...")
         cursor_events = self.cursor_events()
 
         chosen = False
@@ -103,6 +105,7 @@ class Graphics(object):
             self.show_moves()
             self.draw_cursor()
             self.draw_board()
+            self.animate_text_overlays()
             self.update()
 
         return self.cursor
@@ -125,13 +128,15 @@ class Graphics(object):
 
         return event.type == pygame.K_KP_ENTER
 
-    def display_message(self, message):
-        font = pygame.font.Font('freesansbold.ttf', 24)
-        surface, rectangle = text_objects(message, font, (255, 0, 0))
-        rectangle.center = (self.width / 2, self.height / 2)
-        self.game_display.blit(surface, rectangle)
-        pygame.display.update()
-        pygame.time.delay(1000)
+    def add_text_overlay(self, message):
+        self.text_overlays.append(TextOverlay(self.game_display, message))
+
+    def animate_text_overlays(self):
+        for text_overlay in self.text_overlays:
+            text_overlay.animate()
+            text_overlay.show()
+            if text_overlay.is_gone():
+                self.text_overlays.remove(text_overlay)
 
     def close(self):
         pygame.quit()
@@ -144,3 +149,9 @@ class Graphics(object):
             pygame.K_UP: (0, -1),
             pygame.K_DOWN: (0, 1)
         }
+
+    def ask(self, question):
+        text_overlay = TextOverlay(self.game_display, question)
+        answer = text_overlay.ask()
+        self.text_overlays.append(text_overlay)
+        return answer

@@ -1,3 +1,5 @@
+import pygame
+
 from GameBoard import GameBoard
 from HumanPlayer import HumanPlayer
 from AIPlayer import AIPlayer
@@ -5,66 +7,52 @@ from Graphics import Graphics
 
 
 def main():
-    clearScreen()
-    print("Welcome to Reversi")
-
     while True:
-        playGame()
-        if playersAreBored():
+        play_game()
+        if players_are_bored():
             break
 
 
-def playersAreBored():
+def players_are_bored():
     while True:
         areTheyBored = input("Are you bored yet [y/n]? ").lower()
         if areTheyBored == "y":
             print("Bye then...")
             return True
         if areTheyBored == "n":
-            clearScreen()
             print("Excellent!  Another game...")
             return False
         print("Huh? ")
 
 
 def get_players():
-    print("Which game mode do you wish to use?")
-    choices = [
-        ("A", "Computer vs Computer", getAiVsAiOpponents()),
-        ("B", "Human vs Human", getHumanVsHumanOpponents()),
-        ("C", "Computer vs Human", getAiVsHumanOpponents())
-    ]
-    for choice in choices:
-        print("{0} {1}".format(choice[0], choice[1]))
-    while True:
-        gameMode = input(": ").upper()
-        for choice in choices:
-            if choice[0] == gameMode:
-                return choice[2]
+    if graphics.ask("Play against me?") == pygame.K_y:
+        return get_ai_vs_human_opponents()
+
+    if graphics.ask("Someone else?") == pygame.K_y:
+        return get_human_vs_human_opponents()
+
+    return get_ai_vs_ai_opponents()
 
 
-def getHumanVsHumanOpponents():
+def get_human_vs_human_opponents():
     return (
         HumanPlayer(1, game_board),
         HumanPlayer(2, game_board)
     )
 
 
-def getAiVsHumanOpponents():
+def get_ai_vs_human_opponents():
     return (
         AIPlayer(1, game_board),
         HumanPlayer(2, game_board)
     )
 
 
-def getAiVsAiOpponents():
-    p1 = AIPlayer(1, game_board)
-    p2 = AIPlayer(2, game_board)
-    return (p1, p2)
-
-
-def clearScreen():
-    print("\n" * 3)
+def get_ai_vs_ai_opponents():
+    p_1 = AIPlayer(1, game_board)
+    p_2 = AIPlayer(2, game_board)
+    return (p_1, p_2)
 
 
 def game_is_over():
@@ -89,13 +77,13 @@ def game_is_over():
     return True
 
 
-def playGame():
+def play_game():
     global game_board
     global graphics
 
     game_board = GameBoard()
+    graphics = Graphics((400, 400), game_board)
     players = get_players()
-    graphics = Graphics((300, 300), game_board)
 
     player_number = 1
     while True:
@@ -112,5 +100,6 @@ def playGame():
         player_number = game_board.opponent_number(player_number)
 
     graphics.close()
+
 
 main()
