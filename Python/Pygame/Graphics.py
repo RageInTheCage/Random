@@ -1,6 +1,6 @@
 import pygame
 from Sprites import Sprites
-from Dialog import Dialog
+from TextOverlay import TextOverlay
 
 
 def check_bounds(coordinate):
@@ -33,7 +33,7 @@ class Graphics(object):
         self.cursor_colour = (10, 10, 10)
         self.cursor = [3, 3]
 
-        self.dialogs = []
+        self.text_overlays = []
 
 
     def fill(self):
@@ -52,7 +52,6 @@ class Graphics(object):
 
     def game_loop(self):
         clock = pygame.time.Clock()
-
         player_number = 0
 
         for x in range(0, 8):
@@ -66,14 +65,16 @@ class Graphics(object):
             for event in pygame.event.get():
                 if self.process_cursor_keys(cursor_events, event) \
                          or self.process_mouse_clicks(event):
-                    self.add_dialog("Hi there!")
+                    dialog = TextOverlay(self.game_display, "Everything ok (Y/N)?")
+                    dialog.ask()
+                    self.text_overlays.append(dialog)
 
                 if event.type == pygame.QUIT:
                     player_has_quit = True
 
             self.fill()
             self.draw_cursor(player_number)
-            self.show_dialogs()
+            self.animate_text_overlays()
             pygame.display.update()
 
             # Frames per second
@@ -107,12 +108,12 @@ class Graphics(object):
             pygame.K_DOWN: (0, 1)
         }
 
-    def add_dialog(self, message):
-        self.dialogs.append(Dialog(self.game_display, message, 3000))
+    def add_text_overlay(self, message):
+        self.text_overlays.append(TextOverlay(self.game_display, message, 3000))
 
-    def show_dialogs(self):
-        for dialog in self.dialogs:
-            dialog.animate()
-            dialog.display_message()
-            if dialog.times_up():
-                self.dialogs.remove(dialog)
+    def animate_text_overlays(self):
+        for text_overlay in self.text_overlays:
+            text_overlay.animate()
+            text_overlay.show()
+            if text_overlay.is_gone():
+                self.text_overlays.remove(text_overlay)
