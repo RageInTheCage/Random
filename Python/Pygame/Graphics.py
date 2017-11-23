@@ -12,29 +12,31 @@ def check_bounds(coordinate):
 
 
 class Graphics(object):
-    def __init__(self, display_width, display_height):
+    def __init__(self, display_size):
         pygame.init()
 
-        self.game_display = pygame.display.set_mode((display_width, display_height))
+        self.width = display_size[0]
+        self.height = display_size[1]
+        self.game_display = pygame.display.set_mode((self.width, self.height))
+
         pygame.display.set_caption('Reversi')
-        self.width = display_width
-        self.height = display_height
 
-        sprites = Sprites("Reversi Pieces.png", 2, 1)
+        sprites = Sprites("../Reversi/Reversi Pieces.png", 2, 1)
 
-        self.piece_size = int(display_height / 8)
+        self.piece_size = int(self.height / 8)
 
         self.pieces = (
             sprites.get_tile(0, 0, self.piece_size, self.piece_size),
             sprites.get_tile(1, 0, self.piece_size, self.piece_size)
-            )
+        )
 
-        self.background_colour = (0, 0, 0)
-        self.cursor_colour = (10, 10, 10)
+        self.background_colour = (222, 222, 224)
+        self.cursor_colour = (250, 230, 230)
+        self.move_colour = (255, 220, 211)
         self.cursor = [3, 3]
-
+        self.clock = pygame.time.Clock()
+        self.moves = []
         self.text_overlays = []
-
 
     def fill(self):
         self.game_display.fill(self.background_colour)

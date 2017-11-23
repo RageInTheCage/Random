@@ -15,5 +15,5 @@ class HumanPlayer(object):
                 break
 
             opponent = self.board.opponent_number(self.player_number)
-            graphics.say("Doesn't overturn {0}".format(self.board.get_player_name(opponent)))
+            graphics.say("Must overturn {0}".format(self.board.get_player_name(opponent)))
             print("That space doesn't overturn any {0} pieces.".format(self.board.get_player_character(opponent)))

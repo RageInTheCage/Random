@@ -15,7 +15,7 @@ def main():
 
 def players_are_bored():
     while True:
-        if graphics.ask("Bored yet (y/n)?") == pygame.K_y:
+        if graphics.ask("Bored yet?") == pygame.K_y:
             return True
         return False
 
