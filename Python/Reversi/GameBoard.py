@@ -6,9 +6,10 @@ class GameBoard(object):
     def __init__(self):
         self.board = [[0 for x in range(8)] for y in range(8)]
         self.score = [2, 2]
-        self.playerColours = [Fore.RED, Fore.BLUE]
-        self.player_characters = [".", self.playerColours[0] + "©" + Fore.RESET,
-                                  self.playerColours[1] + "ø" + Fore.RESET]
+        self.player_colours = [Fore.RED, Fore.BLUE]
+        self.player_names = ["red", "blue"]
+        self.player_characters = [".", self.player_colours[0] + "©" + Fore.RESET,
+                                  self.player_colours[1] + "ø" + Fore.RESET]
         self.game_extents = []
         self.moves = []
         for x in range(3, 5):
@@ -48,7 +49,8 @@ class GameBoard(object):
                 continue
             self.game_extents.append(location)
 
-    def get_row_terminator(self, x):
+    @staticmethod
+    def get_row_terminator(x):
         if x == 7:
             return "\n"
         return " "
@@ -88,8 +90,11 @@ class GameBoard(object):
     def get_player_character(self, player_number):
         return self.player_characters[player_number]
 
+    def get_player_name(self, player_number):
+        return self.player_names[player_number - 1]
+
     def get_player_colour(self, player_number):
-        return self.playerColours[player_number - 1]
+        return self.player_colours[player_number - 1]
 
     def get_player_at(self, x, y):
         return self.board[x][y]
@@ -137,7 +142,8 @@ class GameBoard(object):
 
         return GameMove(player_number, x, y, all_overturned)
 
-    def opponent_number(self, player_number):
+    @staticmethod
+    def opponent_number(player_number):
         return 3 - player_number
 
     def assess_row(self, player_number, x, y, step_x, step_y):
@@ -160,7 +166,8 @@ class GameBoard(object):
 
         return overturned
 
-    def is_passed_edge(self, coordinate):
+    @staticmethod
+    def is_passed_edge(coordinate):
         return coordinate < 0 or coordinate > 7
 
     def show_score(self):

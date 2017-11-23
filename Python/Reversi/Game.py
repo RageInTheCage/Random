@@ -15,14 +15,9 @@ def main():
 
 def players_are_bored():
     while True:
-        areTheyBored = input("Are you bored yet [y/n]? ").lower()
-        if areTheyBored == "y":
-            print("Bye then...")
+        if graphics.ask("Bored yet (y/n)?") == pygame.K_y:
             return True
-        if areTheyBored == "n":
-            print("Excellent!  Another game...")
-            return False
-        print("Huh? ")
+        return False
 
 
 def get_players():
@@ -64,7 +59,7 @@ def game_is_over():
 
     if game_board.score[0] == game_board.score[1]:
         print("It's a draw.  How dull.")
-        graphics.display_message("It's a draw.  How dull.")
+        graphics.say("It's a draw.  How dull.")
         return True
 
     if game_board.score[0] > game_board.score[1]:
@@ -73,7 +68,7 @@ def game_is_over():
         winner = 2
 
     print("Player {0} has won!".format(game_board.get_player_character(winner)))
-    graphics.display_message("Player {0} has won!".format(winner))
+    graphics.say("Player {0} has won!".format(game_board.get_player_name(winner)))
     return True
 
 
@@ -82,7 +77,7 @@ def play_game():
     global graphics
 
     game_board = GameBoard()
-    graphics = Graphics((400, 400), game_board)
+    graphics = Graphics((800, 800), game_board)
     players = get_players()
 
     player_number = 1
@@ -98,8 +93,5 @@ def play_game():
         players[player_number - 1].make_move(graphics)
 
         player_number = game_board.opponent_number(player_number)
-
-    graphics.close()
-
 
 main()

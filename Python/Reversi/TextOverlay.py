@@ -3,7 +3,7 @@ import random
 
 
 class TextOverlay(object):
-    def __init__(self, display, message, font_size=50, font_name='Impact'):
+    def __init__(self, display, message, font_size=70, font_name='Impact'):
         self.display = display
         font = pygame.font.SysFont(font_name, font_size)
         colour = (0, 0, 255)

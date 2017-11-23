@@ -36,9 +36,9 @@ class Graphics(object):
             sprites.get_tile(1, 0, self.piece_size, self.piece_size)
         )
 
-        self.background_colour = (0, 0, 0)
+        self.background_colour = (222, 222, 224)
         self.cursor_colour = (250, 230, 230)
-        self.move_colour = (40, 40, 40)
+        self.move_colour = (255, 220, 211)
         self.cursor = [3, 3]
         self.clock = pygame.time.Clock()
         self.moves = []
@@ -89,7 +89,6 @@ class Graphics(object):
         else:
             self.moves = self.game_board.assess_board(assess_for_player)
 
-        self.add_text_overlay("Your move...")
         cursor_events = self.cursor_events()
 
         chosen = False
@@ -99,7 +98,7 @@ class Graphics(object):
                          or self.process_mouse_clicks(event)
 
                 if event.type == pygame.QUIT:
-                    pygame.quit()
+                    self.close()
 
             self.fill()
             self.show_moves()
@@ -128,9 +127,6 @@ class Graphics(object):
 
         return event.type == pygame.K_KP_ENTER
 
-    def add_text_overlay(self, message):
-        self.text_overlays.append(TextOverlay(self.game_display, message))
-
     def animate_text_overlays(self):
         for text_overlay in self.text_overlays:
             text_overlay.animate()
@@ -138,7 +134,8 @@ class Graphics(object):
             if text_overlay.is_gone():
                 self.text_overlays.remove(text_overlay)
 
-    def close(self):
+    @staticmethod
+    def close():
         pygame.quit()
 
     @staticmethod
@@ -151,7 +148,12 @@ class Graphics(object):
         }
 
     def ask(self, question):
+        self.fill()
+        self.draw_board()
         text_overlay = TextOverlay(self.game_display, question)
         answer = text_overlay.ask()
         self.text_overlays.append(text_overlay)
         return answer
+
+    def say(self, message):
+        self.text_overlays.append(TextOverlay(self.game_display, message))
