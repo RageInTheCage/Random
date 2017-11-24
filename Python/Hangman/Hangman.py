@@ -1,12 +1,13 @@
 import random
 
-def diplayHangman(levelOfDeath):
-    print(levelOfDeath)
-    if levelOfDeath == 1:
+
+def diplayHangman(level_of_death):
+    print(level_of_death)
+    if level_of_death == 1:
         print("\n\n\n\n\n")
         print(" _____________")
 
-    elif levelOfDeath == 2:
+    elif level_of_death == 2:
         print("   ")
         print("  |")
         print("  |")
@@ -15,7 +16,7 @@ def diplayHangman(levelOfDeath):
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 3:
+    elif level_of_death == 3:
         print("   _________")
         print("  |")
         print("  |")
@@ -24,7 +25,7 @@ def diplayHangman(levelOfDeath):
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 4:
+    elif level_of_death == 4:
         print("   _________")
         print("  |         |")
         print("  |         |")
@@ -33,25 +34,25 @@ def diplayHangman(levelOfDeath):
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 5:
-        print("   _________")
-        print("  |         |")
-        print("  |         0")
-        print("  |")
-        print("  |")
-        print(" /|\\")
-        print("/_|_\\_________")
-
-    elif levelOfDeath == 6:
+    elif level_of_death == 5:
         print("   _________")
         print("  |         |")
         print("  |         0")
+        print("  |")
+        print("  |")
+        print(" /|\\")
+        print("/_|_\\_________")
+
+    elif level_of_death == 6:
+        print("   _________")
+        print("  |         |")
+        print("  |         0")
         print("  |         |")
         print("  |")
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 7:
+    elif level_of_death == 7:
         print("   _________")
         print("  |         |")
         print("  |         0")
@@ -60,7 +61,7 @@ def diplayHangman(levelOfDeath):
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 8:
+    elif level_of_death == 8:
         print("   _________")
         print("  |         |")
         print("  |         0")
@@ -69,7 +70,7 @@ def diplayHangman(levelOfDeath):
         print(" /|\\")
         print("/_|_\\_________")
 
-    elif levelOfDeath == 9:
+    elif level_of_death == 9:
         print("   _________")
         print("  |         |")
         print("  |         0")
@@ -96,19 +97,28 @@ def swapOutLetters(lettersGuessed, guessedLetter, word):
             correctAnswer = True
     return lettersGuessed, correctAnswer
 
+
+def inputSingleLetter():
+    while True:
+        letter = input(":  ").upper()
+        if len(letter) == 1:
+            return letter
+        print("Expected a single character")
+
 def inputLetter(lettersGuessed):
     print("Guess a letter!")
     while True:
-        guessedLetter = input(":  ")
+        guessedLetter = inputSingleLetter()
         if lettersGuessed.count(guessedLetter) == 0:
             return guessedLetter
-        else:
-            print("You have already chosen " + guessedLetter + " as a letter.")
+        print("You have already chosen " + guessedLetter + " as a letter.")
+
 
 def showLetters(lettersGuessed):
     for letter in lettersGuessed:
         print(letter, end=' ')
-    
+
+
 def game():
     dictionary = ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
     random.shuffle(dictionary)
@@ -135,5 +145,17 @@ def game():
             if levelOfDeath == 10:
                 print("*Even more evil laughter than before*")
                 return
-    
-game()
+
+
+def userIsBored():
+    while True:
+        print ("Another game (Y/N)?")
+        reply = inputSingleLetter()
+        if reply == "N" or reply == "Y":
+            return reply == "N"
+
+
+while True:
+    game()
+    if userIsBored():
+        break

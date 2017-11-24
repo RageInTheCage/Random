@@ -12,6 +12,7 @@ class Sprites(object):
         self.tile_width = self.width / self.tiles_wide
         self.tile_height = self.height / self.tiles_high
 
+
     def get_tile(self, x, y, width, height):
         cropped_image = pygame.Surface((self.tile_width, self.tile_height))
         cropped_image.blit(self.image, (0, 0),

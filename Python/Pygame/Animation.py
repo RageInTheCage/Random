@@ -33,7 +33,7 @@ class Animation(pygame.sprite.Sprite):
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 800))
-    white = (255, 255, 255)
+    white = (222, 222, 224)
     screen.fill(white)
 
     my_sprite = Animation()
