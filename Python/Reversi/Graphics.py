@@ -150,10 +150,22 @@ class Graphics(object):
     def ask(self, question):
         self.fill()
         self.draw_board()
-        text_overlay = TextOverlay(self.game_display, question)
-        answer = text_overlay.ask()
-        self.text_overlays.append(text_overlay)
+        ask_overlay = TextOverlay(self.game_display, question)
+        self.append_text_overlays(ask_overlay)
+        answer = ask_overlay.ask()
         return answer
 
     def say(self, message):
-        self.text_overlays.append(TextOverlay(self.game_display, message))
+        new_overlay = TextOverlay(self.game_display, message)
+        self.append_text_overlays(new_overlay)
+
+    def append_text_overlays(self, new_overlay):
+        if len(self.text_overlays) > 0:
+            top_most_y = min(overlay.text_rectangle.top for overlay in self.text_overlays)
+            new_top = top_most_y - new_overlay.text_rectangle.height
+            max_top = (self.height - new_overlay.text_rectangle.height) / 2
+            if new_top < max_top:
+                new_top = max_top
+            new_overlay.text_rectangle.top = new_top
+        self.text_overlays.append(new_overlay)
+

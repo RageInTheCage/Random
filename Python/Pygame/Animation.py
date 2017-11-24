@@ -1,8 +1,7 @@
 import random
-
 import pygame
 import sys
-
+import glob
 
 def load_image(name):
     image = pygame.image.load(name).convert()
@@ -13,8 +12,9 @@ class Animation(pygame.sprite.Sprite):
     def __init__(self):
         super(Animation, self).__init__()
         self.images = []
-        for index in range(1, 17):
-            self.images.append(load_image("../Reversi/Animation/Reversi{0:04d}.png".format(index)))
+
+        for image_file_path in glob.glob('../Reversi/Animation/*.png'):
+            self.images.append(load_image(image_file_path))
 
         self.index = 0
         self.image = self.images[self.index]
