@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="061fefee-9f39-46ad-8931-3918bfaae2f9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Animation.py" afterPath="$PROJECT_DIR$/Animation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Reversi/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/Graphics.py" afterPath="$PROJECT_DIR$/../Reversi/Graphics.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
