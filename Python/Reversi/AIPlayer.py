@@ -18,6 +18,7 @@ class AIPlayer(object):
         self.board.try_to_make_move(self.player_number, best_move.x, best_move.y)
         graphics.fill()
         graphics.draw_board()
+        graphics.animate_text_overlays()
         graphics.update()
 
     def get_move_score(self, move):

@@ -27,6 +27,7 @@ def get_players():
     if graphics.ask("Someone else?") == pygame.K_y:
         return get_human_vs_human_opponents()
 
+    graphics.say("Fine, I'll play me!")
     return get_ai_vs_ai_opponents()
 
 
@@ -67,8 +68,9 @@ def game_is_over():
     else:
         winner = 2
 
-    print("Player {0} has won!".format(game_board.get_player_character(winner)))
-    graphics.say("Player {0} has won!".format(game_board.get_player_name(winner)))
+    message = "Player {0} has won!".format(game_board.get_player_name(winner))
+    print(message)
+    graphics.say(message)
     return True
 
 

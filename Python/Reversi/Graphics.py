@@ -147,12 +147,26 @@ class Graphics(object):
             pygame.K_DOWN: (0, 1)
         }
 
-    def ask(self, question):
+    def ask(self, question, answers=(pygame.K_y, pygame.K_n)):
         self.fill()
         self.draw_board()
         ask_overlay = TextOverlay(self.game_display, question)
+        ask_overlay.animation_enabled = False
         self.append_text_overlays(ask_overlay)
-        answer = ask_overlay.ask()
+
+        answer = None
+        while not answer:
+            self.fill()
+            self.draw_board()
+            self.animate_text_overlays()
+            self.update()
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key in answers:
+                    answer = event.key
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+
+        ask_overlay.animation_enabled = True
         return answer
 
     def say(self, message):

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="061fefee-9f39-46ad-8931-3918bfaae2f9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/Reversi Pieces v2.pyxel" afterPath="$PROJECT_DIR$/../Reversi/Reversi Pieces v2.pyxel" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/Reversi Pieces.png" afterPath="$PROJECT_DIR$/../Reversi/Reversi Pieces.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Reversi/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/AIPlayer.py" afterPath="$PROJECT_DIR$/../Reversi/AIPlayer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/Game.py" afterPath="$PROJECT_DIR$/../Reversi/Game.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/Graphics.py" afterPath="$PROJECT_DIR$/../Reversi/Graphics.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Reversi/TextOverlay.py" afterPath="$PROJECT_DIR$/../Reversi/TextOverlay.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -100,6 +106,7 @@
         <option value="$PROJECT_DIR$/Sprites.py" />
         <option value="$PROJECT_DIR$/../Hangman/Hangman.py" />
         <option value="$PROJECT_DIR$/Animation.py" />
+        <option value="$PROJECT_DIR$/../Reversi/Game.py" />
       </list>
     </option>
   </component>
@@ -366,7 +373,7 @@
         <state relative-caret-position="630">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -432,7 +439,7 @@
         <state relative-caret-position="615">
           <caret line="41" column="28" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,7 +737,7 @@
         <state relative-caret-position="630">
           <caret line="42" column="34" lean-forward="true" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
