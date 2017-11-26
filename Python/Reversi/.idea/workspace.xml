@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="Play &quot;Another game?&quot;">
+    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pygame/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Pygame/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pygame/Animation.py" afterPath="$PROJECT_DIR$/../Pygame/Animation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pygame/Sprites.py" afterPath="$PROJECT_DIR$/../Pygame/Sprites.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AIPlayer.py" afterPath="$PROJECT_DIR$/AIPlayer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.py" afterPath="$PROJECT_DIR$/Game.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameBoard.py" afterPath="$PROJECT_DIR$/GameBoard.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.py" afterPath="$PROJECT_DIR$/Player.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Game.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
@@ -32,6 +31,26 @@
                 <element signature="e#1552#1635#0" expanded="false" />
                 <element signature="e#1682#2203#0" expanded="false" />
                 <element signature="e#2243#2293#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Graphics.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Graphics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+              <folding>
+                <element signature="e#114#211#0" expanded="false" />
+                <element signature="e#258#340#0" expanded="false" />
+                <element signature="e#1330#1788#0" expanded="false" />
+                <element signature="e#1846#2014#0" expanded="false" />
+                <element signature="e#2051#2103#0" expanded="false" />
+                <element signature="e#2649#3357#0" expanded="false" />
+                <element signature="e#3410#3726#0" expanded="false" />
+                <element signature="e#4215#4416#0" expanded="false" />
+                <element signature="e#4527#4685#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -467,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511717540877</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Fixed issue where AI vs AI did not update screen.">
+      <created>1511729365976</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1511729365976</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView">
@@ -481,8 +507,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17238913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17238913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34945586" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.71825874" sideWeight="0.3962804" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32527205" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -539,7 +566,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Almost fully functional Game.py.  Doesn't detect draw yet.  No AI either" />
     <MESSAGE value="Workspace?" />
     <MESSAGE value="Added scoring.  Fixed bug when player gets close to edge of board." />
     <MESSAGE value="Added highlighting of possible moves.  Bug remains when board is full but last player didn't win." />
@@ -564,7 +590,8 @@
     <MESSAGE value="Implemented Player base class to AIPlayer and HumanPlayer" />
     <MESSAGE value="Further refactoring of players (base class)" />
     <MESSAGE value="Play &quot;Another game?&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Play &quot;Another game?&quot;" />
+    <MESSAGE value="Fixed issue where AI vs AI did not update screen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue where AI vs AI did not update screen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -580,13 +607,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GameMove.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AIPlayer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1041,21 +1061,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Graphics.py">
+    <entry file="file://$PROJECT_DIR$/../Pygame/Demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#114#211#0" expanded="false" />
-            <element signature="e#258#340#0" expanded="false" />
-            <element signature="e#1330#1788#0" expanded="false" />
-            <element signature="e#1846#2014#0" expanded="false" />
-            <element signature="e#2051#2103#0" expanded="false" />
-            <element signature="e#2649#3357#0" expanded="false" />
-            <element signature="e#3410#3726#0" expanded="false" />
-            <element signature="e#4215#4416#0" expanded="false" />
-            <element signature="e#4527#4685#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1073,6 +1083,24 @@
             <element signature="e#1552#1635#0" expanded="false" />
             <element signature="e#1682#2203#0" expanded="false" />
             <element signature="e#2243#2293#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding>
+            <element signature="e#114#211#0" expanded="false" />
+            <element signature="e#258#340#0" expanded="false" />
+            <element signature="e#1330#1788#0" expanded="false" />
+            <element signature="e#1846#2014#0" expanded="false" />
+            <element signature="e#2051#2103#0" expanded="false" />
+            <element signature="e#2649#3357#0" expanded="false" />
+            <element signature="e#3410#3726#0" expanded="false" />
+            <element signature="e#4215#4416#0" expanded="false" />
+            <element signature="e#4527#4685#0" expanded="false" />
           </folding>
         </state>
       </provider>

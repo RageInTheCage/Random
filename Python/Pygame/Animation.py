@@ -3,6 +3,7 @@ import pygame
 import sys
 import glob
 
+
 def load_image(name):
     image = pygame.image.load(name).convert()
     return image
@@ -13,7 +14,10 @@ class Animation(pygame.sprite.Sprite):
         super(Animation, self).__init__()
         self.images = []
 
-        for image_file_path in glob.glob('../Reversi/Animation/*.png'):
+        image_files = glob.glob('../Reversi/Animation/*.png')
+        image_files.sort()
+
+        for image_file_path in image_files:
             self.images.append(load_image(image_file_path))
 
         self.index = 0
@@ -39,7 +43,7 @@ def main():
     my_sprite = Animation()
     my_group = pygame.sprite.Group(my_sprite)
 
-    for index in range(1, 64):
+    for index in range(1, 3):
         extra_sprite = Animation()
         location = (
             random.randint(0, 700),
@@ -58,6 +62,11 @@ def main():
         if event.type == pygame.MOUSEMOTION:
             position = pygame.mouse.get_pos()
             my_sprite.rect.center = position
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            extra_sprite = Animation()
+            extra_sprite.rect.center = pygame.mouse.get_pos()
+            my_group.add(extra_sprite)
+
 
         # Calling the 'my_group.update' function calls the 'update' function of all
         # its member sprites. Calling the 'my_group.draw' function uses the 'image'
