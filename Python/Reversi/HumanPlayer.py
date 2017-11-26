@@ -1,6 +1,7 @@
 from Player import Player
 
-class HumanPlayer(object):
+
+class HumanPlayer(Player):
     def __init__(self, player_number, game_board):
         Player.__init__(self, player_number, game_board)
 
@@ -15,6 +16,6 @@ class HumanPlayer(object):
             if flip_count > 0:
                 break
 
-            opponent = self.game_board.opponent(self)
-            graphics.say("Must overturn {0}".format(opponent.name))
-            print("That space doesn't overturn any {0} pieces.".format(opponent.name))
+            message = "Must overturn {0}".format(self.opponent.name)
+            graphics.say(message)
+            print(message)

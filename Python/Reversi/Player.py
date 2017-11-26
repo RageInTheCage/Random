@@ -11,3 +11,7 @@ class Player:
         self.name = ('red', 'blue')[index]
         self.character = ('©', 'ø')[index]
         self.score = 2
+
+    @property
+    def opponent(self):
+        return self.game_board.players[2 - self.number]

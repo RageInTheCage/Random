@@ -7,73 +7,72 @@ from Graphics import Graphics
 
 
 def main():
-    while True:
-        play_game()
-        if players_are_bored():
-            break
-
-
-def play_game():
-    global game_board
-    global graphics
-
     game_board = GameBoard()
     graphics = Graphics((800, 800), game_board)
-    game_board.players = get_players()
+
+    while True:
+        play_game(game_board, graphics)
+
+        if players_are_bored(graphics):
+            break
+
+        game_board = GameBoard()
+        graphics.game_board = game_board
+
+
+def play_game(game_board, graphics):
+    game_board.players = get_players(game_board, graphics)
 
     player = game_board.players[0]
     while True:
         game_board.show_score(game_board.players)
         game_board.draw_ascii_board(assess_for_player=player.number)
 
-        if game_is_over():
+        if game_is_over(game_board, graphics):
             break
 
         print("Player {0}'s turn.".format(player.character))
         player.make_move(graphics)
 
-        player = game_board.opponent(player)
+        player = player.opponent
 
 
-def players_are_bored():
-    while True:
-        if graphics.ask("Bored yet?") == pygame.K_y:
-            return True
-        return False
+def players_are_bored(graphics):
+    return graphics.ask("Bored yet?") == pygame.K_y
 
 
-def get_players():
+def get_players(game_board, graphics):
     if graphics.ask("Play against me?") == pygame.K_y:
-        return get_ai_vs_human_opponents()
+        return get_ai_vs_human_opponents(game_board)
 
     if graphics.ask("Someone else?") == pygame.K_y:
-        return get_human_vs_human_opponents()
+        return get_human_vs_human_opponents(game_board)
 
     graphics.say("Fine, I'll play me!")
-    return get_ai_vs_ai_opponents()
+    return get_ai_vs_ai_opponents(game_board)
 
 
-def get_human_vs_human_opponents():
+def get_human_vs_human_opponents(game_board):
     return (
         HumanPlayer(1, game_board),
         HumanPlayer(2, game_board)
     )
 
 
-def get_ai_vs_human_opponents():
+def get_ai_vs_human_opponents(game_board):
     return (
         AIPlayer(1, game_board),
         HumanPlayer(2, game_board)
     )
 
 
-def get_ai_vs_ai_opponents():
+def get_ai_vs_ai_opponents(game_board):
     p_1 = AIPlayer(1, game_board)
     p_2 = AIPlayer(2, game_board)
     return p_1, p_2
 
 
-def game_is_over():
+def game_is_over(game_board, graphics):
     if len(game_board.moves) > 0:
         return False
 
@@ -83,16 +82,14 @@ def game_is_over():
     score_difference = game_board.players[0].score - game_board.players[1].score
 
     if score_difference == 0:
-        print("It's a draw.  How dull.")
-        graphics.say("It's a draw.  How dull.")
-        return True
-
-    if score_difference < 0:
-        winner = game_board.players[0]
+        message = "It's a draw.  How dull."
     else:
-        winner = game_board.players[1]
+        if score_difference > 0:
+            winner = game_board.players[0]
+        else:
+            winner = game_board.players[1]
+        message = "Player {0} has won!".format(winner.name)
 
-    message = "Player {0} has won!".format(winner.name)
     print(message)
     graphics.say(message)
     return True

@@ -60,14 +60,14 @@ class GameBoard(object):
         for y in range(0, 8):
             print(y, end=" ")
             for x in range(0, 8):
-                print(self.get_board_character(x, y),
+                print(self.get_ascii_board_character(x, y),
                       end=self.get_row_terminator(x))
         print("  ", end="")
 
         for x in range(0, 8):
             print(x, end=self.get_row_terminator(x))
 
-    def get_board_character(self, x, y):
+    def get_ascii_board_character(self, x, y):
         piece = self.board[x][y]
 
         if piece > 0 or len(self.moves) == 0:
@@ -83,17 +83,6 @@ class GameBoard(object):
             return Fore.RESET + '.'
 
         return self.players[move.player_number - 1].colour + '.'
-
-    def get_player_character(self, piece):
-        if piece == 0:
-            return '.'
-        return self.players[piece - 1].character
-
-    def get_player_name(self, player_number):
-        return self.player_names[player_number - 1]
-
-    def get_player_colour(self, player_number):
-        return self.players[player_number - 1].colour
 
     def get_player_at(self, x, y):
         return self.board[x][y]
@@ -115,7 +104,7 @@ class GameBoard(object):
 
         player = self.players[player_number - 1]
         player.score += move.flipCount + 1
-        self.opponent(player).score -= move.flipCount
+        player.opponent.score -= move.flipCount
 
         return move.flipCount
 
@@ -142,9 +131,6 @@ class GameBoard(object):
                 all_overturned.extend(overturned)
 
         return GameMove(player_number, x, y, all_overturned)
-
-    def opponent(self, player):
-        return self.players[2 - player.number]
 
     def assess_row(self, player_number, x, y, step_x, step_y):
         overturned = []

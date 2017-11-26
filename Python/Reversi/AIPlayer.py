@@ -1,14 +1,13 @@
 import random
-
 from Player import Player
+
 
 class AIPlayer(Player):
     def __init__(self, player_number, game_board):
         Player.__init__(self, player_number, game_board)
 
     def make_move(self, graphics):
-        player_character = self.game_board.get_player_character(self.number)
-        print("Player {0} is thinking...".format(player_character))
+        print("Player {0} is thinking...".format(self.character))
 
         self.game_board.assess_board(self.number)
 
@@ -21,12 +20,12 @@ class AIPlayer(Player):
         graphics.update()
 
     def get_move_score(self, move):
-        moveScore = self.get_location_score(move.x, move.y)
+        move_score = self.get_location_score(move.x, move.y)
         for location in move.overturned:
-            locationX = location[0]
-            locationY = location[1]
-            moveScore += self.get_location_score(locationX, locationY)
-        return moveScore
+            location_x = location[0]
+            location_y = location[1]
+            move_score += self.get_location_score(location_x, location_y)
+        return move_score
 
     def get_location_score(self, x, y):
         if self.is_corner(x, y):
@@ -45,34 +44,37 @@ class AIPlayer(Player):
             return False
         return self.is_coordinate_an_edge(x) or self.is_coordinate_an_edge(y)
 
-    def is_coordinate_an_edge(self, coordinate):
+    @staticmethod
+    def is_coordinate_an_edge(coordinate):
         return coordinate == 0 or coordinate == 7
 
-    def is_inner_corner(self, x, y):
+    @staticmethod
+    def is_inner_corner(x, y):
         return (x == 1 or x == 6) and (y == 1 or y == 6)
 
-    def is_corner_unprotected(self, innerCornerX, innerCornerY):
-        cornerX = self.get_edge_nearest(innerCornerX)
-        cornerY = self.get_edge_nearest(innerCornerY)
-        return self.game_board.get_player_at(cornerX, cornerY) != self.number
+    def is_corner_unprotected(self, inner_corner_x, inner_corner_y):
+        corner_x = self.get_edge_nearest(inner_corner_x)
+        corner_y = self.get_edge_nearest(inner_corner_y)
+        return self.game_board.get_player_at(corner_x, corner_y) != self.number
 
-    def get_edge_nearest(self, coordinate):
+    @staticmethod
+    def get_edge_nearest(coordinate):
         if coordinate < 4:
             return 0
         return 7
 
     def get_best_moves(self):
-        bestMoveScore = None
-        bestMoves = []
+        best_move_score = None
+        best_moves = []
 
         for key, move in self.game_board.moves.items():
-            moveScore = self.get_move_score(move)
-            if bestMoveScore is None or moveScore > bestMoveScore:
-                bestMoveScore = moveScore
-                bestMoves = [move]
-            elif moveScore == bestMoveScore:
-                bestMoves.append(move)
+            move_score = self.get_move_score(move)
+            if best_move_score is None or move_score > best_move_score:
+                best_move_score = move_score
+                best_moves = [move]
+            elif move_score == best_move_score:
+                best_moves.append(move)
 
-        return bestMoves
+        return best_moves
 
 
