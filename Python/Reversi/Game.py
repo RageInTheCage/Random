@@ -37,10 +37,6 @@ def play_game(game_board, graphics):
         player = player.opponent
 
 
-def players_are_bored(graphics):
-    return graphics.ask("Another game?") == pygame.K_n
-
-
 def get_players(game_board, graphics):
     if graphics.ask("Play against me?") == pygame.K_y:
         return get_ai_vs_human_opponents(game_board)
@@ -93,6 +89,10 @@ def game_is_over(game_board, graphics):
     print(message)
     graphics.say(message)
     return True
+
+
+def players_are_bored(graphics):
+    return graphics.ask("Another game?") == pygame.K_n
 
 
 main()

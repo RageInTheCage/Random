@@ -1,3 +1,4 @@
+import pygame
 import random
 from Player import Player
 
@@ -18,6 +19,7 @@ class AIPlayer(Player):
         graphics.draw_board()
         graphics.animate_text_overlays()
         graphics.update()
+        pygame.event.poll()
 
     def get_move_score(self, move):
         move_score = self.get_location_score(move.x, move.y)

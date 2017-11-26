@@ -12,6 +12,9 @@ class Player:
         self.character = ('©', 'ø')[index]
         self.score = 2
 
+    def make_move(self, graphics):
+        raise NotImplementedError()
+
     @property
     def opponent(self):
         return self.game_board.players[2 - self.number]

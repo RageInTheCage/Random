@@ -71,6 +71,8 @@ class GameBoard(object):
         piece = self.board[x][y]
 
         if piece > 0 or len(self.moves) == 0:
+            if piece == 0:
+                return '.'
             player = self.players[piece - 1]
             return player.colour + player.character
 
