@@ -5,11 +5,7 @@ from GameMove import GameMove
 class GameBoard(object):
     def __init__(self):
         self.board = [[0 for x in range(8)] for y in range(8)]
-        self.score = [2, 2]
-        self.player_colours = [Fore.RED, Fore.BLUE]
-        self.player_names = ["red", "blue"]
-        self.player_characters = [".", self.player_colours[0] + "©" + Fore.RESET,
-                                  self.player_colours[1] + "ø" + Fore.RESET]
+        self.players = None
         self.game_extents = []
         self.moves = []
         for x in range(3, 5):
@@ -52,8 +48,8 @@ class GameBoard(object):
     @staticmethod
     def get_row_terminator(x):
         if x == 7:
-            return "\n"
-        return " "
+            return Fore.RESET + '\n'
+        return ' '
 
     def draw_ascii_board(self, assess_for_player):
         if assess_for_player == 0:
@@ -75,26 +71,29 @@ class GameBoard(object):
         piece = self.board[x][y]
 
         if piece > 0 or len(self.moves) == 0:
-            return self.player_characters[piece]
+            player = self.players[piece - 1]
+            return player.colour + player.character
 
         location = (x, y)
         if location not in self.moves:
-            return "."
+            return Fore.RESET + '.'
 
         move = self.moves[location]
         if move.flipCount == 0:
-            return "."
+            return Fore.RESET + '.'
 
-        return self.get_player_colour(move.player_number) + '.' + Fore.RESET
+        return self.players[move.player_number - 1].colour + '.'
 
-    def get_player_character(self, player_number):
-        return self.player_characters[player_number]
+    def get_player_character(self, piece):
+        if piece == 0:
+            return '.'
+        return self.players[piece - 1].character
 
     def get_player_name(self, player_number):
         return self.player_names[player_number - 1]
 
     def get_player_colour(self, player_number):
-        return self.player_colours[player_number - 1]
+        return self.players[player_number - 1].colour
 
     def get_player_at(self, x, y):
         return self.board[x][y]
@@ -113,8 +112,10 @@ class GameBoard(object):
             self.board[p_x][p_y] = player_number
 
         self.fill_location(player_number, x, y)
-        self.score[player_number - 1] += move.flipCount + 1
-        self.score[self.opponent_number(player_number) - 1] -= move.flipCount
+
+        player = self.players[player_number - 1]
+        player.score += move.flipCount + 1
+        self.opponent(player).score -= move.flipCount
 
         return move.flipCount
 
@@ -142,9 +143,8 @@ class GameBoard(object):
 
         return GameMove(player_number, x, y, all_overturned)
 
-    @staticmethod
-    def opponent_number(player_number):
-        return 3 - player_number
+    def opponent(self, player):
+        return self.players[2 - player.number]
 
     def assess_row(self, player_number, x, y, step_x, step_y):
         overturned = []
@@ -170,6 +170,11 @@ class GameBoard(object):
     def is_passed_edge(coordinate):
         return coordinate < 0 or coordinate > 7
 
-    def show_score(self):
-        print("Score: {0} = {1}, {2} = {3}".format(self.get_player_character(1), self.score[0],
-                                                   self.get_player_character(2), self.score[1]))
+    @staticmethod
+    def show_score(players):
+        print(
+            "Score: {0} = {1}, {2} = {3}".format(
+                players[0].name, players[0].score,
+                players[1].name, players[1].score
+                )
+        )

@@ -13,6 +13,28 @@ def main():
             break
 
 
+def play_game():
+    global game_board
+    global graphics
+
+    game_board = GameBoard()
+    graphics = Graphics((800, 800), game_board)
+    game_board.players = get_players()
+
+    player = game_board.players[0]
+    while True:
+        game_board.show_score(game_board.players)
+        game_board.draw_ascii_board(assess_for_player=player.number)
+
+        if game_is_over():
+            break
+
+        print("Player {0}'s turn.".format(player.character))
+        player.make_move(graphics)
+
+        player = game_board.opponent(player)
+
+
 def players_are_bored():
     while True:
         if graphics.ask("Bored yet?") == pygame.K_y:
@@ -48,7 +70,7 @@ def get_ai_vs_human_opponents():
 def get_ai_vs_ai_opponents():
     p_1 = AIPlayer(1, game_board)
     p_2 = AIPlayer(2, game_board)
-    return (p_1, p_2)
+    return p_1, p_2
 
 
 def game_is_over():
@@ -58,42 +80,22 @@ def game_is_over():
     graphics.draw_board()
     graphics.update()
 
-    if game_board.score[0] == game_board.score[1]:
+    score_difference = game_board.players[0].score - game_board.players[1].score
+
+    if score_difference == 0:
         print("It's a draw.  How dull.")
         graphics.say("It's a draw.  How dull.")
         return True
 
-    if game_board.score[0] > game_board.score[1]:
-        winner = 1
+    if score_difference < 0:
+        winner = game_board.players[0]
     else:
-        winner = 2
+        winner = game_board.players[1]
 
-    message = "Player {0} has won!".format(game_board.get_player_name(winner))
+    message = "Player {0} has won!".format(winner.name)
     print(message)
     graphics.say(message)
     return True
 
-
-def play_game():
-    global game_board
-    global graphics
-
-    game_board = GameBoard()
-    graphics = Graphics((800, 800), game_board)
-    players = get_players()
-
-    player_number = 1
-    while True:
-        game_board.show_score()
-        game_board.draw_ascii_board(assess_for_player=player_number)
-
-        if game_is_over():
-            break
-
-        print("Player {0}'s turn.".format(game_board.get_player_character(player_number)))
-
-        players[player_number - 1].make_move(graphics)
-
-        player_number = game_board.opponent_number(player_number)
 
 main()

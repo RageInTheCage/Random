@@ -1,21 +1,20 @@
 import random
 
+from Player import Player
 
-class AIPlayer(object):
+class AIPlayer(Player):
     def __init__(self, player_number, game_board):
-        self.player_number = player_number
-        self.board = game_board
-
+        Player.__init__(self, player_number, game_board)
 
     def make_move(self, graphics):
-        player_character = self.board.get_player_character(self.player_number)
+        player_character = self.game_board.get_player_character(self.number)
         print("Player {0} is thinking...".format(player_character))
 
-        self.board.assess_board(self.player_number)
+        self.game_board.assess_board(self.number)
 
         best_move = random.choice(self.get_best_moves())
 
-        self.board.try_to_make_move(self.player_number, best_move.x, best_move.y)
+        self.game_board.try_to_make_move(self.number, best_move.x, best_move.y)
         graphics.fill()
         graphics.draw_board()
         graphics.animate_text_overlays()
@@ -55,7 +54,7 @@ class AIPlayer(object):
     def is_corner_unprotected(self, innerCornerX, innerCornerY):
         cornerX = self.get_edge_nearest(innerCornerX)
         cornerY = self.get_edge_nearest(innerCornerY)
-        return self.board.get_player_at(cornerX, cornerY) != self.player_number
+        return self.game_board.get_player_at(cornerX, cornerY) != self.number
 
     def get_edge_nearest(self, coordinate):
         if coordinate < 4:
@@ -66,7 +65,7 @@ class AIPlayer(object):
         bestMoveScore = None
         bestMoves = []
 
-        for key, move in self.board.moves.items():
+        for key, move in self.game_board.moves.items():
             moveScore = self.get_move_score(move)
             if bestMoveScore is None or moveScore > bestMoveScore:
                 bestMoveScore = moveScore

@@ -119,13 +119,16 @@ class Graphics(object):
         return event.type == pygame.MOUSEBUTTONDOWN
 
     def process_cursor_keys(self, cursor_events, event):
-        if event.type == pygame.KEYDOWN and event.key in cursor_events:
+        if not event.type == pygame.KEYDOWN:
+            return False
+
+        if event.key in cursor_events:
             vector = cursor_events[event.key]
             self.cursor[0] = check_bounds(self.cursor[0] + vector[0])
             self.cursor[1] = check_bounds(self.cursor[1] + vector[1])
             return False
 
-        return event.type == pygame.K_KP_ENTER
+        return event.key in (pygame.K_RETURN, pygame.K_SPACE)
 
     def animate_text_overlays(self):
         for text_overlay in self.text_overlays:
@@ -154,6 +157,7 @@ class Graphics(object):
         ask_overlay.animation_enabled = False
         self.append_text_overlays(ask_overlay)
 
+        pygame.event.clear()
         answer = None
         while not answer:
             self.fill()
