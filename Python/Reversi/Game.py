@@ -38,7 +38,7 @@ def play_game(game_board, graphics):
 
 
 def players_are_bored(graphics):
-    return graphics.ask("Bored yet?") == pygame.K_y
+    return graphics.ask("Another game?") == pygame.K_n
 
 
 def get_players(game_board, graphics):
