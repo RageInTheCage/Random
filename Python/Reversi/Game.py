@@ -26,6 +26,8 @@ def play_game(game_board, graphics):
     player = game_board.players[0]
     while True:
         game_board.show_score(game_board.players)
+        graphics.score_overlay.refresh(game_board.players)
+
         game_board.draw_ascii_board(assess_for_player=player.number)
 
         if game_is_over(game_board, graphics):

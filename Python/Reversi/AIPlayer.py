@@ -18,6 +18,7 @@ class AIPlayer(Player):
         graphics.fill()
         graphics.draw_board()
         graphics.animate_text_overlays()
+        graphics.score_overlay.show()
         graphics.update()
         pygame.event.poll()
 

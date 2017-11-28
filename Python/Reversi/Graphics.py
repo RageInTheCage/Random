@@ -1,4 +1,6 @@
 import pygame
+
+from ScoreOverlay import ScoreOverlay
 from Sprites import Sprites
 from TextOverlay import TextOverlay
 
@@ -23,14 +25,11 @@ class Graphics(object):
         self.width = display_size[0]
         self.height = display_size[1]
         self.game_display = pygame.display.set_mode((self.width, self.height))
+        pygame.display.set_caption('Reversi')
         self.game_board = game_board
 
-        pygame.display.set_caption('Reversi')
-
         sprites = Sprites("Reversi Pieces.png", 2, 1)
-
         self.piece_size = int(self.height / 8)
-
         self.pieces = (
             sprites.get_tile(0, 0, self.piece_size, self.piece_size),
             sprites.get_tile(1, 0, self.piece_size, self.piece_size)
@@ -43,6 +42,8 @@ class Graphics(object):
         self.clock = pygame.time.Clock()
         self.moves = []
         self.text_overlays = []
+
+        self.score_overlay = ScoreOverlay(self.game_display)
 
     def fill(self):
         self.game_display.fill(self.background_colour)
@@ -105,6 +106,7 @@ class Graphics(object):
             self.draw_cursor()
             self.draw_board()
             self.animate_text_overlays()
+            self.score_overlay.show()
             self.update()
 
         return self.cursor
@@ -163,6 +165,7 @@ class Graphics(object):
             self.fill()
             self.draw_board()
             self.animate_text_overlays()
+            self.score_overlay.show()
             self.update()
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.key in answers:
@@ -186,4 +189,3 @@ class Graphics(object):
                 new_top = max_top
             new_overlay.text_rectangle.top = new_top
         self.text_overlays.append(new_overlay)
-
