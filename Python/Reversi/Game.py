@@ -74,9 +74,6 @@ def game_is_over(game_board, graphics):
     if len(game_board.moves) > 0:
         return False
 
-    graphics.draw_board()
-    graphics.update()
-
     score_difference = game_board.players[0].score - game_board.players[1].score
 
     if score_difference == 0:
@@ -86,7 +83,9 @@ def game_is_over(game_board, graphics):
             winner = game_board.players[0]
         else:
             winner = game_board.players[1]
-        message = "Player {0} has won!".format(winner.name)
+        message = "{0} has won!".format(winner.name)
+
+    graphics.score_overlay.show_winner(message, game_board.players)
 
     print(message)
     graphics.say(message)

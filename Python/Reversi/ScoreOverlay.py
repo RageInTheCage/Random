@@ -14,10 +14,22 @@ class ScoreOverlay(object):
             players[0].name, players[0].score,
             players[1].name, players[1].score
         )
+        self.set_text(score_text)
+
+    def show_winner(self, message, players):
+        score = [players[0].score, players[1].score]
+        score.sort()
+        score_text = "{0}:  {1} to {2}".format(
+            message,
+            score[1],
+            score[0]
+        )
+        self.set_text(score_text)
+
+    def set_text(self, score_text):
         self.text_surface = self.font.render(score_text, False, self.colour)
         self.text_surface.set_alpha(150)
         self.text_rectangle = self.text_surface.get_rect()
-
         display_size = self.display.get_rect()
         margin_left = self.text_rectangle.height / 3
         self.text_rectangle.left = margin_left
