@@ -1,4 +1,5 @@
 import pygame
+from colorama import Fore
 
 from GameBoard import GameBoard
 from HumanPlayer import HumanPlayer
@@ -24,17 +25,23 @@ def play_game(game_board, graphics):
     game_board.players = get_players(game_board, graphics)
 
     player = game_board.players[0]
+    zero_move_count = 0
     while True:
         game_board.show_score(game_board.players)
         graphics.score_overlay.refresh(game_board.players)
 
         game_board.draw_ascii_board(assess_for_player=player.number)
 
-        if game_is_over(game_board, graphics):
-            break
-
-        print("Player {0}'s turn.".format(player.character))
-        player.make_move(graphics)
+        if len(game_board.moves) == 0:
+            zero_move_count += 1
+            if zero_move_count == 1:
+                graphics.say("{0} cannot move.".format(player.name))
+            elif game_is_over(game_board, graphics):
+                break
+        else:
+            zero_move_count = 0
+            print("{0}'s turn.".format(player.name))
+            player.make_move(graphics)
 
         player = player.opponent
 
@@ -71,9 +78,6 @@ def get_ai_vs_ai_opponents(game_board):
 
 
 def game_is_over(game_board, graphics):
-    if len(game_board.moves) > 0:
-        return False
-
     score_difference = game_board.players[0].score - game_board.players[1].score
 
     if score_difference == 0:
@@ -86,8 +90,6 @@ def game_is_over(game_board, graphics):
         message = "{0} has won!".format(winner.name)
 
     graphics.score_overlay.show_winner(message, game_board.players)
-
-    print(message)
     graphics.say(message)
     return True
 

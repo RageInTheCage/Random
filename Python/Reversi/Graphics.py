@@ -177,6 +177,7 @@ class Graphics(object):
         return answer
 
     def say(self, message):
+        print(message)
         new_overlay = TextOverlay(self.game_display, message)
         self.append_text_overlays(new_overlay)
 

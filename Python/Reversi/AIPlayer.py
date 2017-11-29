@@ -8,8 +8,6 @@ class AIPlayer(Player):
         Player.__init__(self, player_number, game_board)
 
     def make_move(self, graphics):
-        print("Player {0} is thinking...".format(self.character))
-
         self.game_board.assess_board(self.number)
 
         best_move = random.choice(self.get_best_moves())
