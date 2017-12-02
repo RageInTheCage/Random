@@ -33,7 +33,6 @@ class Graphics(object):
 
         self.background_colour = (222, 222, 224)
         self.cursor_colour = (250, 230, 230)
-        self.move_colour = (255, 220, 211)
         self.cursor = [3, 3]
         self.clock = pygame.time.Clock()
         self.text_overlays = []
@@ -64,8 +63,8 @@ class Graphics(object):
         player_has_quit = False
         while not player_has_quit:
             for event in pygame.event.get():
-                if self.process_cursor_keys(cursor_events, event) \
-                        or self.process_mouse_clicks(event):
+                if self.process_cursor_keys(cursor_events, event, player_number) \
+                        or self.process_mouse_clicks(event, player_number):
                     player_number = 3 - player_number
 
                     self.add_piece(player_number)
@@ -102,16 +101,17 @@ class Graphics(object):
         piece.stop_at_index = (0, piece.max_index)[player_number - 1]
         piece.step = (-1, 1)[player_number - 1]
 
-    def process_mouse_clicks(self, event):
+    def process_mouse_clicks(self, event, player_number):
         if event.type == pygame.MOUSEMOTION:
             position = pygame.mouse.get_pos()
             self.cursor[0] = check_bounds(int(position[0] / self.piece_size))
             self.cursor[1] = check_bounds(int(position[1] / self.piece_size))
+            self.position_cursor(player_number)
             return False
 
         return event.type == pygame.MOUSEBUTTONDOWN
 
-    def process_cursor_keys(self, cursor_events, event):
+    def process_cursor_keys(self, cursor_events, event, player_number):
         if not event.type == pygame.KEYDOWN:
             return False
 
@@ -119,6 +119,7 @@ class Graphics(object):
             vector = cursor_events[event.key]
             self.cursor[0] = check_bounds(self.cursor[0] + vector[0])
             self.cursor[1] = check_bounds(self.cursor[1] + vector[1])
+            self.position_cursor(player_number)
             return False
 
         return event.key in (pygame.K_RETURN, pygame.K_SPACE)

@@ -1,5 +1,7 @@
-import pygame
 import random
+
+import pygame
+
 from Player import Player
 
 
@@ -8,12 +10,12 @@ class AIPlayer(Player):
         Player.__init__(self, player_number, game_board)
 
     def make_move(self, graphics):
+        graphics.wait_for_animation()
         self.game_board.assess_board(self.number)
-
         best_move = random.choice(self.get_best_moves())
-
         self.game_board.try_to_make_move(self.number, best_move.x, best_move.y)
         graphics.fill()
+        graphics.set_board()
         graphics.draw_board()
         graphics.animate_text_overlays()
         graphics.score_overlay.show()

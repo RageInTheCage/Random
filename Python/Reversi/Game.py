@@ -1,10 +1,9 @@
 import pygame
-from colorama import Fore
 
-from GameBoard import GameBoard
-from HumanPlayer import HumanPlayer
 from AIPlayer import AIPlayer
+from GameBoard import GameBoard
 from Graphics import Graphics
+from HumanPlayer import HumanPlayer
 
 
 def main():

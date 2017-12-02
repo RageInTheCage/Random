@@ -1,7 +1,8 @@
 import pygame
 
+from Animation import Animation
+from AnimationFrameCollection import AnimationFrameCollection
 from ScoreOverlay import ScoreOverlay
-from Sprites import Sprites
 from TextOverlay import TextOverlay
 
 
@@ -28,22 +29,39 @@ class Graphics(object):
         pygame.display.set_caption('Reversi')
         self.game_board = game_board
 
-        sprites = Sprites("Reversi Pieces.png", 2, 1)
         self.piece_size = int(self.height / 8)
-        self.pieces = (
-            sprites.get_tile(0, 0, self.piece_size, self.piece_size),
-            sprites.get_tile(1, 0, self.piece_size, self.piece_size)
-        )
+        self.piece_frame_collection = AnimationFrameCollection('./Animation/*.png',
+                                                               (self.piece_size, self.piece_size))
+        self.animation_group = pygame.sprite.Group()
+        self.pieces = {}
+        self.cursor = [3, 3]
+        self.set_board()
 
         self.background_colour = (222, 222, 224)
         self.cursor_colour = (250, 230, 230)
         self.move_colour = (255, 220, 211)
-        self.cursor = [3, 3]
         self.clock = pygame.time.Clock()
         self.moves = []
         self.text_overlays = []
 
         self.score_overlay = ScoreOverlay(self.game_display)
+
+    def add_animation(self, animation_frame_collection, index):
+        animation = Animation(animation_frame_collection, index)
+        self.animation_group.add(animation)
+        return animation
+
+    def add_piece(self, player_number, location):
+        piece = self.add_animation(self.piece_frame_collection, index=7)
+        self.set_piece_player_number(piece, player_number)
+        piece.rect = self.get_location_rect(location)
+        self.pieces[location] = piece
+
+    @staticmethod
+    def set_piece_player_number(piece, player_number):
+        piece.player_number = player_number
+        piece.stop_at_index = (piece.max_index, 0)[player_number - 1]
+        piece.step = (1, -1)[player_number - 1]
 
     def fill(self):
         self.game_display.fill(self.background_colour)
@@ -54,8 +72,16 @@ class Graphics(object):
             self.cursor_colour = pygame.color.Color("green")
             move = self.moves[key]
 
-            for piece in move.overturned:
-                self.draw_rectangle(piece, self.cursor_colour)
+            step = (1, -1)[move.player_number - 1]
+
+            max_index = self.piece_frame_collection.max_index
+            frames = int(max_index / 3)
+            stop_at_index = (max_index - frames, frames)[move.player_number - 1]
+            for location in move.overturned:
+                piece = self.pieces[location]
+                piece.step = step
+                piece.stop_at_index = stop_at_index
+
             return
         self.cursor_colour = pygame.color.Color("red")
 
@@ -63,11 +89,14 @@ class Graphics(object):
             self.draw_rectangle((move.x, move.y), self.move_colour)
 
     def draw_rectangle(self, location, colour):
-        self.game_display.fill(colour, (location[0] * self.piece_size, location[1] * self.piece_size,
-                                        self.piece_size, self.piece_size))
+        self.game_display.fill(colour, self.get_location_rect(location))
 
     def draw_cursor(self):
         self.draw_rectangle(self.cursor, self.cursor_colour)
+
+    def get_location_rect(self, location):
+        return (location[0] * self.piece_size, location[1] * self.piece_size,
+                self.piece_size, self.piece_size)
 
     def draw_piece(self, player_number, x, y):
         if player_number == 0:
@@ -75,23 +104,36 @@ class Graphics(object):
         self.game_display.blit(self.pieces[player_number - 1], (x * self.piece_size, y * self.piece_size))
 
     def draw_board(self):
+        self.animation_group.update()
+        self.animation_group.draw(self.game_display)
+
+    def set_board(self):
         for x in range(0, 8):
             for y in range(0, 8):
-                self.draw_piece(self.game_board.get_player_at(x, y), x, y)
+                player_number = self.game_board.get_player_at(x, y)
+                if player_number == 0:
+                    continue
+
+                location = (x, y)
+                if location in self.pieces.keys():
+                    piece = self.pieces[location]
+                    self.set_piece_player_number(piece, player_number)
+                    continue
+
+                self.add_piece(player_number, (x, y))
 
     def update(self):
         pygame.display.update()
         # Frames per second
         self.clock.tick(20)
 
-    def ask_player_for_move(self, assess_for_player):
-        if assess_for_player == 0:
+    def ask_player_for_move(self, player_number):
+        if player_number == 0:
             self.moves = []
         else:
-            self.moves = self.game_board.assess_board(assess_for_player)
+            self.moves = self.game_board.assess_board(player_number)
 
         cursor_events = self.cursor_events()
-
         chosen = False
         while not chosen:
             for event in pygame.event.get():
@@ -102,6 +144,7 @@ class Graphics(object):
                     self.close()
 
             self.fill()
+            self.set_board()
             self.show_moves()
             self.draw_cursor()
             self.draw_board()
@@ -110,6 +153,16 @@ class Graphics(object):
             self.update()
 
         return self.cursor
+
+    def wait_for_animation(self):
+        for frames in range(0, 20):
+            self.fill()
+            self.set_board()
+            self.draw_board()
+            self.animate_text_overlays()
+            self.score_overlay.show()
+            self.update()
+            pygame.event.poll()
 
     def process_mouse_clicks(self, event):
         if event.type == pygame.MOUSEMOTION:
