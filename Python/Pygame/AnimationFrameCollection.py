@@ -2,8 +2,10 @@ import glob
 import pygame
 
 
-def load_image(name):
+def load_image(name, size=None):
     image = pygame.image.load(name).convert()
+    if size:
+        image = pygame.transform.scale(image, size)
     return image
 
 
@@ -14,8 +16,8 @@ def sort_file_paths(file_path_spec):
 
 
 class AnimationFrameCollection:
-    def __init__(self, file_path_spec):
+    def __init__(self, file_path_spec, size=None):
         self.images = []
         for image_file_path in sort_file_paths(file_path_spec):
-            self.images.append(load_image(image_file_path))
+            self.images.append(load_image(image_file_path, size))
         self.rect = self.images[0].get_rect()

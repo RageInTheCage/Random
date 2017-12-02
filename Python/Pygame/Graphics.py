@@ -25,7 +25,8 @@ class Graphics(object):
         pygame.display.set_caption('Reversi')
 
         self.piece_size = int(self.height / 8)
-        self.piece_frame_collection = AnimationFrameCollection('../Reversi/Animation/*.png')
+        self.piece_frame_collection = AnimationFrameCollection('../Reversi/Animation/*.png',
+                                                               (self.piece_size, self.piece_size))
         self.animation_group = pygame.sprite.Group()
         self.pieces = {}
         self.cursor_animation = self.add_animation(self.piece_frame_collection, index=0)
@@ -42,11 +43,6 @@ class Graphics(object):
         self.animation_group.add(animation)
         return animation
 
-    def get_player_frame_index(self, player_number):
-        if player_number == 1:
-            return 0
-        return self.cursor_animation.max_index
-
     def fill(self):
         self.game_display.fill(self.background_colour)
 
@@ -59,7 +55,7 @@ class Graphics(object):
                                       self.cursor[1] * self.piece_size,
                                       self.piece_size, self.piece_size)
 
-        self.cursor_animation.stop_at_index = self.get_player_frame_index(player_number)
+        self.set_piece_player_number(self.cursor_animation, player_number)
 
     def game_loop(self):
         clock = pygame.time.Clock()
@@ -72,18 +68,10 @@ class Graphics(object):
                         or self.process_mouse_clicks(event):
                     player_number = 3 - player_number
 
-                    new_piece = self.add_animation(self.piece_frame_collection, index=7)
-                    player_index = player_number - 1
-                    new_piece.stop_at_index = (0, new_piece.max_index)[player_index]
-                    new_piece.step = (-1, 1)[player_index]
-                    new_piece.rect = self.cursor_animation.rect
-                    location = (self.cursor[0], self.cursor[1])
-                    self.pieces[location] = new_piece
+                    self.add_piece(player_number)
 
-                    random_piece_index = random.randint(1, len(self.pieces))
-                    random_player_number = random.randint(1, 2)
-                    piece = self.pieces[random_piece_index]
-
+                    rand_piece = random.choice(list(self.pieces.values()))
+                    self.set_piece_player_number(rand_piece, 3 - rand_piece.player_number)
 
                 if event.type == pygame.QUIT:
                     player_has_quit = True
@@ -100,6 +88,19 @@ class Graphics(object):
 
         pygame.quit()
         quit()
+
+    def add_piece(self, player_number):
+        piece = self.add_animation(self.piece_frame_collection, index=7)
+        self.set_piece_player_number(piece, player_number)
+        piece.rect = self.cursor_animation.rect
+        location = (self.cursor[0], self.cursor[1])
+        self.pieces[location] = piece
+
+    @staticmethod
+    def set_piece_player_number(piece, player_number):
+        piece.player_number = player_number
+        piece.stop_at_index = (0, piece.max_index)[player_number - 1]
+        piece.step = (-1, 1)[player_number - 1]
 
     def process_mouse_clicks(self, event):
         if event.type == pygame.MOUSEMOTION:
