@@ -34,8 +34,9 @@ class Graphics(object):
                                                                (self.piece_size, self.piece_size))
         self.animation_group = pygame.sprite.Group()
         self.pieces = {}
-        self.cursor = [3, 3]
-        self.set_board()
+        self.cursor_location = [3, 3]
+        self.cursor_visible = False
+        self.enable_move_preview = True
 
         self.background_colour = (222, 222, 224)
         self.cursor_colour = (250, 230, 230)
@@ -43,7 +44,6 @@ class Graphics(object):
         self.clock = pygame.time.Clock()
         self.moves = []
         self.text_overlays = []
-
         self.score_overlay = ScoreOverlay(self.game_display)
 
     def add_animation(self, animation_frame_collection, index):
@@ -66,33 +66,43 @@ class Graphics(object):
     def fill(self):
         self.game_display.fill(self.background_colour)
 
-    def show_moves(self):
-        key = (self.cursor[0], self.cursor[1])
+    def show_available_moves(self):
+        key = (self.cursor_location[0], self.cursor_location[1])
         if key in self.moves:
             self.cursor_colour = pygame.color.Color("green")
-            move = self.moves[key]
-
-            step = (1, -1)[move.player_number - 1]
-
-            max_index = self.piece_frame_collection.max_index
-            frames = int(max_index / 3)
-            stop_at_index = (max_index - frames, frames)[move.player_number - 1]
-            for location in move.overturned:
-                piece = self.pieces[location]
-                piece.step = step
-                piece.stop_at_index = stop_at_index
-
             return
-        self.cursor_colour = pygame.color.Color("red")
 
+        self.cursor_colour = pygame.color.Color("red")
         for key, move in self.moves.items():
             self.draw_rectangle((move.x, move.y), self.move_colour)
+
+    def preview_move(self):
+        if not self.enable_move_preview:
+            return
+
+        self.set_board_pieces()
+
+        key = (self.cursor_location[0], self.cursor_location[1])
+        if key not in self.moves:
+            return
+
+        move = self.moves[key]
+        player_index = move.player_number - 1
+        step = (1, -1)[player_index]
+        max_index = self.piece_frame_collection.max_index
+        frames = int(max_index / 3)
+        stop_at_index = (max_index - frames, frames)[player_index]
+
+        for location in move.overturned:
+            piece = self.pieces[location]
+            piece.step = step
+            piece.stop_at_index = stop_at_index
 
     def draw_rectangle(self, location, colour):
         self.game_display.fill(colour, self.get_location_rect(location))
 
     def draw_cursor(self):
-        self.draw_rectangle(self.cursor, self.cursor_colour)
+        self.draw_rectangle(self.cursor_location, self.cursor_colour)
 
     def get_location_rect(self, location):
         return (location[0] * self.piece_size, location[1] * self.piece_size,
@@ -107,7 +117,7 @@ class Graphics(object):
         self.animation_group.update()
         self.animation_group.draw(self.game_display)
 
-    def set_board(self):
+    def set_board_pieces(self):
         for x in range(0, 8):
             for y in range(0, 8):
                 player_number = self.game_board.get_player_at(x, y)
@@ -123,18 +133,24 @@ class Graphics(object):
                 self.add_piece(player_number, (x, y))
 
     def update(self):
+        self.fill()
+        if self.cursor_visible:
+            self.show_available_moves()
+            self.draw_cursor()
+        self.draw_board()
+        self.animate_text_overlays()
+        self.score_overlay.show()
+
         pygame.display.update()
-        # Frames per second
-        self.clock.tick(20)
+
+        self.clock.tick(30)
 
     def ask_player_for_move(self, player_number):
-        if player_number == 0:
-            self.moves = []
-        else:
-            self.moves = self.game_board.assess_board(player_number)
-
+        self.moves = self.game_board.assess_board(player_number)
+        self.cursor_visible = True
         cursor_events = self.cursor_events()
         chosen = False
+
         while not chosen:
             for event in pygame.event.get():
                 chosen = self.process_cursor_keys(cursor_events, event) \
@@ -143,32 +159,21 @@ class Graphics(object):
                 if event.type == pygame.QUIT:
                     self.close()
 
-            self.fill()
-            self.set_board()
-            self.show_moves()
-            self.draw_cursor()
-            self.draw_board()
-            self.animate_text_overlays()
-            self.score_overlay.show()
             self.update()
 
-        return self.cursor
+        return self.cursor_location
 
     def wait_for_animation(self):
         for frames in range(0, 20):
-            self.fill()
-            self.set_board()
-            self.draw_board()
-            self.animate_text_overlays()
-            self.score_overlay.show()
             self.update()
             pygame.event.poll()
 
     def process_mouse_clicks(self, event):
         if event.type == pygame.MOUSEMOTION:
             position = pygame.mouse.get_pos()
-            self.cursor[0] = check_bounds(int(position[0] / self.piece_size))
-            self.cursor[1] = check_bounds(int(position[1] / self.piece_size))
+            self.cursor_location[0] = check_bounds(int(position[0] / self.piece_size))
+            self.cursor_location[1] = check_bounds(int(position[1] / self.piece_size))
+            self.preview_move()
             return False
 
         return event.type == pygame.MOUSEBUTTONDOWN
@@ -179,8 +184,9 @@ class Graphics(object):
 
         if event.key in cursor_events:
             vector = cursor_events[event.key]
-            self.cursor[0] = check_bounds(self.cursor[0] + vector[0])
-            self.cursor[1] = check_bounds(self.cursor[1] + vector[1])
+            self.cursor_location[0] = check_bounds(self.cursor_location[0] + vector[0])
+            self.cursor_location[1] = check_bounds(self.cursor_location[1] + vector[1])
+            self.preview_move()
             return False
 
         return event.key in (pygame.K_RETURN, pygame.K_SPACE)
@@ -206,8 +212,6 @@ class Graphics(object):
         }
 
     def ask(self, question, answers=(pygame.K_y, pygame.K_n)):
-        self.fill()
-        self.draw_board()
         ask_overlay = TextOverlay(self.game_display, question)
         ask_overlay.animation_enabled = False
         self.append_text_overlays(ask_overlay)
@@ -215,10 +219,6 @@ class Graphics(object):
         pygame.event.clear()
         answer = None
         while not answer:
-            self.fill()
-            self.draw_board()
-            self.animate_text_overlays()
-            self.score_overlay.show()
             self.update()
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.key in answers:

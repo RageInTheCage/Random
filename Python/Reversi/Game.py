@@ -27,6 +27,7 @@ def play_game(game_board, graphics):
     zero_move_count = 0
     while True:
         game_board.show_score(game_board.players)
+        graphics.set_board_pieces()
         graphics.score_overlay.refresh(game_board.players)
 
         game_board.draw_ascii_board(assess_for_player=player.number)
