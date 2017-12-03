@@ -21,6 +21,7 @@ def main():
 
 
 def play_game(game_board, graphics):
+    graphics.set_board_pieces()
     game_board.players = get_players(game_board, graphics)
 
     player = game_board.players[0]

@@ -30,8 +30,7 @@ class Graphics(object):
         self.game_board = game_board
 
         self.piece_size = int(self.height / 8)
-        self.piece_frame_collection = AnimationFrameCollection('./Animation/*.png',
-                                                               (self.piece_size, self.piece_size))
+        self.piece_frame_collection = AnimationFrameCollection('./Animation/*.png', (self.piece_size, self.piece_size))
         self.animation_group = pygame.sprite.Group()
         self.pieces = {}
         self.cursor_location = [3, 3]
@@ -46,16 +45,16 @@ class Graphics(object):
         self.text_overlays = []
         self.score_overlay = ScoreOverlay(self.game_display)
 
-    def add_animation(self, animation_frame_collection, index):
-        animation = Animation(animation_frame_collection, index)
-        self.animation_group.add(animation)
-        return animation
-
     def add_piece(self, player_number, location):
         piece = self.add_animation(self.piece_frame_collection, index=7)
         self.set_piece_player_number(piece, player_number)
         piece.rect = self.get_location_rect(location)
         self.pieces[location] = piece
+
+    def add_animation(self, animation_frame_collection, index):
+        animation = Animation(animation_frame_collection, index)
+        self.animation_group.add(animation)
+        return animation
 
     @staticmethod
     def set_piece_player_number(piece, player_number):
@@ -120,29 +119,36 @@ class Graphics(object):
     def set_board_pieces(self):
         for x in range(0, 8):
             for y in range(0, 8):
-                player_number = self.game_board.get_player_at(x, y)
-                if player_number == 0:
-                    continue
-
                 location = (x, y)
-                if location in self.pieces.keys():
-                    piece = self.pieces[location]
-                    self.set_piece_player_number(piece, player_number)
-                    continue
+                piece = self.get_piece_at(location)
+                player_number = self.game_board.get_player_at(x, y)
 
-                self.add_piece(player_number, (x, y))
+                if piece:
+                    if player_number == 0:
+                        piece.kill()
+                        del (self.pieces[location])
+                    else:
+                        self.set_piece_player_number(piece, player_number)
+                    continue
+                elif player_number != 0:
+                    self.add_piece(player_number, location)
+
+    def get_piece_at(self, location):
+        if location in self.pieces.keys():
+            return self.pieces[location]
+        return None
 
     def update(self):
         self.fill()
+
         if self.cursor_visible:
             self.show_available_moves()
             self.draw_cursor()
+
         self.draw_board()
         self.animate_text_overlays()
         self.score_overlay.show()
-
         pygame.display.update()
-
         self.clock.tick(30)
 
     def ask_player_for_move(self, player_number):
@@ -153,8 +159,7 @@ class Graphics(object):
 
         while not chosen:
             for event in pygame.event.get():
-                chosen = self.process_cursor_keys(cursor_events, event) \
-                         or self.process_mouse_clicks(event)
+                chosen = self.process_cursor_keys(cursor_events, event) or self.process_mouse_clicks(event)
 
                 if event.type == pygame.QUIT:
                     self.close()
