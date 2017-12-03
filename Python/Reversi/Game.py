@@ -92,6 +92,7 @@ def game_is_over(game_board, graphics):
 
     graphics.score_overlay.show_winner(message, game_board.players)
     graphics.say(message)
+    graphics.animate_winning_pieces(winner.number)
     return True
 
 

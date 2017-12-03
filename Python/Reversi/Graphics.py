@@ -166,10 +166,19 @@ class Graphics(object):
 
             self.update()
 
+        self.cursor_visible = False
         return self.cursor_location
 
-    def wait_for_animation(self):
-        for frames in range(0, 20):
+    def animate_winning_pieces(self, player_number):
+        self.wait_for_animation(self.piece_frame_collection.max_index)
+
+        for piece in self.pieces.values():
+            if piece.player_number != player_number:
+                piece.stop_at_index = None
+                piece.enabled = True
+
+    def wait_for_animation(self, frame_count=20):
+        for frame in range(0, frame_count):
             self.update()
             pygame.event.poll()
 
