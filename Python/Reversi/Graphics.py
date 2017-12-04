@@ -159,7 +159,9 @@ class Graphics(object):
 
         while not chosen:
             for event in pygame.event.get():
-                chosen = self.process_cursor_keys(cursor_events, event) or self.process_mouse_clicks(event)
+                if self.process_cursor_keys(cursor_events, event) or self.process_mouse_clicks(event):
+                    chosen = True
+                    break
 
                 if event.type == pygame.QUIT:
                     self.close()
