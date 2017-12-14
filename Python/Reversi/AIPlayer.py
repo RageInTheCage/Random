@@ -14,10 +14,6 @@ class AIPlayer(Player):
         self.game_board.assess_board(self.number)
         best_move = random.choice(self.get_best_moves())
         self.game_board.try_to_make_move(self.number, best_move.x, best_move.y)
-        graphics.fill()
-        graphics.draw_board()
-        graphics.animate_text_overlays()
-        graphics.score_overlay.show()
         graphics.update()
         pygame.event.poll()
 
@@ -32,10 +28,10 @@ class AIPlayer(Player):
     def get_location_score(self, x, y):
         if self.is_corner(x, y):
             return 20
+        if self.is_edge_of_corner(x, y) and self.is_corner_unprotected(x, y):
+            return -10
         if self.is_edge(x, y):
             return 10
-        if self.is_inner_corner(x, y) and self.is_corner_unprotected(x, y):
-            return -10
         return 1
 
     def is_corner(self, x, y):
@@ -51,8 +47,8 @@ class AIPlayer(Player):
         return coordinate == 0 or coordinate == 7
 
     @staticmethod
-    def is_inner_corner(x, y):
-        return (x == 1 or x == 6) and (y == 1 or y == 6)
+    def is_edge_of_corner(x, y):
+        return (x <= 1 or x >= 6) and (y <= 1 or y >= 6)
 
     def is_corner_unprotected(self, inner_corner_x, inner_corner_y):
         corner_x = self.get_edge_nearest(inner_corner_x)
