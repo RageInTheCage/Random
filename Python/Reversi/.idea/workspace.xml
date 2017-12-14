@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="More work on animation.">
+    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/AIPlayer.py" afterPath="$PROJECT_DIR$/AIPlayer.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -544,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512303253736</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="AIPlayer graphics optimisation, and minor improvements to location scoring (is_edge_of_corner)">
+      <created>1513295294015</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1513295294015</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -620,7 +626,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Added GameMove and implemented GameBoard.assessBoard" />
     <MESSAGE value="Added rudimentary AIPlayer, no real intelligence as yet." />
     <MESSAGE value="getFlipCount =&gt; assessRow now returns overturned list rather than an int&#10;Yet to implement." />
     <MESSAGE value="Implemented GameMove.Overturned" />
@@ -645,7 +650,8 @@
     <MESSAGE value="Fully implemented Animation class." />
     <MESSAGE value="Looking good!" />
     <MESSAGE value="More work on animation." />
-    <option name="LAST_COMMIT_MESSAGE" value="More work on animation." />
+    <MESSAGE value="AIPlayer graphics optimisation, and minor improvements to location scoring (is_edge_of_corner)" />
+    <option name="LAST_COMMIT_MESSAGE" value="AIPlayer graphics optimisation, and minor improvements to location scoring (is_edge_of_corner)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
