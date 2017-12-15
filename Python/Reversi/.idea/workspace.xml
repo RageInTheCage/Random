@@ -3,9 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="Minor UI tweaks.  Tried optimizing get_location_score, but tests revealed no improvement in CPU cycles.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/AIPlayer.py" afterPath="$PROJECT_DIR$/AIPlayer.py" />
-      <change beforePath="$PROJECT_DIR$/Game.py" afterPath="$PROJECT_DIR$/Game.py" />
-      <change beforePath="$PROJECT_DIR$/GameBoard.py" afterPath="$PROJECT_DIR$/GameBoard.py" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0001.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0002.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0003.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0004.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0005.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0006.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0007.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0008.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0009.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0010.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0011.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0012.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0013.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0014.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0015.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Animation/Reversi0016.png" afterPath="" />
       <change beforePath="$PROJECT_DIR$/Graphics.py" afterPath="$PROJECT_DIR$/Graphics.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,15 +30,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Graphics.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Graphics.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Graphics.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="169">
-              <caret line="87" column="26" lean-forward="false" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+              <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#2269#2604#0" expanded="true" />
+                <element signature="e#530#1505#0" expanded="true" />
+                <element signature="e#1565#1780#0" expanded="true" />
+                <element signature="e#2337#2672#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimationFrameCollection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AnimationFrameCollection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -33,22 +58,21 @@
       <file leaf-file-name="GameBoard.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameBoard.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="97" column="26" lean-forward="false" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
+            <state relative-caret-position="75">
+              <caret line="7" column="29" lean-forward="false" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
-                <element signature="e#116#367#0" expanded="true" />
                 <element signature="e#2161#2656#0" expanded="true" />
                 <element signature="e#2701#2724#0" expanded="true" />
+                <element signature="e#2787#3313#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="525">
               <caret line="95" column="36" lean-forward="false" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
               <folding>
                 <element signature="e#161#424#0" expanded="true" />
@@ -118,18 +142,16 @@
         <option value="$PROJECT_DIR$/AnimationFrameCollection.py" />
         <option value="$PROJECT_DIR$/Animation.py" />
         <option value="$PROJECT_DIR$/HumanPlayer.py" />
-        <option value="$PROJECT_DIR$/Game.py" />
         <option value="$PROJECT_DIR$/GameBoard.py" />
         <option value="$PROJECT_DIR$/AIPlayer.py" />
+        <option value="$PROJECT_DIR$/Game.py" />
         <option value="$PROJECT_DIR$/Graphics.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="193" />
-    <option name="y" value="143" />
-    <option name="width" value="1247" />
-    <option name="height" value="757" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -166,8 +188,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -552,7 +574,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513295307540</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Minor UI tweaks.  Tried optimizing get_location_score, but tests revealed no improvement in CPU cycles.">
+      <created>1513376224477</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1513376224477</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -568,36 +597,25 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17477097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34945586" sideWeight="0.49753347" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3349456" sideWeight="0.4721635" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3349456" sideWeight="0.5278365" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49753347" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38210398" sideWeight="0.4855532" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34945586" sideWeight="0.49753347" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5024665" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49753347" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3349456" sideWeight="0.5687104" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3349456" sideWeight="0.5687104" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17477097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49753347" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32439336" sideWeight="0.4947146" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38210398" sideWeight="0.4855532" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -675,7 +693,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Graphics.py</url>
-          <line>181</line>
+          <line>182</line>
           <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -710,10 +728,9 @@
         <state relative-caret-position="480">
           <caret line="93" column="20" lean-forward="true" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="27" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -751,10 +768,9 @@
         <state relative-caret-position="195">
           <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -781,10 +797,9 @@
         <state relative-caret-position="195">
           <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -811,10 +826,9 @@
         <state relative-caret-position="375">
           <caret line="81" column="25" lean-forward="false" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="25" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -848,10 +862,9 @@
         <state relative-caret-position="195">
           <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -878,10 +891,9 @@
         <state relative-caret-position="90">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -908,10 +920,9 @@
         <state relative-caret-position="300">
           <caret line="20" column="53" lean-forward="false" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -928,10 +939,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -948,10 +958,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
             <element signature="e#2161#2656#0" expanded="true" />
             <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1026,16 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AnimationFrameCollection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="23" column="45" lean-forward="false" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-          <folding>
-            <element signature="e#412#650#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sprites.py" />
     <entry file="file://$PROJECT_DIR$/Reversi Pieces.png" />
     <entry file="file://$PROJECT_DIR$/Reversi Pieces v1.png" />
@@ -1106,40 +1105,16 @@
         <state relative-caret-position="135">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#645#912#0" expanded="true" />
-            <element signature="e#962#1178#0" expanded="true" />
-            <element signature="e#2102#2524#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="87" column="26" lean-forward="false" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#2269#2604#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameBoard.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="97" column="26" lean-forward="false" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#116#367#0" expanded="true" />
-            <element signature="e#2161#2656#0" expanded="true" />
-            <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#645#912#0" expanded="false" />
+            <element signature="e#962#1178#0" expanded="false" />
+            <element signature="e#2102#2524#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="525">
           <caret line="95" column="36" lean-forward="false" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
           <folding>
             <element signature="e#161#424#0" expanded="true" />
@@ -1149,6 +1124,39 @@
             <element signature="e#1804#1886#0" expanded="true" />
             <element signature="e#1933#2044#0" expanded="true" />
             <element signature="e#2640#2810#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AnimationFrameCollection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameBoard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="7" column="29" lean-forward="false" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="e#2161#2656#0" expanded="true" />
+            <element signature="e#2701#2724#0" expanded="true" />
+            <element signature="e#2787#3313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#530#1505#0" expanded="true" />
+            <element signature="e#1565#1780#0" expanded="true" />
+            <element signature="e#2337#2672#0" expanded="true" />
           </folding>
         </state>
       </provider>

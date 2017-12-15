@@ -30,7 +30,8 @@ class Graphics(object):
         self.game_board = game_board
 
         self.piece_size = int(self.height / 8)
-        self.piece_frame_collection = AnimationFrameCollection('./Animation/*.png', (self.piece_size, self.piece_size))
+        self.piece_frame_collection = AnimationFrameCollection('./Reversi Pieces/*.png',
+                                                               (self.piece_size, self.piece_size))
         self.animation_group = pygame.sprite.Group()
         self.pieces = {}
         self.cursor_location = [3, 3]
