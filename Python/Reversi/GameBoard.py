@@ -1,4 +1,5 @@
 from colorama import Fore
+
 from GameMove import GameMove
 
 
@@ -98,11 +99,11 @@ class GameBoard(object):
         if move.flipCount == 0:
             return False
 
+        self.fill_location(player_number, x, y)
+
         for piece in move.overturned:
             p_x, p_y = piece[0], piece[1]
             self.board[p_x][p_y] = player_number
-
-        self.fill_location(player_number, x, y)
 
         player = self.players[player_number - 1]
         player.score += move.flipCount + 1

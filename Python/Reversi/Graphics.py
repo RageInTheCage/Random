@@ -174,8 +174,13 @@ class Graphics(object):
     def animate_winning_pieces(self, player_number):
         self.wait_for_animation(self.piece_frame_collection.max_index)
 
+        index = 0
         for piece in self.pieces.values():
             if piece.player_number != player_number:
+                piece.index = int(index)
+                index += 0.3
+                if index > self.piece_frame_collection.max_index:
+                    index = 0
                 piece.stop_at_index = None
                 piece.enabled = True
 

@@ -6,11 +6,12 @@ from Player import Player
 
 
 class AIPlayer(Player):
-    def __init__(self, player_number, game_board):
+    def __init__(self, player_number, game_board, delay_before_move=20):
         Player.__init__(self, player_number, game_board)
+        self.delay_before_move = delay_before_move
 
     def make_move(self, graphics):
-        graphics.wait_for_animation()
+        graphics.wait_for_animation(self.delay_before_move)
         self.game_board.assess_board(self.number)
         best_move = random.choice(self.get_best_moves())
         self.game_board.try_to_make_move(self.number, best_move.x, best_move.y)
@@ -29,7 +30,7 @@ class AIPlayer(Player):
         if self.is_corner(x, y):
             return 20
         if self.is_edge_of_corner(x, y) and self.is_corner_unprotected(x, y):
-            return -10
+            return -5
         if self.is_edge(x, y):
             return 10
         return 1

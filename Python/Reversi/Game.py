@@ -73,8 +73,9 @@ def get_ai_vs_human_opponents(game_board):
 
 
 def get_ai_vs_ai_opponents(game_board):
-    p_1 = AIPlayer(1, game_board)
-    p_2 = AIPlayer(2, game_board)
+    delay = 0
+    p_1 = AIPlayer(1, game_board, delay)
+    p_2 = AIPlayer(2, game_board, delay)
     return p_1, p_2
 
 
@@ -97,7 +98,11 @@ def game_is_over(game_board, graphics):
 
 
 def players_are_bored(graphics):
-    return graphics.ask("Another game?") == pygame.K_n
+    if graphics.ask("Another game?") == pygame.K_y:
+        return False
+    graphics.say("Okay, bye then...")
+    graphics.wait_for_animation(frame_count=40)
+    return True
 
 
 main()
