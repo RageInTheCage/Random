@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="Minor UI tweaks.  Tried optimizing get_location_score, but tests revealed no improvement in CPU cycles.">
+    <list default="true" id="fb89b740-50ac-4500-8ae9-06c329966fa2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0001.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0002.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0003.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0004.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0005.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0006.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0007.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0008.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0009.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0010.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0011.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0012.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0013.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0014.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0015.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Animation/Reversi0016.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Graphics.py" afterPath="$PROJECT_DIR$/Graphics.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,7 +19,6 @@
             <state relative-caret-position="169">
               <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#530#1505#0" expanded="true" />
                 <element signature="e#1565#1780#0" expanded="true" />
                 <element signature="e#2337#2672#0" expanded="true" />
@@ -581,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513376224477</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Minor UI tweaks.  Tried optimizing get_location_score, but tests revealed no improvement in CPU cycles.">
+      <created>1513376690351</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1513376690351</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -595,12 +584,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34945586" sideWeight="0.49753347" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5024665" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49753347" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.49753347" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3349456" sideWeight="0.5687104" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1153,7 +1141,6 @@
         <state relative-caret-position="169">
           <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
             <element signature="e#530#1505#0" expanded="true" />
             <element signature="e#1565#1780#0" expanded="true" />
             <element signature="e#2337#2672#0" expanded="true" />
