@@ -31,7 +31,6 @@ class Graphics(object):
         self.pieces = {}
         self.cursor_location = [3, 3]
         self.cursor_visible = False
-        self.enable_move_preview = True
 
         self.background_colour = (222, 222, 224)
         self.move_colour = (255, 220, 211)
@@ -75,7 +74,7 @@ class Graphics(object):
             return
 
         for key, move in self.moves.items():
-            self.draw_rectangle((move.x, move.y), self.move_colour)
+            self.draw_rectangle(move.location, self.move_colour)
 
     def draw_rectangle(self, location, colour):
         surface = pygame.Surface((self.piece_size, self.piece_size),
@@ -87,9 +86,6 @@ class Graphics(object):
         self.draw_rectangle(self.cursor_location, self.get_cursor_colour())
 
     def preview_move(self):
-        if not self.enable_move_preview:
-            return
-
         self.set_board_pieces()
 
         key = (self.cursor_location[0], self.cursor_location[1])
@@ -174,7 +170,7 @@ class Graphics(object):
             self.update()
 
         self.cursor_visible = False
-        return self.cursor_location
+        return tuple(self.cursor_location)
 
     def animate_winning_pieces(self, player_number):
         self.wait_for_animation(self.piece_frame_collection.max_index)
@@ -231,8 +227,7 @@ class Graphics(object):
                 self.text_overlays.remove(text_overlay)
 
     def animate_move(self, move):
-        location = (move.x, move.y)
-        self.add_piece(move.player_number, location)
+        self.add_piece(move.player_number, move.location)
         self.wait_for_animation(10)
 
     @staticmethod

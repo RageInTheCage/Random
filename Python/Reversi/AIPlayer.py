@@ -12,21 +12,21 @@ class AIPlayer(Player):
         graphics.wait_for_animation(self.delay_before_move)
         self.game_board.assess_board(self.number)
         best_move = random.choice(self.get_best_moves())
-        self.game_board.try_to_make_move(best_move.x, best_move.y)
+        self.game_board.try_to_make_move(best_move.location)
         graphics.update()
         graphics.animate_move(best_move)
         graphics.quit_if_user_wants()
         return best_move
 
     def get_move_score(self, move):
-        move_score = self.get_location_score(move.x, move.y)
+        move_score = self.get_location_score(move.location)
         for location in move.overturned:
-            location_x = location[0]
-            location_y = location[1]
-            move_score += self.get_location_score(location_x, location_y)
+            move_score += self.get_location_score(location)
         return move_score
 
-    def get_location_score(self, x, y):
+    def get_location_score(self, location):
+        x = location[0]
+        y = location[1]
         if self.is_corner(x, y):
             return 20
         if self.is_edge_of_corner(x, y) and self.is_corner_unprotected(x, y):

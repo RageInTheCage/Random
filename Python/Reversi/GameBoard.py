@@ -10,8 +10,8 @@ class GameBoard(object):
         self.game_extents = []
         self.moves = []
         for x in range(3, 5):
-            self.fill_location(1, x, x)
-            self.fill_location(2, 7 - x, x)
+            self.fill_location(1, (x, x))
+            self.fill_location(2, (7 - x, x))
 
     def get_directions(self, x, y):
         directions = []
@@ -30,10 +30,11 @@ class GameBoard(object):
 
         return directions
 
-    def fill_location(self, player_number, x, y):
+    def fill_location(self, player_number, location):
+        x = location[0]
+        y = location[1]
         self.board[x][y] = player_number
 
-        location = (x, y)
         if location in self.game_extents:
             self.game_extents.remove(location)
 
@@ -90,13 +91,12 @@ class GameBoard(object):
     def get_player_at(self, x, y):
         return self.board[x][y]
 
-    def try_to_make_move(self, x, y):
-        location = (x, y)
+    def try_to_make_move(self, location):
         if location not in self.moves:
             return None
 
         move = self.moves[location]
-        self.fill_location(move.player_number, x, y)
+        self.fill_location(move.player_number, location)
 
         for piece in move.overturned:
             p_x, p_y = piece[0], piece[1]
