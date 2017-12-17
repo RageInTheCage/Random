@@ -8,11 +8,10 @@ class HumanPlayer(Player):
     def make_move(self, graphics):
         while True:
             cursor = graphics.ask_player_for_move(self.number)
-            flip_count = self.game_board.try_to_make_move(self.number, cursor[0], cursor[1])
+            move = self.game_board.try_to_make_move(cursor[0], cursor[1])
 
-            if flip_count > 0:
-                break
+            if move:
+                return move
 
             message = "Must overturn {0}".format(self.opponent.name)
             graphics.say(message)
-            print(message)

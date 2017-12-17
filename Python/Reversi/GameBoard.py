@@ -90,26 +90,23 @@ class GameBoard(object):
     def get_player_at(self, x, y):
         return self.board[x][y]
 
-    def try_to_make_move(self, player_number, x, y):
+    def try_to_make_move(self, x, y):
         location = (x, y)
         if location not in self.moves:
-            return False
+            return None
 
         move = self.moves[location]
-        if move.flipCount == 0:
-            return False
-
-        self.fill_location(player_number, x, y)
+        self.fill_location(move.player_number, x, y)
 
         for piece in move.overturned:
             p_x, p_y = piece[0], piece[1]
-            self.board[p_x][p_y] = player_number
+            self.board[p_x][p_y] = move.player_number
 
-        player = self.players[player_number - 1]
+        player = self.players[move.player_number - 1]
         player.score += move.flipCount + 1
         player.opponent.score -= move.flipCount
 
-        return move.flipCount
+        return move
 
     def assess_board(self, player_number):
         moves = {}

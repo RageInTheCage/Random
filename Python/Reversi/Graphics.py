@@ -14,11 +14,6 @@ def check_bounds(coordinate):
     return coordinate
 
 
-def text_objects(message, font, color):
-    surface = font.render(message, True, color)
-    return surface, surface.get_rect()
-
-
 class Graphics(object):
     def __init__(self, display_size, game_board):
         pygame.init()
@@ -30,8 +25,8 @@ class Graphics(object):
         self.game_board = game_board
 
         self.piece_size = int(self.height / 8)
-        self.piece_frame_collection = AnimationFrameCollection('./Reversi Pieces/*.png',
-                                                               (self.piece_size, self.piece_size))
+        self.piece_frame_collection = AnimationFrameCollection(
+            './Reversi Pieces/*.png', (self.piece_size, self.piece_size))
         self.animation_group = pygame.sprite.Group()
         self.pieces = {}
         self.cursor_location = [3, 3]
@@ -39,7 +34,6 @@ class Graphics(object):
         self.enable_move_preview = True
 
         self.background_colour = (222, 222, 224)
-        self.cursor_colour = (250, 230, 230)
         self.move_colour = (255, 220, 211)
         self.clock = pygame.time.Clock()
         self.moves = []
@@ -51,6 +45,7 @@ class Graphics(object):
         self.set_piece_player_number(piece, player_number)
         piece.rect = self.get_location_rect(location)
         self.pieces[location] = piece
+        return piece
 
     def add_animation(self, animation_frame_collection, index):
         animation = Animation(animation_frame_collection, index)
@@ -66,15 +61,30 @@ class Graphics(object):
     def fill(self):
         self.game_display.fill(self.background_colour)
 
-    def show_available_moves(self):
+    def cursor_is_a_valid_move(self):
         key = (self.cursor_location[0], self.cursor_location[1])
-        if key in self.moves:
-            self.cursor_colour = pygame.color.Color("green")
+        return key in self.moves
+
+    def get_cursor_colour(self):
+        if self.cursor_is_a_valid_move():
+            return pygame.Color("green")
+        return 255, 0, 0, 128
+
+    def show_available_moves(self):
+        if self.cursor_is_a_valid_move():
             return
 
-        self.cursor_colour = pygame.color.Color("red")
         for key, move in self.moves.items():
             self.draw_rectangle((move.x, move.y), self.move_colour)
+
+    def draw_rectangle(self, location, colour):
+        surface = pygame.Surface((self.piece_size, self.piece_size),
+                                 pygame.SRCALPHA)
+        surface.fill(colour)
+        self.game_display.blit(surface, self.get_location_rect(location))
+
+    def draw_cursor(self):
+        self.draw_rectangle(self.cursor_location, self.get_cursor_colour())
 
     def preview_move(self):
         if not self.enable_move_preview:
@@ -98,12 +108,6 @@ class Graphics(object):
             piece.step = step
             piece.stop_at_index = stop_at_index
 
-    def draw_rectangle(self, location, colour):
-        self.game_display.fill(colour, self.get_location_rect(location))
-
-    def draw_cursor(self):
-        self.draw_rectangle(self.cursor_location, self.cursor_colour)
-
     def get_location_rect(self, location):
         return (location[0] * self.piece_size, location[1] * self.piece_size,
                 self.piece_size, self.piece_size)
@@ -113,7 +117,7 @@ class Graphics(object):
             return
         self.game_display.blit(self.pieces[player_number - 1], (x * self.piece_size, y * self.piece_size))
 
-    def draw_board(self):
+    def draw_pieces(self):
         self.animation_group.update()
         self.animation_group.draw(self.game_display)
 
@@ -141,12 +145,12 @@ class Graphics(object):
 
     def update(self):
         self.fill()
+        self.draw_pieces()
 
         if self.cursor_visible:
             self.show_available_moves()
             self.draw_cursor()
 
-        self.draw_board()
         self.animate_text_overlays()
         self.score_overlay.show()
         pygame.display.update()
@@ -188,7 +192,13 @@ class Graphics(object):
     def wait_for_animation(self, frame_count=20):
         for frame in range(0, frame_count):
             self.update()
-            pygame.event.poll()
+            self.quit_if_user_wants()
+
+    @staticmethod
+    def quit_if_user_wants():
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
 
     def process_mouse_clicks(self, event):
         if event.type == pygame.MOUSEMOTION:
@@ -219,6 +229,11 @@ class Graphics(object):
             text_overlay.show()
             if text_overlay.is_gone():
                 self.text_overlays.remove(text_overlay)
+
+    def animate_move(self, move):
+        location = (move.x, move.y)
+        self.add_piece(move.player_number, location)
+        self.wait_for_animation(10)
 
     @staticmethod
     def close():
@@ -263,5 +278,6 @@ class Graphics(object):
             max_top = (self.height - new_overlay.text_rectangle.height) / 2
             if new_top < max_top:
                 new_top = max_top
+                self.wait_for_animation()
             new_overlay.text_rectangle.top = new_top
         self.text_overlays.append(new_overlay)

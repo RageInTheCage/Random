@@ -1,7 +1,5 @@
 import random
 
-import pygame
-
 from Player import Player
 
 
@@ -14,9 +12,11 @@ class AIPlayer(Player):
         graphics.wait_for_animation(self.delay_before_move)
         self.game_board.assess_board(self.number)
         best_move = random.choice(self.get_best_moves())
-        self.game_board.try_to_make_move(self.number, best_move.x, best_move.y)
+        self.game_board.try_to_make_move(best_move.x, best_move.y)
         graphics.update()
-        pygame.event.poll()
+        graphics.animate_move(best_move)
+        graphics.quit_if_user_wants()
+        return best_move
 
     def get_move_score(self, move):
         move_score = self.get_location_score(move.x, move.y)

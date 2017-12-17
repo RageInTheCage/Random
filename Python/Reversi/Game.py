@@ -37,7 +37,8 @@ def play_game(game_board, graphics):
             zero_move_count += 1
             if zero_move_count == 1:
                 graphics.say("{0} cannot move.".format(player.name))
-            elif game_is_over(game_board, graphics):
+            else:
+                finish_game(game_board, graphics)
                 break
         else:
             zero_move_count = 0
@@ -79,22 +80,22 @@ def get_ai_vs_ai_opponents(game_board):
     return p_1, p_2
 
 
-def game_is_over(game_board, graphics):
+def finish_game(game_board, graphics):
     score_difference = game_board.players[0].score - game_board.players[1].score
 
     if score_difference == 0:
-        message = "It's a draw.  How dull."
-    else:
-        if score_difference > 0:
-            winner = game_board.players[0]
-        else:
-            winner = game_board.players[1]
-        message = "{0} has won!".format(winner.name)
+        graphics.say("It's a draw.  How dull.")
+        return
 
+    if score_difference > 0:
+        winner = game_board.players[0]
+    else:
+        winner = game_board.players[1]
+
+    message = "{0} has won!".format(winner.name)
     graphics.score_overlay.show_winner(message, game_board.players)
     graphics.say(message)
     graphics.animate_winning_pieces(winner.number)
-    return True
 
 
 def players_are_bored(graphics):
