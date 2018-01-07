@@ -1,4 +1,3 @@
--Blackjack:         	20points(A)
--Hangman:            	50points(B)
--Noughts and crosses:   40points(C)
--Mine blower:           60points(D)
+Hangman:               20 points
+Noughts and crosses:   30 points
+Mine blower:           50 points

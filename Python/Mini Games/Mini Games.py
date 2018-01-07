@@ -1,28 +1,142 @@
 import shelve
 import random
 
-#apps needs work (a lot!)
+def BlackJack():
+    print("->---<$>--<BlackJack>--<$>---<-")
+    choiceLoop = 0
+    while choiceLoop<1:
+        print("\n-Rules(A)\n-I already know how to play(B)\n-Back(Back)")
+        choice = input(":  ").upper()
+        if choice == "A":
+            introToBlackJack()
+        elif choice == "B":
+            results = playBlackJack()
+            if results == True:
+                return 5
+            if results == False:
+                return -5
+            if results == None:
+                return 0
+        elif choice == "BACK":
+            return
+        else:
+            print(choice.capitalize() , " is not an option. Try again.")
+
+def introToBlackJack():
+    print("Noooooooooooooo!")
+    return
+
+def playBlackJack():
+    dealerHasMissed = False
+    playerHasMissed = False
+    score = 0
+    dealerScore = 0
+    cardTaken = False
+    while True:
+        if playerHasMissed == False:
+            Rank = ("Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King")
+            Set = (" of Diamonds", " of Spades", " of Clubs", " of Hearts")
+            rank = random.choice(Rank)
+            if rank == "Ace":
+                score += 1
+            elif rank == "Jack":
+                score += 10
+            elif rank == "Queen":
+                score += 10
+            elif rank == "King":
+                score += 10
+            else:
+                score += int(rank)
+            cards = (rank + random.choice(Set))
+            if cardTaken == False:
+                print("your first card is " + cards)
+                print("Your current score is " + str(score))
+                cardTaken = True
+                break
+            elif cardTaken == True:
+                print("Your next card is " + cards)
+                print("Your current score is " + str(score))
+                break
+            if score == dealerScore and score == 21:
+                print("We drew!\n")
+                return None
+            if score == 21:
+                print("You win!\n")
+                if dealerScore > 21:
+                    print("The dealer is bust!\n")
+                    return True
+                else:
+                    return True
+            if score > 21:
+                print("Your bust!\n")
+                return False
+        if dealerScore > 21:
+            print("The dealer is bust!\n")
+            return True
+        if playerHasMissed == False:
+            while True:
+                askForMiss = input("do you want to hit(H) or miss(M)?\n:  ")
+                if askForMiss == "H":
+                    print("O.K.")
+                    break
+                elif askForMiss == "M":
+                    playerHasMissed = True
+                    print("You have missed.\nYou had a score of " + str(score))
+                    break
+                else:
+                    print(askForMiss.capitalize() + " is not an option.")
+
+        if dealerHasMissed == False:
+            dealerScore += random.randint(1, 12)
+            dealerMiss = random.randint(0, 3)
+            if dealerScore == 21:
+                dealerMiss = 0
+            if dealerMiss == 0:
+                print("The dealer has missed.\nHe had a score of " + str(dealerScore))
+                dealerHasMissed = True
+                if dealerScore == score and playerHasMissed == True:
+                    print("You Drew!")
+                    return None
+                elif dealerScore < score and playerHasMissed == True:
+                    print("You win!")
+                    return True
+                elif dealerScore > score and playerHasMissed == True:
+                    print("The dealer has won")
+                    return False
+            else:
+                print("The dealer has hit")
+
 
 def apps(score):
     while True:
-        count = 0
-        Applications = ["Number guessing game"]
-        Applications.sort()
-        print("Applications\n")
-        appNumber = 1
-        for A in (Applications):
-            print("-" + A + "(" + str(appNumber) + ")")
-            appNumber += 1
-        chooseApp = input(":  ")
-        try:
-            chooseAppNumber = int(chooseApp)
-        except ValueError:
-            print(chooseApp.capitalize() + " is not a number.")
+        while True:
+            with open("boughtApps.txt") as f:
+                Applications = f.readlines()
+                Applications = [x.strip() for x in Applications]
+                Applications.sort()
+            Applications.sort()
+            print("Applications\n")
+            appNumber = 1
+            for A in Applications:
+                print("-" + A + "(" + str(appNumber) + ")")
+                appNumber += 1
+            print("-Back(Quit)")
+            chooseApp = input(":  ").upper()
+            if chooseApp == "QUIT":
+                return 0
+            try:
+                chooseAppNumber = int(chooseApp)
+                if chooseAppNumber == 0:
+                    print("0 is not on the list\n")
+                else:
+                    break
+            except ValueError:
+                print(chooseApp.capitalize() + " is not a number.")
 
         appNumber -= 1
 
-        if chooseAppNumber > appNumber or chooseAppNumber < appNumber:
-            print(str(chooseApp) + " is not on the list")
+        if chooseAppNumber > appNumber or chooseAppNumber < 0:
+            print(str(chooseApp) + " is not on the list.")
         else:
             chooseAppNumber -= 1
             chosenApp = Applications[chooseAppNumber]
@@ -52,30 +166,148 @@ def apps(score):
                     else:
                         print(choice + " is not an option.")
             elif chosenApp == "Blackjack":
-                print("not yet")
+
+                while True:
+                    score = 0
+                    gameScore = BlackJack()
+                    if gameScore == -5:
+                        print("-5 points")
+                        score -= 5
+                    elif gameScore == 5:
+                        print("+5 points")
+                        score += 5
+                    else:
+                        print("+0 points")
+
+                    choice = input("Again?\n(Y or N)\n:  ").upper()
+
+                    if choice == "Y":
+                        input("Great!")
+                    elif choice == "N":
+                        print("good bye!")
+                        return score
+                    else:
+                        print(choice + " is not an option.")
 
 
+def shop(score):
+    boughtMessage = "Great! Your purchase will be ready in your apps."
+    while True:
+        with open("shopStock.txt") as f:
+            stock = f.readlines()
+            stock = [x.strip() for x in stock]
+            stock.sort()
+        while True:
 
-def shop():
-    print("Sorry but the shop is not currently open.")
-    shopStock = open("shopStock.txt", "r")
-    print(shopStock.read())
-    byItem = input(":  ").upper()
-    something = "(" + byItem + ")"
-    #do stuff here
-    with open("shopStock.txt") as f:
-        stock = f.readlines()
-    if something in open("shopStock.txt").read():
-        print()
-    else:
-        print("damn")
+            appNumber = 1
+
+            for S in stock:
+                print("-" + S + "(" + str(appNumber) + ")")
+                appNumber += 1
+            print("-Back(Quit)")
+            chooseApp = input(":  ").upper()
+            if chooseApp == "QUIT":
+                return 0
+            try:
+                chooseAppNumber = int(chooseApp)
+                if chooseAppNumber == 0:
+                    print("0 is not on the list\n")
+                else:
+                    break
+            except ValueError:
+                print(chooseApp.capitalize() + " is not a number.")
+
+        appNumber -= 1
+
+        if chooseAppNumber > appNumber or chooseAppNumber < 0:
+            print(str(chooseApp) + " is not on the list.")
+        else:
+            chooseAppNumber -= 1
+            chosenApp = stock[chooseAppNumber]
+            if chosenApp == "Blackjack:             20 points":
+                if score >= 20:
+                    print(boughtMessage)
+                    boughtApps = open("boughtApps.txt", "a")
+
+                    boughtApps.write("Blackjack\n")
+
+                    readShopFiles = open("shopStock.txt", "r")
+                    linesInFile = readShopFiles.readlines()
+                    readShopFiles.close()
+                    writeShopFiles = open("shopStock.txt", "w")
+                    for line in linesInFile:
+                        if line != "Blackjack:             20 points" + "\n":
+                            writeShopFiles.write(line)
+                    writeShopFiles.close()
+
+                    return 20
+                else:
+                    print("Sorry but Blackjack is too expensive for you to afford. try some other games to save up points.")
+            if chosenApp == "Hangman:               20 points":
+                if score >= 20:
+                    print(boughtMessage)
+                    boughtApps = open("boughtApps.txt", "a")
+
+                    boughtApps.write("Hangman\n")
+
+                    readShopFiles = open("shopStock.txt", "r")
+                    linesInFile = readShopFiles.readlines()
+                    readShopFiles.close()
+                    writeShopFiles = open("shopStock.txt", "w")
+                    for line in linesInFile:
+                        if line != "Hangman:               20 points" + "\n":
+                            writeShopFiles.write(line)
+                    writeShopFiles.close()
+
+                    return 20
+                else:
+                    print("Sorry but Hangman is too expensive for you to afford. try some other games to save up points.")
+            if chosenApp == "Noughts and crosses:   30 points":
+                if score >= 30:
+                    print(boughtMessage)
+                    boughtApps = open("boughtApps.txt", "a")
+
+                    boughtApps.write("Noughts and crosses\n")
+                    readShopFiles = open("shopStock.txt", "r")
+                    linesInFile = readShopFiles.readlines()
+                    readShopFiles.close()
+                    writeShopFiles = open("shopStock.txt", "w")
+                    for line in linesInFile:
+                        if line != "Noughts and crosses:   30 points" + "\n":
+                            writeShopFiles.write(line)
+                    writeShopFiles.close()
+
+                    return 30
+                else:
+                    print("Sorry but Noughts and crosses is too expensive for you to afford. try some other games to save up points.")
+            if chosenApp == "Mine blower:           50 points":
+                if score >= 50:
+                    print(boughtMessage)
+                    boughtApps = open("boughtApps.txt", "a")
+
+                    boughtApps.write("Mine blower\n")
+                    readShopFiles = open("shopStock.txt", "r")
+                    linesInFile = readShopFiles.readlines()
+                    readShopFiles.close()
+                    writeShopFiles = open("shopStock.txt", "w")
+                    for line in linesInFile:
+                        if line != "Mine blower:           50 points" + "\n":
+                            writeShopFiles.write(line)
+                    writeShopFiles.close()
+
+                    return 50
+                else:
+                    print("Sorry but Mine Blower is too expensive for you to afford. try some other games to save up points.")
+
+            print("The app you have chosen is not in stock and will probably never be. Sorry.\n")
+
 
 
 def numberGuessingGame():
     randomNumber = random.randint(1000,9999)
 
     while True:
-        difficulty = input("Number guessing game!\nChoose your dificulty\n-Easy(A)-20 tries to guess the 4 didit number\n-Hard(B)-10 tries to guess the 4 digit number. 4x all points.\n:  ").upper()
+        difficulty = input("Number guessing game!\nChoose your difficulty\n-Easy(A)-20 tries to guess the 4 digit number\n-Hard(B)-10 tries to guess the 4 digit number. 4x all points.\n:  ").upper()
 
         if difficulty == "A":
             guessesLeft = 20
@@ -89,7 +321,7 @@ def numberGuessingGame():
 
             while True:
                 userFriendly = str(guessesLeft)
-                choice = input("Guess my four diget number in " + userFriendly + " guesses!\n:  ")
+                choice = input("Guess my four digit number in " + userFriendly + " guesses!\n:  ")
                 print("")
 
                 try:
@@ -128,6 +360,7 @@ def numberGuessingGame():
 
             guessesLeft -= 1
 
+
 def main(score):
 
     while True:
@@ -140,7 +373,11 @@ def main(score):
             score += apps(score)
                 
         elif menu == "B":
-            shop()
+            score -= shop(score)
+            d = shelve.open('score.txt')
+            d['score'] = score
+            d.close()
+
         elif menu == "C":
 
             while True:
@@ -154,6 +391,15 @@ def main(score):
                     if password == "FEAT":
                         print("Resetting all data...")
                         score = 0
+                        resetShopStock = open("shopStock.txt", "w")
+                        resetShopStock.write("Blackjack:             20 points\nHangman:               20 points\nNoughts and crosses:   30 points\nMine blower:           50 points\n")
+                        resetShopStock.close()
+                        resetBoughtApps = open("boughtApps.txt", "w")
+                        resetBoughtApps.write("Number guessing game\n")
+                        resetBoughtApps.close()
+                        d = shelve.open('score.txt')
+                        d['score'] = score
+                        d.close()
                         print("All data reset")
                         break
                     else:
@@ -175,10 +421,8 @@ def main(score):
 print("Opening save files...")
 d = shelve.open('score.txt')
 score = d['score']
-print("Save files opend.")
+print("Save files open'd.")
+
+score += 200
 
 main(score)
-
-
-
-     
