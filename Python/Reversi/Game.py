@@ -36,6 +36,7 @@ def play_game(game_board, graphics):
         if len(game_board.moves) == 0:
             zero_move_count += 1
             if zero_move_count == 1:
+                graphics.wait_for_animation()
                 graphics.say("{0} cannot move.".format(player.name))
             else:
                 finish_game(game_board, graphics)
@@ -81,6 +82,7 @@ def get_ai_vs_ai_opponents(game_board):
 
 
 def finish_game(game_board, graphics):
+    graphics.wait_for_animation()
     score_difference = game_board.players[0].score - game_board.players[1].score
 
     if score_difference == 0:
