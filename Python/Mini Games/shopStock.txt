@@ -1,0 +1,3 @@
+Hangman:               20 points
+Noughts and crosses:   30 points
+Mine blower:           50 points
