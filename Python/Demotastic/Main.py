@@ -10,7 +10,7 @@ def main():
 
     display_info = pygame.display.Info()
     display = pygame.display.set_mode((display_info.current_w, display_info.current_h))
-    pygame.display.set_caption("Circular")
+    pygame.display.set_caption("Demotastic")
 
     running = True
     clock = pygame.time.Clock()
