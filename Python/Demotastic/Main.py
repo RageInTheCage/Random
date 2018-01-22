@@ -1,5 +1,7 @@
 import pygame
 from pygame.locals import *
+
+from Maze import Maze
 from PeacockFeather import PeacockFeather
 from Rainbow import Rainbow
 from Spiral import Spiral
@@ -15,8 +17,12 @@ def main():
     running = True
     clock = pygame.time.Clock()
 
-    animations = get_animation_array(display)
-    animations.append(Rainbow(display))
+    animations = [
+        #Rainbow(display),
+        Maze(display)
+    ]
+    #animations = get_animation_array(display)
+    #animations.append(Rainbow(display))
 
     while running:
         running = handle_events(animations, display)

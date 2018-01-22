@@ -5,32 +5,32 @@ def get_random_step():
     return random.randint(-10, 10)
 
 
-def get_random_colour_element():
-    return random.randint(0, 255)
-
-
-def bounds_have_been_exceeded(colour_value):
-    return colour_value < 0 or colour_value > 255
-
-
 class ColourPulse:
-    def __init__(self):
+    def __init__(self, min_value=0, max_value=255):
         self.colour_element = []
         self.colour_step = []
+        self.min_value = min_value
+        self.max_value = max_value
+        self.reset()
 
+    def reset(self):
+        self.colour_element.clear()
         for index in range(0, 4):
-            self.colour_element.append(get_random_colour_element())
+            self.colour_element.append(self.get_random_colour_element())
             self.colour_step.append(get_random_step())
 
     def animate(self):
         for index in range(0, 4):
             self.colour_element[index] += self.colour_step[index]
 
-            if 0 <= self.colour_element[index] <= 255:
+            if self.min_value <= self.colour_element[index] <= self.max_value:
                 continue
 
             self.colour_step[index] = -self.colour_step[index]
             self.colour_element[index] += self.colour_step[index] * 2
+
+    def get_random_colour_element(self):
+        return random.randint(self.min_value, self.max_value)
 
     @property
     def colour(self):
