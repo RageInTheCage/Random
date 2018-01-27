@@ -2,11 +2,13 @@ import pygame
 from pygame.locals import *
 
 from Maze import Maze
+from Player import Player
 
 
 def main():
     clock, display = initialise()
     maze = Maze(display)
+    player = Player(maze, (10, 10))
     background_colour = (5, 5, 50)
     running = True
     while running:
@@ -16,6 +18,7 @@ def main():
 
         display.fill(background_colour)
         maze.update()
+        player.update()
         pygame.display.update()
         clock.tick
 

@@ -9,8 +9,11 @@ class Direction(Enum):
 
 
 class Cell(object):
-    def __init__(self, location):
+    def __init__(self, maze, location, wall_colour):
+        self.maze = maze
         self.location = location
+        self.wall_colour = wall_colour
+        self.wall_width = 3
         self.exits = [
             Direction.UP,
             Direction.DOWN,
@@ -31,13 +34,14 @@ class Cell(object):
         )
         vector = vectors[wall_direction.value]
         self.walls[wall_direction.value] = (
-            self.add_location(vector[0]),
-            self.add_location(vector[1])
+            self.__add_location(vector[0]),
+            self.__add_location(vector[1])
         )
         self.exits.remove(wall_direction)
 
-    def add_location(self, point):
+    def __add_location(self, point):
         return point[0] + self.location[0], point[1] + self.location[1]
 
-    def get_lines(self):
-        return self.walls.values()
+    def update(self):
+        for wall in self.walls.values():
+            self.maze.draw_line(wall, self.wall_colour, self.wall_width)
