@@ -17,6 +17,7 @@ class Cell(object):
         self.walls = {}
         self._visible_ = False
         self.opacity = 0
+        self.is_end = False
 
     @property
     def visible(self):

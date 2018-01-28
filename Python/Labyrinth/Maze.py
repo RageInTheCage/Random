@@ -20,7 +20,7 @@ class Maze:
         self.scale_factor = self.display_width / self.scale
 
     def update(self):
-        self.__change_perspective()
+        #self.__change_perspective()
         for cell in self.cells.values():
             cell.update()
 
@@ -75,4 +75,8 @@ class Maze:
                 adjacent_cell = cells[adjacent_location]
                 adjacent_cell.add_wall(adjacent_direction)
 
+        location, the_end = random.choice(list(cells.items()))
+        the_end.is_end = True
+        the_end.wall_colour = pygame.Color("green")
+        the_end.visible = True
         return cells
