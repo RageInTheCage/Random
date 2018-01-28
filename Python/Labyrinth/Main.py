@@ -7,8 +7,8 @@ from Player import Player
 
 def main():
     clock, display = initialise()
-    maze = Maze(display, (30, 10))
-    player = Player(maze, (4, 4))
+    maze = Maze(display, (50, 50))
+    player = Player(maze, (25, 25))
     background_colour = (5, 5, 50)
     running = True
     while running:
@@ -26,7 +26,7 @@ def main():
 
 def initialise():
     pygame.init()
-    display = pygame.display.set_mode((500, 500))
+    display = pygame.display.set_mode()
     pygame.display.set_caption("Labyrinth")
     clock = pygame.time.Clock()
     return clock, display

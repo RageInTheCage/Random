@@ -5,7 +5,7 @@ from Point import Point
 class Cell(object):
     def __init__(self, maze, location, wall_colour):
         self.maze = maze
-        self.location = Point(location)
+        self.point = Point(location)
         self.wall_colour = wall_colour
         self.wall_width = 3
         self.exits = [
@@ -28,8 +28,8 @@ class Cell(object):
         )
         vector = vectors[wall_direction.value]
         self.walls[wall_direction.value] = (
-            self.location.offset(vector[0]),
-            self.location.offset(vector[1])
+            self.point.offset(vector[0]),
+            self.point.offset(vector[1])
         )
         self.exits.remove(wall_direction)
 
