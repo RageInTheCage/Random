@@ -26,6 +26,7 @@ def main():
 
 def initialise():
     pygame.init()
+    pygame.key.set_repeat(1, 10)  # use 10 as interval to speed things up.
     display = pygame.display.set_mode()
     pygame.display.set_caption("Labyrinth")
     clock = pygame.time.Clock()

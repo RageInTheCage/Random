@@ -1,6 +1,5 @@
 import random
 import pygame
-import math
 
 from Cell import Cell
 from Direction import Direction
@@ -16,9 +15,9 @@ class Maze:
         self.origin = (int(self.display_width / 2), int(self.display_height / 2))
         self.cells = self.__create_cells(dimensions)
         self.angle_in_radians = 0
-        self.ange_step = 0.05
-        self.scale = 10
-        self.scale_factor = None
+        self.angle_step = 0.05
+        self.scale = 90
+        self.scale_factor = self.display_width / self.scale
 
     def update(self):
         self.__change_perspective()
@@ -33,10 +32,10 @@ class Maze:
         pygame.draw.line(self.display, colour, rotated_from, rotated_to, width)
 
     def __change_perspective(self):
-        self.angle_in_radians += self.ange_step
-        if self.ange_step > -.001:
-            self.ange_step -= 0.001
-        self.scale += .2
+        self.angle_in_radians += self.angle_step
+        if self.angle_step > -.002:
+            self.angle_step -= 0.0005
+        #self.scale += .2
         self.scale_factor = self.display_width / self.scale
 
     def __create_cells(self, dimensions):

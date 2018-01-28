@@ -6,11 +6,28 @@ from Point import Point
 
 class Player:
     def __init__(self, maze, location):
-        #maze.offset = location
         self.maze = maze
         self.point = Point(location)
         self.colour = pygame.Color("yellow")
         self.direction = Direction.UP
+        self.look()
+
+    def look(self):
+        directions = (
+            self.direction,
+            self.direction.rotate_clockwise(),
+            self.direction.rotate_anticlockwise()
+        )
+
+        for direction in directions:
+            visible_cell = self.current_cell
+            for distance in range(0, 5):
+                visible_cell.visible = True
+                if direction not in visible_cell.exits:
+                    break
+
+                adjacent_point = visible_cell.point.get_adjacent_point(direction)
+                visible_cell = self.maze.cells[adjacent_point]
 
     def update(self):
         pointlist = []
@@ -47,10 +64,15 @@ class Player:
         elif event.key == pygame.K_RIGHT:
             self.direction = self.direction.rotate_clockwise()
 
+        self.look()
+
     def __move_if_possible(self, direction):
-        current_cell = self.maze.cells[self.point.location]
-        if direction not in current_cell.exits:
+        if direction not in self.current_cell.exits:
             return
 
-        #self.maze.offset = self.point.location
         self.point.move(direction)
+        self.look()
+
+    @property
+    def current_cell(self):
+        return self.maze.cells[self.point.location]

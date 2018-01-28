@@ -8,8 +8,11 @@ class Point:
         self.location = location
 
     def move(self, direction):
+        self.location = self.get_adjacent_point(direction)
+
+    def get_adjacent_point(self, direction):
         movements = self.movements()
-        self.location = self.offset(movements[direction])
+        return self.offset(movements[direction])
 
     def offset(self, offset):
         return self.location[0] + offset[0], self.location[1] + offset[1]
