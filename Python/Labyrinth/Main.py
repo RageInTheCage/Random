@@ -9,6 +9,7 @@ def main():
     clock, display = initialise()
     maze = Maze(display, (50, 50))
     player = Player(maze, (25, 25))
+    maze.randomly_place_end(player.point, distance=30)
     background_colour = (5, 5, 50)
     running = True
     while running:

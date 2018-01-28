@@ -30,14 +30,8 @@ class Player:
                 visible_cell = self.maze.cells[adjacent_point]
 
     def update(self):
-        pointlist = []
-        for coordinate in self.__get_points():
-            point = Point(coordinate)
-            point = Point(point.offset(self.point.location))
-            point = Point(point.rotate_and_scale(self.point.offset((0.5, 0.5)), self.direction.angle_in_radians, 1))
-            pointlist.append(point.rotate_and_scale(self.maze.origin, self.maze.angle_in_radians, self.maze.scale_factor))
-
-        pygame.draw.polygon(self.maze.display, self.colour, pointlist)
+        self.maze.draw_polygon(self.__get_points(), self.point, self.direction.angle_in_radians,
+                               self.colour)
 
     @staticmethod
     def __get_points():
@@ -72,6 +66,9 @@ class Player:
 
         self.point.move(direction)
         self.look()
+        if self.current_cell.is_end:
+            self.current_cell.is_end = False
+            self.maze.randomly_place_end(self.point, 20)
 
     @property
     def current_cell(self):

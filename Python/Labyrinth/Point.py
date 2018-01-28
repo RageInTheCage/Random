@@ -15,16 +15,27 @@ class Point:
         return self.offset(movements[direction])
 
     def offset(self, offset):
-        return self.location[0] + offset[0], self.location[1] + offset[1]
+        return self.x + offset[0], self.y + offset[1]
 
     def rotate_and_scale(self, origin, angle_in_radians, scale_factor):
         ox, oy = origin
-        px = self.location[0] * scale_factor
-        py = self.location[1] * scale_factor
+        px = self.x * scale_factor
+        py = self.y * scale_factor
 
         qx = ox + math.cos(angle_in_radians) * (px - ox) - math.sin(angle_in_radians) * (py - oy)
         qy = oy + math.sin(angle_in_radians) * (px - ox) + math.cos(angle_in_radians) * (py - oy)
         return qx, qy
+
+    @property
+    def x(self):
+        return self.location[0]
+
+    @property
+    def y(self):
+        return self.location[1]
+
+    def distance_from(self, point):
+        return math.hypot(self.x - point.x, self.y - point.y)
 
     @staticmethod
     def movements():

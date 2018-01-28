@@ -1,3 +1,5 @@
+import pygame
+
 from Direction import Direction
 from Point import Point
 
@@ -7,6 +9,7 @@ class Cell(object):
         self.maze = maze
         self.point = Point(location)
         self.wall_colour = wall_colour
+        self.end_colour = pygame.Color("blue")
         self.wall_width = 3
         self.exits = [
             Direction.UP,
@@ -17,7 +20,17 @@ class Cell(object):
         self.walls = {}
         self._visible_ = False
         self.opacity = 0
-        self.is_end = False
+        self._is_end_ = False
+
+    @property
+    def is_end(self):
+        return self._is_end_
+
+    @is_end.setter
+    def is_end(self, value):
+        self._is_end_ = value
+        if value:
+            self.visible = True
 
     @property
     def visible(self):
@@ -52,14 +65,25 @@ class Cell(object):
         if not self.visible:
             return
 
-        self.opacity -= .001
+        self.opacity -= .004
         if self.opacity <= 0:
             self.visible = False
             return
 
-        wall_colour = []
-        for element in self.wall_colour:
-            wall_colour.append(element * self.opacity)
+        if self.is_end:
+            pointlist = ((0, 0), (1, 1), (1, 0))
+            self.maze.draw_polygon(
+                pointlist, self.point, 0, self.get_faded_colour(self.end_colour)
+            )
+
+        wall_colour = self.get_faded_colour(self.wall_colour)
 
         for wall in self.walls.values():
             self.maze.draw_line(wall, wall_colour, self.wall_width)
+
+    def get_faded_colour(self, base_colour):
+        wall_colour = []
+        for element in base_colour:
+            wall_colour.append(element * self.opacity)
+
+        return wall_colour

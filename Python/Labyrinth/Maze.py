@@ -20,7 +20,7 @@ class Maze:
         self.scale_factor = self.display_width / self.scale
 
     def update(self):
-        #self.__change_perspective()
+        self.__change_perspective()
         for cell in self.cells.values():
             cell.update()
 
@@ -30,6 +30,17 @@ class Maze:
         rotated_from = point_from.rotate_and_scale(self.origin, self.angle_in_radians, self.scale_factor)
         rotated_to = point_to.rotate_and_scale(self.origin, self.angle_in_radians, self.scale_factor)
         pygame.draw.line(self.display, colour, rotated_from, rotated_to, width)
+
+    def draw_polygon(self, point_list, polygon_point, angle_in_radians, colour):
+        transformed_points = []
+        for coordinate in point_list:
+            point = Point(coordinate)
+            point = Point(point.offset(polygon_point.location))
+            point = Point(point.rotate_and_scale(polygon_point.offset((0.5, 0.5)), angle_in_radians, 1))
+            transformed_points.append(
+                point.rotate_and_scale(self.origin, self.angle_in_radians, self.scale_factor)
+            )
+        pygame.draw.polygon(self.display, colour, transformed_points)
 
     def __change_perspective(self):
         self.angle_in_radians += self.angle_step
@@ -75,8 +86,16 @@ class Maze:
                 adjacent_cell = cells[adjacent_location]
                 adjacent_cell.add_wall(adjacent_direction)
 
-        location, the_end = random.choice(list(cells.items()))
-        the_end.is_end = True
-        the_end.wall_colour = pygame.Color("green")
-        the_end.visible = True
         return cells
+
+    def randomly_place_end(self, point, distance):
+        the_end = self.cells[point.location]
+
+        for iteration in range(0, 10000):
+            direction = random.choice(the_end.exits)
+            next_point = the_end.point.get_adjacent_point(direction)
+            the_end = self.cells[next_point]
+            if the_end.point.distance_from(point) >= distance:
+                break
+
+        the_end.is_end = True
