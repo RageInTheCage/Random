@@ -2,3 +2,5 @@
 __pycache__/
 venv/
 .DS_Store
+/C#/KidsChecklist/PackedYourBagTom/obj/Debug
+/C#/KidsChecklist/PackedYourBagTom/bin/Debug
