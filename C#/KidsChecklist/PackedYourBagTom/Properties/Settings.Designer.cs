@@ -25,7 +25,7 @@ namespace KidsCheckList.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Packed bag?;Tidied room?")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Packed lunch?;P.E. Kit?;Tidied room?")]
         public string CheckList {
             get {
                 return ((string)(this["CheckList"]));
@@ -61,7 +61,7 @@ namespace KidsCheckList.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
         public int LaunchBeforeHour {
             get {
                 return ((int)(this["LaunchBeforeHour"]));

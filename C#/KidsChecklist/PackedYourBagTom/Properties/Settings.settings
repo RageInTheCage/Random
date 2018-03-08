@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CheckList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Packed bag?;Tidied room?</Value>
+      <Value Profile="(Default)">Packed lunch?;P.E. Kit?;Tidied room?</Value>
     </Setting>
     <Setting Name="HaveYouText" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hey Tom, have you...</Value>
@@ -12,7 +12,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LaunchBeforeHour" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">12</Value>
+      <Value Profile="(Default)">9</Value>
     </Setting>
   </Settings>
 </SettingsFile>
