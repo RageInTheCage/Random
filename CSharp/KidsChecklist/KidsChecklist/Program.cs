@@ -13,13 +13,18 @@ namespace KidsCheckList
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            if (isBeforeSchool(DateTime.Now))
+            
+            if (isDebugParameterPassed(args) || isBeforeSchool(DateTime.Now))
                 Application.Run(new frmMain());
+        }
+
+        private static bool isDebugParameterPassed(string[] args)
+        {
+            return args.Contains("/debug");
         }
 
         private static bool isBeforeSchool(DateTime time)
