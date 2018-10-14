@@ -33,7 +33,7 @@ namespace MathsCypher
             {
                 var key = mapping.Key;
                 var value = mapping.Value;
-                var delimiter = index % 7 == 0 ? Environment.NewLine : "\t";
+                var delimiter = index % 6 == 0 ? Environment.NewLine : "\t";
                 richTextBox.AppendText(string.Format("{0} = {1}{2}{2}", value, key, delimiter));
                 index++;
             }
