@@ -62,5 +62,12 @@ namespace MathsCypher
             }
             return factors;
         }
+
+        public static int ConvertToIntegerOrDefault(this string stringValue, int defaultValue)
+        {
+            int value;
+
+            return int.TryParse(stringValue, out value) ? value : defaultValue;
+        }
     }
 }

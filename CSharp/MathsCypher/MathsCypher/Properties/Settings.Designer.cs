@@ -46,5 +46,29 @@ namespace MathsCypher.Properties {
                 this["MappingsList"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int MaxFactorValue {
+            get {
+                return ((int)(this["MaxFactorValue"]));
+            }
+            set {
+                this["MaxFactorValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MaxDividendValue {
+            get {
+                return ((int)(this["MaxDividendValue"]));
+            }
+            set {
+                this["MaxDividendValue"] = value;
+            }
+        }
     }
 }

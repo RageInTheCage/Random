@@ -4,47 +4,36 @@ using System.Linq;
 
 namespace MathsCypher
 {
-    internal class Multiplication
+    public class Multiplication
     {
-        public readonly int Answer;
-        public readonly int Factor1;
-        public readonly int Factor2;
+        public readonly FactorPair Factors = FactorPair.Empty;
 
-        private Random _random;
-
-        public Multiplication(int answer, Random random)
+        public Multiplication(int answer, Random random, int maxFactorValue = 12)
         {
-            Answer = answer;
-            _random = random;
-
-            Factor1 = getRandomFactor();
-            Factor2 = answer / Factor1;
-
+            var factorPairs = getFactorPairs(answer, maxFactorValue)
+                .ToList();
+            
+            if (factorPairs.Count > 0)
+                Factors = getRandomFactorPair(random, factorPairs);
         }
 
-        private int getRandomFactor()
+        private static FactorPair getRandomFactorPair(Random random, List<FactorPair> factors)
         {
-            var factors = Answer.GetFactors()
-                .OrderBy(f => f)
-                .ToList();
+            int index = random.Next(0, factors.Count);
+            return factors[index];
+        }
 
-            var minFactor = 1;
-            var maxFactor = factors.Count;
-
-            if (factors.Count > 2)
-            {
-                minFactor++;
-                maxFactor--;
-            }
-
-            int index = _random.Next(minFactor, maxFactor);
-
-            return factors[index - 1];
+        private static IEnumerable<FactorPair> getFactorPairs(int answer, int maxFactorValue)
+        {
+            return answer.GetFactors()
+                .Where(f => f > 1 && f < answer & f <= maxFactorValue)
+                .Select(f => new FactorPair(f, answer / f))
+                .Where(fp => fp.Factor2 <= maxFactorValue);
         }
 
         public override string ToString()
         {
-            return string.Format("{0} x {1}   ", Factor1, Factor2);
+            return string.Format("{0} x {1}   ", Factors.Factor1, Factors.Factor2);
         }
     }
 }

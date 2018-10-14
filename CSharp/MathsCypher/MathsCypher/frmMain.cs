@@ -40,18 +40,39 @@ namespace MathsCypher
             Settings.Default.MappingsList = string.Join(";",
                 _mappings.Select(mapping => mapping.Key + "=" + mapping.Value).ToArray()
                 );
+            Settings.Default.MaxDividendValue = getValidMaxDividendValue();
+            Settings.Default.MaxFactorValue = getValidMaxFactorValue();
             Settings.Default.Save();
+        }
+
+        private int getValidMaxFactorValue()
+        {
+            var maxFactorValue = txtMaxFactorValue.Text.ConvertToIntegerOrDefault(12);
+
+            return Math.Max(maxFactorValue, 7);
+        }
+
+        private int getValidMaxDividendValue()
+        {
+            var maxDividendValue = txtMaxDividendValue.Text.ConvertToIntegerOrDefault(144);
+
+            return Math.Max(maxDividendValue, 90);
         }
 
         private void loadSettings()
         {
-            var mappings = Settings.Default.MappingsList;
+            setMapping(Settings.Default.MappingsList);
+            txtCodedMessageInput.Text = Settings.Default.CodedMessageInput;
+            txtMaxDividendValue.Text = Settings.Default.MaxDividendValue.ToString();
+            txtMaxFactorValue.Text = Settings.Default.MaxFactorValue.ToString();
+        }
+
+        private void setMapping(string mappings)
+        {
             if (mappings == "")
                 generateDefaultMappings();
             else
                 extractMappings(mappings);
-
-            txtCodedMessageInput.Text = Settings.Default.CodedMessageInput;
         }
 
         private void extractMappings(string mappings)
@@ -104,78 +125,15 @@ namespace MathsCypher
         private void regenerate()
         {
             rtfPuzzleOutput.Clear();
-            createHeading();
-            appendEncodedMessage();
-            appendMappingsTable();
-        }
-
-        private void appendMappingsTable()
-        {
-            rtfPuzzleOutput.AppendText(string.Format("{0}{0}Here's a clue!{0}", Environment.NewLine));
-            var index = 1;
-            foreach (var mapping in _mappings)
-            {
-                var key = mapping.Key;
-                var value = mapping.Value;
-                var delimiter = index % 6 == 0 ? Environment.NewLine : "\t";
-                rtfPuzzleOutput.AppendText(string.Format("{0} = {1}{2}{2}", value, key, delimiter));
-                index++;
-            }
-        }
-
-        private void appendEncodedMessage()
-        {
-            var colours = new[] { Color.Red, Color.Blue, Color.Green };
-            var colourIndex = 0;
-            foreach (char character in txtCodedMessageInput.Text.ToUpper())
-            {
-                var encoding = encodeCharacter(character);
-                rtfPuzzleOutput.AppendText(encoding, colours[colourIndex]);
-
-                colourIndex++;
-                if (colourIndex >= colours.Length)
-                    colourIndex = 0;
-            }
-        }
-
-        private void createHeading()
-        {
-            rtfPuzzleOutput.SelectionAlignment = HorizontalAlignment.Center;
-            rtfPuzzleOutput.AppendText("Maths Cypher" + Environment.NewLine, new Font("Arial", 24f, FontStyle.Bold));
-            rtfPuzzleOutput.SelectionAlignment = HorizontalAlignment.Left;
-
-            rtfPuzzleOutput.AppendText("Can you solve this puzzle?" + Environment.NewLine);
-        }
-
-        private string encodeCharacter(char character)
-        {
-            if (character == ' ' || character.Equals('\n'))
-                return Environment.NewLine;
-
-            if (!_mappings.ContainsKey(character))
-                return character + "  ";
-
-            var answer = _mappings[character];
-
-            if (getRandomOperation() == Operation.MULTIPLICATION)
-            {
-                var multiplication = new Multiplication(answer, _random);
-                return multiplication.ToString();
-            }
-
-            var division = new Division(answer, _random);
-            return division.ToString();
-        }
-
-        private enum Operation {
-            MULTIPLICATION,
-            DIVISION
-        }
-
-        private Operation getRandomOperation()
-        {
-            var values = Enum.GetValues(typeof(Operation));
-            return (Operation)values.GetValue(_random.Next(values.Length));
+            var codedMessage = new CodedMessage(
+                txtCodedMessageInput.Text,
+                _random,
+                _mappings,
+                getValidMaxFactorValue(),
+                getValidMaxDividendValue()
+                );
+            var formattedMessage = new RichTextCodedMessage(codedMessage, _random, _mappings);
+            formattedMessage.Generate(rtfPuzzleOutput);
         }
 
         private void lvwMappings_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -237,6 +195,18 @@ namespace MathsCypher
         {
             rtfPuzzleOutput.SelectAll();
             rtfPuzzleOutput.Copy();
+        }
+
+        private void txtMaxFactorValue_Validated(object sender, EventArgs e)
+        {
+            txtMaxFactorValue.Text = getValidMaxFactorValue().ToString();
+            regenerate();
+        }
+
+        private void txtMaxDividendValue_Validated(object sender, EventArgs e)
+        {
+            txtMaxDividendValue.Text = getValidMaxDividendValue().ToString();
+            regenerate();
         }
     }
 }
