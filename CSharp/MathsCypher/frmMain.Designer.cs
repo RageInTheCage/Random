@@ -276,6 +276,7 @@
             this.ClientSize = new System.Drawing.Size(1139, 720);
             this.Controls.Add(this.HorizontalSplitContainer);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maths Cypher";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);

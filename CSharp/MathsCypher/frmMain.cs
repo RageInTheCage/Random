@@ -27,6 +27,7 @@ namespace MathsCypher
 
             loadSettings();
             populateMappingsList();
+            Icon = Properties.Resources.APP_ICON;
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
