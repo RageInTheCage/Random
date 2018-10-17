@@ -33,7 +33,7 @@ namespace MathsCypher
 
         public override string ToString()
         {
-            return string.Format("{0} x {1}   ", Factors.Factor1, Factors.Factor2);
+            return string.Format("{0} × {1}   ", Factors.Factor1, Factors.Factor2);
         }
     }
 }
