@@ -46,7 +46,7 @@
             this.cmdCopy = new System.Windows.Forms.Button();
             this.cmdRegenerate = new System.Windows.Forms.Button();
             this.lblPuzzleOutput = new System.Windows.Forms.Label();
-            this.rtfPuzzleOutput = new System.Windows.Forms.RichTextBox();
+            this.WebBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.HorizontalSplitContainer)).BeginInit();
             this.HorizontalSplitContainer.Panel1.SuspendLayout();
             this.HorizontalSplitContainer.Panel2.SuspendLayout();
@@ -72,10 +72,10 @@
             // 
             // HorizontalSplitContainer.Panel2
             // 
+            this.HorizontalSplitContainer.Panel2.Controls.Add(this.WebBrowser);
             this.HorizontalSplitContainer.Panel2.Controls.Add(this.cmdCopy);
             this.HorizontalSplitContainer.Panel2.Controls.Add(this.cmdRegenerate);
             this.HorizontalSplitContainer.Panel2.Controls.Add(this.lblPuzzleOutput);
-            this.HorizontalSplitContainer.Panel2.Controls.Add(this.rtfPuzzleOutput);
             this.HorizontalSplitContainer.Size = new System.Drawing.Size(1115, 696);
             this.HorizontalSplitContainer.SplitterDistance = 209;
             this.HorizontalSplitContainer.TabIndex = 3;
@@ -256,18 +256,16 @@
             this.lblPuzzleOutput.TabIndex = 0;
             this.lblPuzzleOutput.Text = "Coded Message &Output";
             // 
-            // rtfPuzzleOutput
+            // WebBrowser
             // 
-            this.rtfPuzzleOutput.AcceptsTab = true;
-            this.rtfPuzzleOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.WebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtfPuzzleOutput.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtfPuzzleOutput.Location = new System.Drawing.Point(7, 25);
-            this.rtfPuzzleOutput.Name = "rtfPuzzleOutput";
-            this.rtfPuzzleOutput.Size = new System.Drawing.Size(980, 455);
-            this.rtfPuzzleOutput.TabIndex = 0;
-            this.rtfPuzzleOutput.Text = "";
+            this.WebBrowser.Location = new System.Drawing.Point(7, 26);
+            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowser.Name = "WebBrowser";
+            this.WebBrowser.Size = new System.Drawing.Size(980, 454);
+            this.WebBrowser.TabIndex = 3;
             // 
             // frmMain
             // 
@@ -305,7 +303,6 @@
         private System.Windows.Forms.ListView lvwMappings;
         private System.Windows.Forms.ColumnHeader colLetter;
         private System.Windows.Forms.ColumnHeader colNumber;
-        private System.Windows.Forms.RichTextBox rtfPuzzleOutput;
         private System.Windows.Forms.Label lblPuzzleOutput;
         private System.Windows.Forms.Button cmdRegenerate;
         private System.Windows.Forms.Button cmdDefaultMappings;
@@ -316,6 +313,7 @@
         private System.Windows.Forms.TextBox txtMaxFactorValue;
         private System.Windows.Forms.Label lblMaxDividendValue;
         private System.Windows.Forms.TextBox txtMaxDividendValue;
+        private System.Windows.Forms.WebBrowser WebBrowser;
     }
 }
 

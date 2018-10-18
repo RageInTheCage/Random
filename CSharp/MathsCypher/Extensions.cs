@@ -4,39 +4,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace MathsCypher
 {
     public static class Extensions
     {
-        public static void AppendText(this RichTextBox textBox, string text, Color colour)
+        public static void AppendText(this HtmlTextWriter htmlWriter,
+            string contents, HtmlTextWriterTag tag)
         {
-            textBox.SelectionStart = textBox.TextLength;
-            textBox.SelectionLength = 0;
-
-            textBox.SelectionColor = colour;
-            textBox.AppendText(text);
-            textBox.SelectionColor = textBox.ForeColor;
+            htmlWriter.RenderBeginTag(tag);
+            htmlWriter.Write(contents);
+            htmlWriter.RenderEndTag();
         }
 
-        public static void AppendText(this RichTextBox textBox, string text, Font font)
-        {
-            textBox.SelectionStart = textBox.TextLength;
-            textBox.SelectionLength = 0;
-
-            textBox.SelectionFont = font;
-            textBox.AppendText(text);
-            textBox.SelectionFont = textBox.Font;
-        }
-
-        public static Dictionary<TKey, TValue> Shuffle<TKey, TValue>(
-            this Dictionary<TKey, TValue> source)
-        {
-            Random random = new Random();
-            return source.OrderBy(x => random.Next())
-               .ToDictionary(item => item.Key, item => item.Value);
-        }
 
         public static List<TValue> Shuffle<TValue>(this List<TValue> source)
         {

@@ -125,7 +125,6 @@ namespace MathsCypher
 
         private void regenerate()
         {
-            rtfPuzzleOutput.Clear();
             var codedMessage = new CodedMessage(
                 txtCodedMessageInput.Text,
                 _random,
@@ -133,8 +132,8 @@ namespace MathsCypher
                 getValidMaxFactorValue(),
                 getValidMaxDividendValue()
                 );
-            var formattedMessage = new RichTextCodedMessage(codedMessage, _random, _mappings);
-            formattedMessage.Generate(rtfPuzzleOutput);
+            var formattedMessage = new HTMLCodedMessage(codedMessage, _random, _mappings);
+            formattedMessage.Generate(WebBrowser);
         }
 
         private void lvwMappings_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -194,8 +193,9 @@ namespace MathsCypher
 
         private void cmdCopy_Click(object sender, EventArgs e)
         {
-            rtfPuzzleOutput.SelectAll();
-            rtfPuzzleOutput.Copy();
+            WebBrowser.Document.ExecCommand("SelectAll", true, null);
+            WebBrowser.Document.ExecCommand("Copy", true, null);
+            WebBrowser.Refresh();
         }
 
         private void txtMaxFactorValue_Validated(object sender, EventArgs e)
