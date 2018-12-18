@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,15 @@ namespace MathsCypher
             int value;
 
             return int.TryParse(stringValue, out value) ? value : defaultValue;
+        }
+
+        public static void AddPublishVersion(this Form form)
+        {
+            if (!ApplicationDeployment.IsNetworkDeployed)
+                return;
+
+            form.Text = string.Format("{0} v{1}", Application.ProductName,
+                ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4));
         }
     }
 }

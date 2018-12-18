@@ -11,16 +11,14 @@ namespace MathsCypher
     {
         private CodedMessage _codedMessage;
         private Dictionary<char, int> _mappings;
-        private Random _random;
 
-        public HTMLCodedMessage(CodedMessage codedMessage, Random random, Dictionary<char, int> mappings)
+        public HTMLCodedMessage(CodedMessage codedMessage, Dictionary<char, int> mappings)
         {
             _codedMessage = codedMessage;
-            _random = random;
             _mappings = mappings;
         }
 
-        public void Generate(WebBrowser webBrowser)
+        public string Generate()
         {
             using (var stringWriter = new StringWriter())
             using (var htmlWriter = new HtmlTextWriter(stringWriter))
@@ -30,7 +28,7 @@ namespace MathsCypher
                 createBody(htmlWriter);
                 htmlWriter.RenderEndTag();
 
-                writeHtmlToWebBrowser(webBrowser, stringWriter);
+                return stringWriter.ToString();
             }
         }
 
@@ -91,10 +89,22 @@ table {
     width: 100%;
 }
 
-th, td {
+td {
     padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+}
+
+td.question {
+    text-align: center;
+}
+
+td.answer {
+    border: 3px dotted red;
+    height: 35px;
+    line-height: 2;
+}
+
+td.gap {
+    width: 1px;
 }
 
 div.tiny {
@@ -106,34 +116,70 @@ div.tiny {
 
         private void createEncodedMessage(HtmlTextWriter htmlWriter)
         {
-            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Table);
-            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
+            startRenderingTable(htmlWriter);
 
-            foreach (var encoding in _codedMessage.Generate())
+            var letterCount = 0;
+            foreach (var encodedCharacter in _codedMessage.Generate())
             {
-                if (encoding == Environment.NewLine)
+                if (encodedCharacter == Environment.NewLine)
                 {
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
+                    renderAnswerRow(htmlWriter, letterCount);
+                    letterCount = 0;
+                    continue;
                 }
-                else
-                {
-                    htmlWriter.AppendText(encoding, HtmlTextWriterTag.Td);
-                }
-            }
 
+                renderQuestion(htmlWriter, encodedCharacter);
+                letterCount++;
+            }
+            renderAnswerRow(htmlWriter, letterCount);
+
+            endRenderingTable(htmlWriter);
+        }
+
+        private static void renderQuestion(HtmlTextWriter htmlWriter, string encodedCharacter)
+        {
+            htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, "question");
+            htmlWriter.AppendText(encodedCharacter, HtmlTextWriterTag.Td);
+            renderCellGap(htmlWriter);
+        }
+
+        private void renderAnswerRow(HtmlTextWriter htmlWriter, int letterCount)
+        {
+            startRenderingNextRow(htmlWriter);
+            for (int letter = 0; letter < letterCount; letter++)
+            {
+                htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, "answer");
+                htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                htmlWriter.RenderEndTag();
+
+                renderCellGap(htmlWriter);
+            }
+            startRenderingNextRow(htmlWriter);
+        }
+
+        private static void renderCellGap(HtmlTextWriter htmlWriter)
+        {
+            htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, "gap");
+            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+            htmlWriter.RenderEndTag();
+        }
+
+        private static void endRenderingTable(HtmlTextWriter htmlWriter)
+        {
             htmlWriter.RenderEndTag();
             htmlWriter.RenderEndTag();
         }
 
-        private static void writeHtmlToWebBrowser(WebBrowser webBrowser, StringWriter stringWriter)
+        private static void startRenderingNextRow(HtmlTextWriter htmlWriter)
         {
-            webBrowser.Parent.Enabled = false; //https://stackoverflow.com/questions/8495857/webbrowser-steals-focus
-            webBrowser.DocumentText = string.Empty;
-            webBrowser.Document.OpenNew(true);
-            webBrowser.Document.Write(stringWriter.ToString());
-            webBrowser.Refresh();
-            webBrowser.Parent.Enabled = true;
+            htmlWriter.RenderEndTag();
+            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
+        }
+
+        private static void startRenderingTable(HtmlTextWriter htmlWriter)
+        {
+            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Table);
+            htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
         }
 
         private void createHeading(HtmlTextWriter htmlWriter)

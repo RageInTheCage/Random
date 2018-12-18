@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Deployment.Application;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathsCypher.Properties;
 
@@ -25,9 +22,11 @@ namespace MathsCypher
         {
             ActiveControl = txtCodedMessageInput;
 
+            this.AddPublishVersion();
+
             loadSettings();
             populateMappingsList();
-            Icon = Properties.Resources.APP_ICON;
+            Icon = Resources.APP_ICON;
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -113,9 +112,36 @@ namespace MathsCypher
             }
         }
 
+        private Timer _regenerateTimer = new Timer();
+
         private void txtCodedMessageInput_TextChanged(object sender, EventArgs e)
         {
+            if (_regenerateTimer.Enabled)
+                return;
+
+            _regenerateTimer.Interval = 3000;
+            _regenerateTimer.Tick += _regenerateTimer_Tick;
+            _regenerateTimer.Start();
+        }
+
+        private void _regenerateTimer_Tick(object sender, EventArgs e)
+        {
+            _regenerateTimer.Stop();
+            _regenerateTimer.Tick -= _regenerateTimer_Tick;
+
             regenerate();
+
+            _regenerateTimer.Interval = 50;
+            _regenerateTimer.Tick += _regenerateTimer_Tick2;
+            _regenerateTimer.Start();
+        }
+
+        private void _regenerateTimer_Tick2(object sender, EventArgs e)
+        {
+            _regenerateTimer.Stop();
+            _regenerateTimer.Tick -= _regenerateTimer_Tick2;
+
+            txtCodedMessageInput.Focus();
         }
 
         private void cmdRegenerate_Click(object sender, EventArgs e)
@@ -132,9 +158,21 @@ namespace MathsCypher
                 getValidMaxFactorValue(),
                 getValidMaxDividendValue()
                 );
-            var formattedMessage = new HTMLCodedMessage(codedMessage, _random, _mappings);
-            formattedMessage.Generate(WebBrowser);
+            var formattedMessage = new HTMLCodedMessage(codedMessage, _mappings);
+            var html = formattedMessage.Generate();
+            writeHtmlToWebBrowser(html);
         }
+
+        private void writeHtmlToWebBrowser(string html)
+        {
+            WebBrowser.DocumentText = string.Empty;
+            WebBrowser.Parent.Enabled = false; //https://stackoverflow.com/questions/8495857/webbrowser-steals-focus
+            WebBrowser.Document.OpenNew(true);
+            WebBrowser.Document.Write(html);
+            WebBrowser.Refresh();
+            WebBrowser.Parent.Enabled = true;
+        }
+
 
         private void lvwMappings_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
