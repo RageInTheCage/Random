@@ -18,9 +18,6 @@ def create_draw_buffer():
     pygame.init()
     return pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-    window_size = 800, 600
-    return pygame.display.set_mode(window_size)
-
 
 def center_screen():
     return [size / 2 for size in draw_buffer.get_size()]
@@ -45,7 +42,7 @@ def create_background():
     return surface
 
 
-def create_dirty_sprites(count=1):
+def create_dirty_sprites(count):
     dirty_sprites = pygame.sprite.LayeredDirty()
 
     for x in range(0, count):
@@ -59,13 +56,13 @@ def create_dirty_sprites(count=1):
 
 draw_buffer = create_draw_buffer()
 background = create_background()
-sprites = create_dirty_sprites(1)
+sprites = create_dirty_sprites(10)
 clock = pygame.time.Clock()
 
 while still_running():
     sprites.update()
     rectangles = sprites.draw(draw_buffer)
-    clock.tick(24)
+    clock.tick(50)
     pygame.display.update(rectangles)
 
 pygame.quit()
