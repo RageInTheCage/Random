@@ -18,11 +18,11 @@ def main():
     clock = pygame.time.Clock()
 
     animations = [
-        #Rainbow(display),
+        Rainbow(display),
         Maze(display)
     ]
-    #animations = get_animation_array(display)
-    #animations.append(Rainbow(display))
+    animations = get_animation_array(display)
+    animations.append(Rainbow(display))
 
     while running:
         running = handle_events(animations, display)
