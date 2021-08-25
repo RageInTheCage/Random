@@ -15,7 +15,7 @@ def main():
     message = get_message_to_translate()
     morse_code = morse_translator.encode(message)
 
-    morse_sound = MorseSound(speed=.5)
+    morse_sound = MorseSound(speed=1)
     morse_sound.echo(morse_code)
 
     original_message = morse_translator.decode(morse_code)
