@@ -123,9 +123,22 @@ def show_letters(letters_guessed):
         print(letter, end=' ')
 
 
-def play_game():
+def get_hangman_dictionary():
+    dictionary = ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
     random.shuffle(dictionary)
-    word = dictionary.pop()
+
+    return dictionary
+
+
+def get_word(hangman_dictionary):
+    if not len(hangman_dictionary):
+        hangman_dictionary = get_hangman_dictionary()
+
+    return hangman_dictionary.pop()
+
+
+def play_game():
+    word = get_word(hangman_dictionary)
     level_of_death = 0
     word_placeholder = '_' * len(word)
     show_letters(word_placeholder)
@@ -160,12 +173,8 @@ def user_is_bored():
             return reply == "N"
 
 
-def get_hangman_dictionary():
-    return ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
-
-
 while True:
-    dictionary = get_hangman_dictionary()
+    hangman_dictionary = get_hangman_dictionary()
     play_game()
     if user_is_bored():
         break
