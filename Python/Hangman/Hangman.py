@@ -1,7 +1,7 @@
 import random
 
 
-def diplayHangman(level_of_death):
+def display_hangman(level_of_death):
     print(level_of_death)
     if level_of_death == 1:
         print("\n\n\n\n\n")
@@ -88,74 +88,80 @@ def diplayHangman(level_of_death):
         print("/_|_\\_________")
 
 
-def swapOutLetters(lettersGuessed, guessedLetter, word):
-    correctAnswer = False
+def swap_out_letters(letters_guessed, guessed_letter, word):
+    is_correct_answer = False
     for character in range(0, len(word)):
         letter = word[character]
-        if letter == guessedLetter:
-            lettersGuessed = lettersGuessed[:character] + letter + lettersGuessed[character + 1:]
-            correctAnswer = True
-    return lettersGuessed, correctAnswer
+        if letter == guessed_letter:
+            letters_guessed = letters_guessed[:character] + letter + letters_guessed[character + 1:]
+            is_correct_answer = True
+    return letters_guessed, is_correct_answer
 
 
-def inputSingleLetter():
+def input_single_letter():
     while True:
         letter = input(":  ").upper()
         if len(letter) == 1:
             return letter
         print("Expected a single character")
 
-def inputLetter(lettersGuessed):
+
+def input_letter(letters_already_guessed):
     print("Guess a letter!")
     while True:
-        guessedLetter = inputSingleLetter()
-        if lettersGuessed.count(guessedLetter) == 0:
-            return guessedLetter
-        print("You have already chosen " + guessedLetter + " as a letter.")
+        guessed_letter = input_single_letter()
+
+        if guessed_letter not in letters_already_guessed:
+            letters_already_guessed.append(guessed_letter)
+            return guessed_letter
+
+        print("You have already chosen " + guessed_letter + " as a letter.")
 
 
-def showLetters(lettersGuessed):
-    for letter in lettersGuessed:
+def show_letters(letters_guessed):
+    for letter in letters_guessed:
         print(letter, end=' ')
 
 
-def game():
+def play_game():
     dictionary = ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
     random.shuffle(dictionary)
-    word = dictionary[0]
-    levelOfDeath = 0
-    print(word)
-    lettersGuessed = '_' * len(word)
+    word = dictionary.pop()
+    level_of_death = 0
+    word_placeholder = '_' * len(word)
+    show_letters(word_placeholder)
+    letters_already_guessed = []
 
     while True:
-        showLetters(lettersGuessed)
-        guessedLetter = inputLetter(lettersGuessed)
-        lettersGuessed, isCorrect = swapOutLetters(lettersGuessed, guessedLetter, word)
+        guessed_letter = input_letter(letters_already_guessed)
+        word_placeholder, is_correct_answer = swap_out_letters(word_placeholder, guessed_letter, word)
+        show_letters(word_placeholder)
 
-        if isCorrect:
+        if is_correct_answer:
             print("Yay!")
-            if lettersGuessed == word:
-                print("Well done my friend!")
+            if word_placeholder == word:
+                print("Well done my friend, you survived the hangman's noose!")
                 return
-        else:
-            levelOfDeath += 1
-            print("*Evil laughter*")
-            diplayHangman(levelOfDeath)
+            continue
 
-            if levelOfDeath == 10:
-                print("*Even more evil laughter than before*")
-                return
+        level_of_death += 1
+        print("Wrong")
+        display_hangman(level_of_death)
+
+        if level_of_death == 10:
+            print(f'You\'re hung!  The word was "{word}"')
+            return
 
 
-def userIsBored():
+def user_is_bored():
     while True:
-        print ("Another game (Y/N)?")
-        reply = inputSingleLetter()
+        print("Another game (Y/N)?")
+        reply = input_single_letter()
         if reply == "N" or reply == "Y":
             return reply == "N"
 
 
 while True:
-    game()
-    if userIsBored():
+    play_game()
+    if user_is_bored():
         break
