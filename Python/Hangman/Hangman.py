@@ -115,7 +115,7 @@ def input_letter(letters_already_guessed):
             letters_already_guessed.append(guessed_letter)
             return guessed_letter
 
-        print("You have already chosen " + guessed_letter + " as a letter.")
+        print(f"You have already chosen {guessed_letter} as a letter.")
 
 
 def show_letters(letters_guessed):
@@ -124,7 +124,6 @@ def show_letters(letters_guessed):
 
 
 def play_game():
-    dictionary = ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
     random.shuffle(dictionary)
     word = dictionary.pop()
     level_of_death = 0
@@ -161,7 +160,12 @@ def user_is_bored():
             return reply == "N"
 
 
+def get_hangman_dictionary():
+    return ["PYTHON", "SCRIPT", "CODE", "COMMAND", "PRINT"]
+
+
 while True:
+    dictionary = get_hangman_dictionary()
     play_game()
     if user_is_bored():
         break
