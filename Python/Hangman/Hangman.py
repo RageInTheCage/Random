@@ -37,7 +37,7 @@ def display_hangman(level_of_death):
     elif level_of_death == 5:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |")
         print("  |")
         print(" /|\\")
@@ -46,7 +46,7 @@ def display_hangman(level_of_death):
     elif level_of_death == 6:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |         |")
         print("  |")
         print(" /|\\")
@@ -55,7 +55,7 @@ def display_hangman(level_of_death):
     elif level_of_death == 7:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |         |\\")
         print("  |")
         print(" /|\\")
@@ -64,7 +64,7 @@ def display_hangman(level_of_death):
     elif level_of_death == 8:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |        /|\\")
         print("  |")
         print(" /|\\")
@@ -73,7 +73,7 @@ def display_hangman(level_of_death):
     elif level_of_death == 9:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |        /|\\")
         print("  |        /")
         print(" /|\\")
@@ -81,7 +81,7 @@ def display_hangman(level_of_death):
     else:
         print("   _________")
         print("  |         |")
-        print("  |         0")
+        print("  |         O")
         print("  |        /|\\")
         print("  |        / \\")
         print(" /|\\")
