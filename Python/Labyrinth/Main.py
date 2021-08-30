@@ -22,7 +22,7 @@ def main():
         maze.update()
         player.update()
         pygame.display.update()
-        clock.tick(15)
+        clock.tick(8)
 
 
 def initialise():
