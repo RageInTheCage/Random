@@ -16,7 +16,7 @@ class Logo(pygame.sprite.DirtySprite):
 
     @staticmethod
     def random_rescale(image):
-        x, y = image.get_rect().size
+        x, y = image.get_rect().screen_size
         new_x = random.randrange(int(x / 2), int(x * 1.75))
         new_y = (new_x / x) * y
         new_size = new_x, int(new_y)

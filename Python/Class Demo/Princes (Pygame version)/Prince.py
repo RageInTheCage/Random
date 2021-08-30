@@ -2,7 +2,7 @@ import pygame
 
 
 class Prince:
-    def __init__(self, name, son_of = None):
+    def __init__(self, name, son_of=None):
         self.name = name
         self.son = son_of
         self.final_location = None
@@ -20,7 +20,7 @@ class Prince:
             self.current_location = [0, 0]
 
     def announce(self):
-        self.announcement = "I am {}" .format(self.name)
+        self.announcement = "I am {}".format(self.name)
         if self.son:
             self.announcement += ", son of {}".format(self.son.name)
 
@@ -43,7 +43,6 @@ class Prince:
             self.current_location[0] += 2
         if self.current_location[1] < self.final_location[1]:
             self.current_location[1] += 1
-
 
     def draw(self):
         self.move_to_location()
