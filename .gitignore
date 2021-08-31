@@ -1,10 +1,10 @@
-.idea/
+/obj/Debug
+/bin/Debug
 __pycache__/
+.idea/
 venv/
+workspace/
+options/
 .DS_Store
-/C#/KidsChecklist/PackedYourBagTom/obj/Debug
-/C#/KidsChecklist/PackedYourBagTom/bin/Debug
 *.pyc
-Python/tasks/GitHub.tasks.zip
-Python/workspace/1xE8zkvQ3PWzoNc8JtAbhS2yg2U.xml
-*.zip
+GitHub.tasks.zip
