@@ -20,12 +20,14 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x += self.delta_x
         self.rect.y += self.delta_y
 
-    def bounce(self):
-        self.bounce_x()
-        self.delta_y = randint(-8, 8)
-
     def bounce_x(self):
         self.delta_x = -self.delta_x
 
     def bounce_y(self):
         self.delta_y = -self.delta_y
+
+    def collision_check(self, sprite_list):
+        for sprite in sprite_list:
+            if pygame.sprite.collide_rect(self, sprite):
+                self.bounce_x()
+                self.delta_y = randint(-8, 8)

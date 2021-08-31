@@ -1,3 +1,4 @@
+# Pong Game - Refactored from https://www.101computing.net/pong-tutorial-using-pygame-getting-started/
 import pygame
 from Python.Pong.Ball import Ball
 from Python.Pong.Paddle import Paddle
@@ -62,8 +63,7 @@ while game_is_underway:
     if ball.rect.y > 490 or ball.rect.y < 0:
         ball.bounce_y()
 
-    if pygame.sprite.collide_mask(ball, paddle_a) or pygame.sprite.collide_mask(ball, paddle_b):
-        ball.bounce()
+    ball.collision_check([paddle_a, paddle_b])
 
     screen.fill(BACK_COLOR)
     draw_net()
