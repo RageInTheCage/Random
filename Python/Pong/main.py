@@ -1,6 +1,7 @@
 import pygame
 from Python.Pong.Ball import Ball
 from Python.Pong.Paddle import Paddle
+from Python.Pong.Score import Score
 
 
 def create_sprites():
@@ -16,14 +17,6 @@ def draw_net():
     pygame.draw.line(screen, FORE_COLOR, [349, 0], [349, 500], 5)
 
 
-def display_scores():
-    font = pygame.font.Font(None, 74)
-    text = font.render(str(score_a), 1, FORE_COLOR)
-    screen.blit(text, (250, 10))
-    text = font.render(str(score_b), 1, FORE_COLOR)
-    screen.blit(text, (420, 10))
-
-
 def initialise_screen():
     global BACK_COLOR, FORE_COLOR, FRAMES_PER_SECOND, screen
     BACK_COLOR = 200, 200, 255
@@ -37,12 +30,13 @@ pygame.init()
 initialise_screen()
 FRAMES_PER_SECOND = 60
 
-paddle_a, paddle_b, ball, all_sprites_list = create_sprites()
+paddle_a, paddle_b, ball, sprite_list = create_sprites()
 
 clock = pygame.time.Clock()
 
-score_a = 0
-score_b = 0
+score_left = Score(screen, 250, FORE_COLOR)
+score_right = Score(screen, 420, FORE_COLOR)
+sprite_list.add(score_left, score_right)
 
 game_is_underway = True
 while game_is_underway:
@@ -56,13 +50,13 @@ while game_is_underway:
     paddle_a.move(keys)
     paddle_b.move(keys)
 
-    all_sprites_list.update()
+    sprite_list.update()
 
     if ball.rect.x >= 690:
-        score_a += 1
+        score_left.increment()
         ball.bounce_x()
     elif ball.rect.x <= 0:
-        score_b += 1
+        score_right.increment()
         ball.bounce_x()
 
     if ball.rect.y > 490 or ball.rect.y < 0:
@@ -73,8 +67,7 @@ while game_is_underway:
 
     screen.fill(BACK_COLOR)
     draw_net()
-    all_sprites_list.draw(screen)
-    display_scores()
+    sprite_list.draw(screen)
     pygame.display.flip()
 
     clock.tick(FRAMES_PER_SECOND)

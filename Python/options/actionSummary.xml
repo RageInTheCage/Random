@@ -1,19 +1,22 @@
 <application>
   <component name="ActionsLocalSummary">
     <e n="$Copy">
-      <i c="3" l="1630342695545" />
+      <i c="5" l="1630396551340" />
     </e>
     <e n="$Delete">
-      <i c="1" l="1630332289267" />
+      <i c="2" l="1630361012785" />
     </e>
     <e n="$SelectAll">
-      <i c="3" l="1630333597545" />
+      <i c="4" l="1630361323060" />
     </e>
     <e n="$Undo">
-      <i c="21" l="1630360655000" />
+      <i c="23" l="1630396102129" />
     </e>
     <e n="ChangeSignature">
       <i c="4" l="1630342706200" />
+    </e>
+    <e n="CheckinProject">
+      <i c="1" l="1630361319757" />
     </e>
     <e n="CommentByLineComment">
       <i c="6" l="1630341584512" />
@@ -25,58 +28,67 @@
       <i c="1" l="1630331147546" />
     </e>
     <e n="EditorBackSpace">
-      <i c="316" l="1630360692823" />
+      <i c="384" l="1630396664155" />
     </e>
     <e n="EditorChooseLookupItem">
-      <i c="41" l="1630360231568" />
+      <i c="52" l="1630396665372" />
     </e>
     <e n="EditorCopy">
-      <i c="22" l="1630360643184" />
+      <i c="29" l="1630396410629" />
     </e>
     <e n="EditorCut">
-      <i c="15" l="1630360690376" />
+      <i c="18" l="1630396236154" />
     </e>
     <e n="EditorDown">
-      <i c="308" l="1630360694608" />
+      <i c="385" l="1630396578419" />
     </e>
     <e n="EditorDownWithSelection">
-      <i c="64" l="1630359694587" />
+      <i c="68" l="1630396520496" />
     </e>
     <e n="EditorEnter">
-      <i c="63" l="1630360121570" />
+      <i c="84" l="1630396660100" />
+    </e>
+    <e n="EditorEscape">
+      <i c="2" l="1630395993229" />
     </e>
     <e n="EditorLeft">
-      <i c="78" l="1630360607537" />
+      <i c="103" l="1630396667756" />
     </e>
     <e n="EditorLeftWithSelection">
-      <i c="52" l="1630360008628" />
+      <i c="75" l="1630396596955" />
+    </e>
+    <e n="EditorLineEnd">
+      <i c="1" l="1630396042812" />
     </e>
     <e n="EditorPaste">
-      <i c="63" l="1630360691742" />
+      <i c="73" l="1630396565506" />
     </e>
     <e n="EditorRight">
-      <i c="151" l="1630360353446" />
+      <i c="207" l="1630396666804" />
     </e>
     <e n="EditorRightWithSelection">
-      <i c="64" l="1630360014508" />
+      <i c="75" l="1630396596595" />
     </e>
     <e n="EditorStartNewLine">
       <i c="1" l="1630342676565" />
     </e>
     <e n="EditorTab">
-      <i c="7" l="1630360423639" />
+      <i c="11" l="1630396508298" />
     </e>
     <e n="EditorUnindentSelection">
       <i c="1" l="1630333122263" />
     </e>
     <e n="EditorUp">
-      <i c="211" l="1630360017140" />
+      <i c="317" l="1630396578427" />
     </e>
     <e n="EditorUpWithSelection">
       <i c="40" l="1630342921394" />
     </e>
     <e n="ExtractMethod">
       <i c="4" l="1630360677925" />
+    </e>
+    <e n="Git.Commit.And.Push.Executor">
+      <i c="1" l="1630361340209" />
     </e>
     <e n="GotoDeclaration">
       <i c="2" l="1630334169226" />
@@ -86,6 +98,9 @@
     </e>
     <e n="HelpTopics">
       <i c="1" l="1630331331573" />
+    </e>
+    <e n="HideAllWindows">
+      <i c="1" l="1630395774526" />
     </e>
     <e n="NewDir">
       <i c="1" l="1630332800371" />
@@ -97,28 +112,34 @@
       <i c="1" l="1630333215358" />
     </e>
     <e n="NewPythonFile">
-      <i c="3" l="1630333219587" />
+      <i c="4" l="1630395843844" />
     </e>
     <e n="NextTemplateVariable">
-      <i c="2" l="1630331633421" />
+      <i c="3" l="1630361041273" />
     </e>
     <e n="RenameElement">
-      <i c="33" l="1630360606720" />
+      <i c="36" l="1630396650793" />
     </e>
     <e n="Run">
-      <i c="45" l="1630360707367" />
+      <i c="47" l="1630396690100" />
     </e>
     <e n="RunClass">
-      <i c="5" l="1630333013611" />
+      <i c="6" l="1630395827282" />
     </e>
     <e n="SaveAll">
       <i c="1" l="1630343074117" />
     </e>
     <e n="ShowIntentionActions">
-      <i c="2" l="1630359490727" />
+      <i c="5" l="1630395989281" />
     </e>
     <e n="Table-selectNextRow">
       <i c="5" l="1630342707296" />
+    </e>
+    <e n="Vcs.Push">
+      <i c="1" l="1630361399874" />
+    </e>
+    <e n="Vcs.UpdateProject">
+      <i c="1" l="1630361310985" />
     </e>
     <e n="Vcs.VcsClone">
       <i c="1" l="1630328340718" />
@@ -136,10 +157,10 @@
       <i c="1" l="1630331414248" />
     </e>
     <e n="com.intellij.openapi.fileEditor.impl.tabActions.CloseTab">
-      <i c="5" l="1630359547753" />
+      <i c="9" l="1630396211064" />
     </e>
     <e n="com.intellij.openapi.wm.impl.ToolWindowHeader$HideAction">
-      <i c="1" l="1630333063682" />
+      <i c="2" l="1630395768198" />
     </e>
     <e n="com.intellij.ui.CommonActionsPanel$AddButton">
       <i c="3" l="1630341856810" />

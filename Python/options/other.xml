@@ -11,9 +11,11 @@
     </trackers>
   </component>
   <component name="PropertiesComponent">
+    <property name="CommitChangeListDialog.DETAILS_SPLITTER_PROPORTION_2" value="0.60169494" />
     <property name="ExpandBeforeRunStepsPanel" value="true" />
     <property name="NextRunPlatformUpdateBuild" value="PC-212.5080.64/2021.2.1" />
     <property name="NextRunPlatformUpdateVersion" value="2021.2.1" />
+    <property name="NonModalCommitPromotionState" value="SHOWN" />
     <property name="PyCharm.InitialConfiguration" value="true" />
     <property name="PyCharm.InitialConfiguration.V2" value="true" />
     <property name="PyCharm.InitialConfiguration.V3" value="true" />
@@ -24,10 +26,11 @@
     <property name="SettingsSearchHistory" value="path" />
     <property name="appcds.runOnSecondStart" value="PC-212.4746.96-e511b8486908af89227732980c0abbc52cc2eaf9288fc46ff110d04951dd3e6e" />
     <property name="experimentalFeature.terminal.shell.command.handling" value="false" />
-    <property name="file.gist.reindex.count" value="672" />
+    <property name="file.gist.reindex.count" value="900" />
     <property name="fileTypeChangedCounter" value="2" />
     <property name="fileTypeDetectors" value="com.intellij.ide.scratch.ScratchFileServiceImpl$Detector:org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector" />
     <property name="got.it.tooltip.cwm.invitation.notification" value="1" />
+    <property name="got.it.tooltip.reader.mode.got.it" value="1" />
     <property name="ide.updates.previous.build.number" value="PC-212.4746.96" />
     <property name="ignore.implicit.plugin.directory.path" value="true" />
     <property name="log.trace.categories" value="#com.jetbrains.rdserver.requests&#10;#com.jetbrains.rd.ide.document&#10;#com.jetbrains.rdserver.document&#10;#com.jetbrains.rdserver.editors&#10;#com.jetbrains.rdserver.actions&#10;#com.jetbrains.rdserver.permissions" />

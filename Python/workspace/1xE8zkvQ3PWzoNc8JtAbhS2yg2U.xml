@@ -2,34 +2,52 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="-1">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Python/Pong/Paddle.py">
+        <entry file="file://$PROJECT_DIR$/Python/Pong/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="12">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Python/Pong/main.py">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.9/site-packages/pygame/examples/aliens.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+            <state relative-caret-position="225">
+              <caret line="228" column="33" selection-start-line="228" selection-end-line="229" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Python/Pong/Ball.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" column="22" selection-start-line="8" selection-end-line="9" />
               <folding>
-                <element signature="e#59#72#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Python/Pong/Ball.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Python/Pong/Score.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="308">
+              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Python/Pong/Paddle.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -45,6 +63,7 @@
       <option value="$PROJECT_DIR$/Python/Pongv2/main.py" />
       <option value="$PROJECT_DIR$/Python/Pongv2/Ball.py" />
       <option value="$PROJECT_DIR$/Python/Pong/main.py" />
+      <option value="$PROJECT_DIR$/Python/Pong/Score.py" />
     </changedPaths>
   </component>
   <component name="IgnoredFileRootStore">
@@ -83,12 +102,48 @@
             </path>
             <path>
               <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GitHub" type="462c0819:PsiDirectoryNode" />
+              <item name="Python" type="462c0819:PsiDirectoryNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
               <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; Python 3.9 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.9 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.9 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="pygame" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.9 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="pygame" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.9 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="pygame" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="aliens.py" type="8704e2dd:PyFileNode" />
             </path>
           </expand>
           <select />
@@ -107,7 +162,7 @@
       <window_info id="Learn" order="4" />
       <window_info id="Space Code Reviews" order="5" />
       <window_info id="Pull Requests" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.52166665" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.33085716" />
       <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.34055555" />
@@ -121,9 +176,32 @@
       <window_info anchor="bottom" id="Services" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Space Automation" order="0" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24340278" />
+      <window_info id="Structure" order="1" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Commit" order="3" />
+      <window_info id="Learn" order="4" />
+      <window_info id="Space Code Reviews" order="5" />
+      <window_info id="Pull Requests" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.52166665" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.33085716" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.34055555" />
+      <window_info anchor="bottom" id="TODO" order="4" />
+      <window_info anchor="bottom" id="Problems View" order="5" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.40055555" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Python Packages" order="9" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Services" order="11" show_stripe_button="false" />
+      <window_info anchor="right" id="Space Automation" order="0" />
+    </layout-to-restore>
     <recentWindows>
       <value>Project</value>
       <value>Run</value>
+      <value>Version Control</value>
       <value>Find</value>
       <value>Debug</value>
     </recentWindows>
@@ -142,46 +220,54 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="508" y="180" key="#com.intellij.ide.macro.MacrosDialog/0.0.1440.900@0.0.1440.900" timestamp="1630328601055" />
-    <state width="1419" height="269" key="GridCell.Tab.0.bottom" timestamp="1630360707445">
+    <state x="304" y="25" key="CommitChangelistDialog2" timestamp="1630361340774">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="269" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1630360707445" />
+    <state x="304" y="25" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1630361340774" />
+    <state width="1419" height="278" key="GridCell.Tab.0.bottom" timestamp="1630396944860">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="278" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1630396944860" />
     <state width="1419" height="269" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1630360609483" />
-    <state width="1419" height="269" key="GridCell.Tab.0.center" timestamp="1630360707444">
+    <state width="1419" height="278" key="GridCell.Tab.0.center" timestamp="1630396944860">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="269" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1630360707444" />
+    <state width="1419" height="278" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1630396944860" />
     <state width="1419" height="269" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1630360609482" />
-    <state width="1419" height="269" key="GridCell.Tab.0.left" timestamp="1630360707444">
+    <state width="1419" height="278" key="GridCell.Tab.0.left" timestamp="1630396944859">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="269" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1630360707444" />
+    <state width="1419" height="278" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1630396944859" />
     <state width="1419" height="269" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1630360609482" />
-    <state width="1419" height="269" key="GridCell.Tab.0.right" timestamp="1630360707445">
+    <state width="1419" height="278" key="GridCell.Tab.0.right" timestamp="1630396944860">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="269" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1630360707445" />
+    <state width="1419" height="278" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1630396944860" />
     <state width="1419" height="269" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1630360609483" />
-    <state width="1419" height="332" key="GridCell.Tab.1.bottom" timestamp="1630342716691">
+    <state width="1419" height="332" key="GridCell.Tab.1.bottom" timestamp="1630361421145">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="332" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1630342716691" />
-    <state width="1419" height="332" key="GridCell.Tab.1.center" timestamp="1630342716690">
+    <state width="1419" height="332" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1630361421145" />
+    <state width="1419" height="332" key="GridCell.Tab.1.center" timestamp="1630361421144">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="332" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1630342716690" />
-    <state width="1419" height="332" key="GridCell.Tab.1.left" timestamp="1630342716690">
+    <state width="1419" height="332" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1630361421144" />
+    <state width="1419" height="332" key="GridCell.Tab.1.left" timestamp="1630361421144">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="332" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1630342716690" />
-    <state width="1419" height="332" key="GridCell.Tab.1.right" timestamp="1630342716691">
+    <state width="1419" height="332" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1630361421144" />
+    <state width="1419" height="332" key="GridCell.Tab.1.right" timestamp="1630361421144">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="332" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1630342716691" />
+    <state width="1419" height="332" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1630361421144" />
     <state x="229" y="96" key="SettingsEditor" timestamp="1630331412709">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="96" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1630331412709" />
+    <state x="320" y="189" key="Vcs.Push.Dialog.v2" timestamp="1630361414083">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="189" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1630361414083" />
     <state x="521" y="376" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1630361314855">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -199,57 +285,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Python/Pong/101computing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#59#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Python/Pong/Paddle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Python/Pong/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Python/Pong/Paddle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Python/Pong/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-          <folding>
-            <element signature="e#59#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Python/Pong/101computing.py" />
     <entry file="file://$PROJECT_DIR$/Python/Pong/Ball.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+        <state relative-caret-position="176">
+          <caret line="8" column="22" selection-start-line="8" selection-end-line="9" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.9/site-packages/pygame/examples/aliens.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="228" column="33" selection-start-line="228" selection-end-line="229" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Python/Pong/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Python/Pong/Score.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Python/Pong/Paddle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
         </state>
       </provider>
     </entry>
