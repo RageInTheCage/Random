@@ -2,10 +2,9 @@ import pygame
 
 
 class Score(pygame.sprite.Sprite):
-    def __init__(self, screen, x, fore_color):
+    def __init__(self, fore_color, x):
         super().__init__()
 
-        self.screen = screen
         self.fore_color = fore_color
         self.score = 0
         self.font = pygame.font.Font(None, 74)

@@ -15,7 +15,7 @@ class Paddle(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-    def move(self, keys):
+    def move_on_keypress(self, keys):
         if keys[self.up_key]:
             self.move_up()
         elif keys[self.down_key]:
