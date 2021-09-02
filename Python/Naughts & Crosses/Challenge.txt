@@ -19,9 +19,13 @@ Once you're finished with all your improvements and have "Pushed" your final "Co
 
 9. Create a Pull Request
     Try PyCharm's "Git > Github > Create Pull Request" feature
+10. Base fork Repository should be "Random" with branch "origin/master"
+11. Head fork Repository should be your fork and your branch.  E.g. "Naughts_&_Crosses_UI"
 10. Add a Title "Naughts & Crosses UI"
 10. Assign me as a Reviewer
 11. Click "Create Pull Request"
+
+I should then receive your pull request with the option to merge in your improvements.
 
 For a wider explanation of all this:
     Watch: https://www.youtube.com/watch?v=rgbCcBNZcdQ for a good explanation of each step
