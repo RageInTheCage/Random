@@ -63,13 +63,13 @@ class AIPlayer(object):
         for x in range(0, self.board.width):
             countColumn, countRow = 0, 0
             for y in range(0, self.board.height):
-                xyPosition = self.board.getPlayerAtPosition(x, y)
+                xyPosition = self.board.get_player_at_position(x, y)
                 if xyPosition == 0:
                     columnGapX, columnGapY = x, y
                 elif xyPosition == findPlayerNumber:
                     countColumn += 1
 
-                yxposition = self.board.getPlayerAtPosition(y, x)
+                yxposition = self.board.get_player_at_position(y, x)
                 if yxposition == findPlayerNumber:
                     countRow += 1
                 elif yxposition == 0:
@@ -89,14 +89,14 @@ class AIPlayer(object):
         gap1X, gap1Y, gap2X, gap2Y = None, None, None, None
         
         for index in range(0, self.board.width):
-            position1 = self.board.getPlayerAtPosition(index, index)
+            position1 = self.board.get_player_at_position(index, index)
             if position1 == 0:
                 gap1X, gap1Y = index, index
             elif position1 == findPlayerNumber:
                 count1 += 1
             
             y = self.board.width - index - 1
-            position2 = self.board.getPlayerAtPosition(index, y)
+            position2 = self.board.get_player_at_position(index, y)
             if position2 == 0:
                 gap2X, gap2Y = index, y
             elif position2 == findPlayerNumber:
@@ -122,4 +122,4 @@ class AIPlayer(object):
         return False
 
     def tryToMakeMove(self, x, y):
-        return self.board.tryToMakeMove(x, y, self.playerNumber)
+        return self.board.try_to_make_move(x, y, self.playerNumber)

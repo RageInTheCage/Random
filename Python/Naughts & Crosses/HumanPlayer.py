@@ -20,7 +20,7 @@ class HumanPlayer(object):
             x = self.askPlayerForCoordinate('x = ', self.board.width) - 1
             y = self.askPlayerForCoordinate('y = ', self.board.height) - 1 
 
-            if self.board.tryToMakeMove(x, y, self.playerNumber):
+            if self.board.try_to_make_move(x, y, self.playerNumber):
                 break
             print ('That space is taken dummy')
         

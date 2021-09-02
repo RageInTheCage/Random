@@ -4,58 +4,58 @@ class GameBoard(object):
         self.height = height
         self.board = [[0 for x in range(width)] for y in range(height)]
 
-    def drawBoard(self):
+    def draw_board(self):
         for y in reversed(range(0, self.height)):
             for x in range(0, self.width):
-                playerNumber = self.board[x][y]
-                print (self.getPlayerLetter(playerNumber), end=' ')
+                player_number = self.board[x][y]
+                print(self.get_player_letter(player_number), end=' ')
             print('\n')
 
-    def getPlayerLetter(self, playerNumber):
-        if playerNumber == 1:
+    def get_player_letter(self, player_number):
+        if player_number == 1:
             return 'X'
-        if playerNumber == 2:
+        if player_number == 2:
             return 'O'
         return '.'
 
-    def positionIsEmpty(self, x, y):
+    def position_is_empty(self, x, y):
         return self.board[x][y] == 0
 
-    def getPlayerAtPosition(self, x, y):
+    def get_player_at_position(self, x, y):
         return self.board[x][y]
-    
-    def tryToMakeMove(self, x, y, playerNumber):
-        if self.positionIsEmpty(x, y):
-            self.board[x][y] = playerNumber
+
+    def try_to_make_move(self, x, y, player_number):
+        if self.position_is_empty(x, y):
+            self.board[x][y] = player_number
             return True
         return False
 
-    def playerHasWon(self, playerNumber):
-        if self.checkForStraightWin(playerNumber):
+    def player_has_won(self, player_number):
+        if self.checkForStraightWin(player_number):
             return True
-        return self.checkForWinDiagonally(playerNumber)
+        return self.check_for_win_diagonally(player_number)
 
-    def checkForStraightWin(self, playerNumber):
+    def checkForStraightWin(self, player_number):
         for x in range(0, self.width):
-            countColumn, countRow = 0, 0
+            count_column, count_row = 0, 0
             for y in range(0, self.height):
-                if self.board[x][y] == playerNumber:
-                    countColumn += 1
-                if self.board[y][x] == playerNumber:
-                    countRow += 1
-            if countColumn == self.height:
+                if self.board[x][y] == player_number:
+                    count_column += 1
+                if self.board[y][x] == player_number:
+                    count_row += 1
+            if count_column == self.height:
                 return True
-            if countRow == self.width:
+            if count_row == self.width:
                 return True
-        
+
         return False
 
-    def checkForWinDiagonally(self, playerNumber):
+    def check_for_win_diagonally(self, player_number):
         count1, count2 = 0, 0
         for index in range(0, self.width):
-            if self.board[index][index] == playerNumber:
+            if self.board[index][index] == player_number:
                 count1 += 1
             y = self.width - index - 1
-            if self.board[index][y] == playerNumber:
+            if self.board[index][y] == player_number:
                 count2 += 1
         return count1 == self.width or count2 == self.width
