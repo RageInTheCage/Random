@@ -7,6 +7,6 @@ workspace/
 Python/options/
 Python/plugins/
 Python/tasks/
+Python/inspection
 .DS_Store
 *.pyc
-GitHub.tasks.zip
