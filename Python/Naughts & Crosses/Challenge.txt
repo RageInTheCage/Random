@@ -1,0 +1,20 @@
+Matthew's Challenge: Naughts & Crosses UI
+
+1. Create a Fork of https://github.com/NickAllan71/Random/
+    (I think you may have one already, but as it is 4yrs old it may be easier to delete this and create a fresh one)
+2. Clone your new Fork
+    (There are a few ways you can do this.  Try Pycharm's "Git > Clone" feature)
+3. Create a branch for your changes called "Naughts_&_Crosses_UI"
+    Try Pycharm's "Git > New Branch " feature
+
+4. Now you can make your improvements to the project
+
+5. Get into the habit of making frequent "Commits" as you work
+    Try Pycharm's "Git > Commit"
+6. Tick "Changes" to files you want to commit
+7. Add a commit message .  E.g. "Adding UI"
+8. "Commit and Push..."
+
+For a wider explanation of all this:
+    Watch: https://www.youtube.com/watch?v=rgbCcBNZcdQ for a good explanation of each step
+    Read: * https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork
