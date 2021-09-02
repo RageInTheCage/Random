@@ -518,7 +518,7 @@ class GraphicsObject:
             else:
                 x = dx
                 y = dy
-            self.canvas.move(self.id, x, y)
+            self.canvas.move_on_keypress(self.id, x, y)
             if canvas.autoflush:
                 _root.update()
            
@@ -739,7 +739,7 @@ class Text(GraphicsObject):
         return canvas.create_text(x,y,options)
         
     def _move(self, dx, dy):
-        self.anchor.move(dx,dy)
+        self.anchor.move_on_keypress(dx, dy)
         
     def clone(self):
         other = Text(self.anchor, self.config['text'])
@@ -816,7 +816,7 @@ class Entry(GraphicsObject):
         return self.text.get()
 
     def _move(self, dx, dy):
-        self.anchor.move(dx,dy)
+        self.anchor.move_on_keypress(dx, dy)
 
     def getAnchor(self):
         return self.anchor.clone()
@@ -897,7 +897,7 @@ class Image(GraphicsObject):
         return canvas.create_image(x,y,image=self.img)
     
     def _move(self, dx, dy):
-        self.anchor.move(dx,dy)
+        self.anchor.move_on_keypress(dx, dy)
         
     def undraw(self):
         try:
