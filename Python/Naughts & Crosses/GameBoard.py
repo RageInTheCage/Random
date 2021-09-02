@@ -4,7 +4,7 @@ class GameBoard(object):
         self.height = height
         self.board = [[0 for x in range(width)] for y in range(height)]
 
-    def draw_board(self):
+    def draw_ascii_board(self):
         for y in reversed(range(0, self.height)):
             for x in range(0, self.width):
                 player_number = self.board[x][y]

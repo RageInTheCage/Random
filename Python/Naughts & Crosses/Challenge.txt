@@ -1,27 +1,33 @@
-Matthew's Challenge: Naughts & Crosses UI
+Matthew's Challenge: Naughts & Crosses GUI
+==========================================
 
+Deadline: Sun 6pm
+Prize: £10 plus some edible goodies :-)
+
+Use GitHub to Publish Your Improvements to My Repo
+==================================================
 1. Create a Fork of https://github.com/NickAllan71/Random/
     (I think you may have one already, but as it is 4yrs old it may be easier to delete this and create a fresh one)
 2. Clone your new Fork
     (There are a few ways you can do this.  Try PyCharm's "Git > Clone" feature)
-3. Create a branch for your changes called "Naughts_&_Crosses_UI"
+3. Create a branch for your changes called "Naughts_&_Crosses_GUI"
     Try PyCharm's "Git > New Branch " feature
 
-Now you can make your improvements to the project
+Now you can make your improvements to the project.  See Improvements (below)
 
 5. Get into the habit of making frequent "Commits" as you work
     Try PyCharm's "Git > Commit"
 6. Tick "Changes" to files you want to commit
-7. Add a commit message .  E.g. "Adding UI"
+7. Add a commit message .  E.g. "Adding GUI"
 8. "Commit and Push..."
 
 Once you're finished with all your improvements and have "Pushed" your final "Commit"...
 
 9. Create a Pull Request
-    Try PyCharm's "Git > Github > Create Pull Request" feature
+    Try PyCharm's "Git > GitHub > Create Pull Request" feature
 10. Base fork Repository should be "Random" with branch "origin/master"
-11. Head fork Repository should be your fork and your branch.  E.g. "Naughts_&_Crosses_UI"
-10. Add a Title "Naughts & Crosses UI"
+11. Head fork Repository should be your fork and your branch.  E.g. "Naughts_&_Crosses_GUI"
+10. Add a Title "Naughts & Crosses GUI"
 10. Assign me as a Reviewer
 11. Click "Create Pull Request"
 
@@ -29,4 +35,63 @@ I should then receive your pull request with the option to merge in your improve
 
 For a wider explanation of all this:
     Watch: https://www.youtube.com/watch?v=rgbCcBNZcdQ for a good explanation of each step
-    Read: * https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork
+    Read: https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork
+
+Improvements
+============
+* Have a play with the game as it currently stands
+* Make sure you understand how it works
+* Get a load of those lovely ASCII graphics!
+* Marvel at the wicked user input system!
+* Now have a go at presenting the board graphically
+* No need to replace the ASCII board just yet - it's useful to have it there for debugging purposes
+* Replace "Enter co-ordinates:" input with mouse click input
+
+Suggested implementation
+* Create a new class called Gui.py with the following methods:
+    .__init__(self, game_board):
+    .draw_board(self)
+    .ask_player_for_move(self, player_number)
+        NB: player_number is an int whereby 1 is "X", and 2 is "O"
+    .display_message(self, message)
+* Create a new instance of Gui within main.play_game()...
+* Add a parameter to the make_move() methods of HumanPlayer.py and AIPlayer.py
+
+E.g...
+__________________________________________________________
+def play_game():
+    global game_board
+    game_board = GameBoard(3, 3)
+    players = get_players()
+
+#INSTANTIATE HERE...
+    gui = GUI(game_board)
+
+    player_number = 1
+    for move_number in range(1, game_board.width * game_board.height):
+        message = f'Player {game_board.get_player_letter(player_number)}''s turn.'
+        print(message)
+
+#IMPLEMENT HERE...
+        gui.display_message(message)
+
+        game_board.draw_ascii_board()
+
+        #IMPLEMENT HERE...
+        gui.draw_board()
+
+#ADD NEW PARAMETER HERE...
+        players[player_number - 1].make_move(gui)
+
+        if game_board.player_has_won(player_number):
+            finish_game(player_number)
+            return
+
+        clear_screen()
+        player_number = 3 - player_number
+
+    message = "It's a draw - how dull."
+    print(message)
+#IMPLEMENT HERE...
+    gui.display_message(message)
+__________________________________________________________

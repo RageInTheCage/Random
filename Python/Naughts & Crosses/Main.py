@@ -20,9 +20,10 @@ def play_game():
 
     player_number = 1
     for move_number in range(1, game_board.width * game_board.height):
-        print('Player {0}''s turn.'.format(game_board.get_player_letter(player_number)))
+        message = f'Player {game_board.get_player_letter(player_number)}''s turn.'
+        print(message)
 
-        game_board.draw_board()
+        game_board.draw_ascii_board()
         players[player_number - 1].make_move()
 
         if game_board.player_has_won(player_number):
@@ -72,7 +73,7 @@ def get_ai_vs_ai_opponents():
 def finish_game(winning_player):
     clear_screen()
     print(f"Well done player {game_board.get_player_letter(winning_player)}, you won!")
-    game_board.draw_board()
+    game_board.draw_ascii_board()
 
 
 def clear_screen():
