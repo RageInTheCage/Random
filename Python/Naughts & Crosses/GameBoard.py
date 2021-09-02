@@ -11,7 +11,8 @@ class GameBoard(object):
                 print(self.get_player_letter(player_number), end=' ')
             print('\n')
 
-    def get_player_letter(self, player_number):
+    @staticmethod
+    def get_player_letter(player_number):
         if player_number == 1:
             return 'X'
         if player_number == 2:
@@ -31,11 +32,11 @@ class GameBoard(object):
         return False
 
     def player_has_won(self, player_number):
-        if self.checkForStraightWin(player_number):
+        if self.check_for_straight_win(player_number):
             return True
         return self.check_for_win_diagonally(player_number)
 
-    def checkForStraightWin(self, player_number):
+    def check_for_straight_win(self, player_number):
         for x in range(0, self.width):
             count_column, count_row = 0, 0
             for y in range(0, self.height):

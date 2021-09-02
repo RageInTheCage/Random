@@ -23,7 +23,7 @@ def play_game():
         print('Player {0}''s turn.'.format(game_board.get_player_letter(player_number)))
 
         game_board.draw_board()
-        players[player_number - 1].makeMove()
+        players[player_number - 1].make_move()
 
         if game_board.player_has_won(player_number):
             finish_game(player_number)
