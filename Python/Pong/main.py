@@ -41,8 +41,8 @@ def main():
     frames_per_second = 60
     paddle_a, paddle_b, score_left, score_right, ball, sprite_list = create_sprites()
     clock = pygame.time.Clock()
-    game_is_underway = True
-    while game_is_underway:
+    game_is_playing = True
+    while game_is_playing:
         events = pygame.event.get()
         keys = pygame.key.get_pressed()
         paddle_a.move_on_keypress(keys)
@@ -53,7 +53,7 @@ def main():
         sprite_list.draw(screen)
         pygame.display.flip()
         clock.tick(frames_per_second)
-        game_is_underway = not has_user_quit(events, keys)
+        game_is_playing = not has_user_quit(events, keys)
 
 
 if __name__ == '__main__':

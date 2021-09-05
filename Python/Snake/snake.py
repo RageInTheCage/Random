@@ -4,6 +4,7 @@ from pygame.locals import *
 from SnakeBody import SnakeBody
 from Apple import Apple
 
+
 def main():
     game_display = create_display()
     sprite_size = 50
@@ -17,7 +18,7 @@ def main():
     horizontal_events = {
         K_RIGHT: (1, 0),
         K_LEFT: (-1, 0)
-        }
+    }
     vertical_events = {
         K_UP: (0, -1),
         K_DOWN: (0, 1)
